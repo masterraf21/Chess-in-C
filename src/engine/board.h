@@ -5,21 +5,29 @@
 #define BOARD_H
 
 //enum board place starting from 21
-enum {A1=21,A2,A3,A4,A5,A6,A7,A8};
+enum POSISI_BOARD {A1=21,A2,A3,A4,A5,A6,A7,A8};
 
-typedef struct {
-    TabInt Tabel;
+typedef struct CHESS_BOARD{
+    TabInt Tabel; //Table of int[120]
     boolean is_checkmate;
     boolean is_en_passan;
-    boolean is
 
     
 }BOARD;
 
 // Konstruktor
 void init_board(BOARD *B);
-// Draw function
+// Update
+void update_board(BOARD *B);
+// Move generator
+void generate_move(BOARD B);
+// Draw procedure
 void draw_board(BOARD B);
+// Checkmate check
+boolean is_check(BOARD B);
+// En passant check
+boolean is_enpassant(BOARD B);
+
 
 
 

@@ -5,7 +5,7 @@
 enum COLOR {WHITE,BLACK};
 
 
-typedef struct{
+typedef struct BIDAK_CATUR{
 
 
 }BIDAK;

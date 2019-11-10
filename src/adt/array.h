@@ -3,6 +3,7 @@
 /* Penempatan elemen selalu rapat kiri */
 
 #include "boolean.h"
+#include "../engine/bidak.h"
 
 #ifndef ARRAY_H 
 #define ARRAY_H
