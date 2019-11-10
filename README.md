@@ -5,10 +5,11 @@ Direktori dibagi jadi 2 di src ada engine sama adt. Adt isinya adt yang dibuat d
 #include "../adt/<fileadt.h>"
 ```
 
-### List Gawean
+### List Gawean yang udah mulai dikerjain
 * Board di file `board.h`
-* Bidak 
-* 
+* Bidak di file `bidak.h`
+
+
 
 
 
