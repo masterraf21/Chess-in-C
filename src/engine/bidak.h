@@ -1,3 +1,5 @@
+#include "../adt/listlinier.h"
+
 #ifndef BIDAK_H
 #define BIDAK_H
 
@@ -5,9 +7,15 @@
 enum COLOR {WHITE,BLACK};
 
 
-typedef struct BIDAK_CATUR{
-    int tipe_bidak;
+//enum pawns
+enum PAWN_TYPE{PAWNS=1, KNIGHT, BISHOP, ROOK, QUEEN, KING};
+
+//struct ini dipake buat nanti di linked list, bisa buat generate move juga
+typedef struct{
+    int tipe;
     int posisi;
+    //bisa diisi apa aja
+
 
 
 }BIDAK;
