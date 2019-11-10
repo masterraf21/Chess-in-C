@@ -9,8 +9,8 @@
 
 /* Kamus Umum */
 
-#define IdxMax 120
-#define IdxMin 1
+#define IdxMax 119
+#define IdxMin 0
 #define IdxUndef -999 /* indeks tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
