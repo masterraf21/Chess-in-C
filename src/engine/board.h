@@ -27,6 +27,8 @@ void draw_board(BOARD B);
 boolean is_check(BOARD B);
 // En passant check
 boolean is_enpassant(BOARD B);
+// Testing illegal board
+boolean is_illegal(ElType T);
 
 
 
