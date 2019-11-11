@@ -2,6 +2,8 @@
 /* contoh ADT list berkait dengan representasi fisik pointer  */
 /* Representasi address dengan pointer */
 /* infotype adalah integer */
+#include "../engine/bidak.h"
+
 
 #ifndef listlinier_H
 #define listlinier_H
@@ -10,7 +12,7 @@
 
 #define Nil NULL
 
-typedef int infotype;
+typedef BIDAK infotype;
 typedef struct tElmtlist *address;
 typedef struct tElmtlist { 
 	infotype info;
