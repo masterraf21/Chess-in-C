@@ -14,15 +14,14 @@ enum BOARD_SQUARES{
     A6, B6, C6, D6, E6, F6, G6, H6,
     A7, B7, C7, D7, E7, F7, G7, H7,
     A8, B8, C8, D8, E8, F8, G8, H8,
-    BAD_SQUARE = 99};
+    BAD_SQUARE = 99, EMPTY_SQUARE = 0};
 
 typedef struct {
     TabInt Tabel; //Table of int[120]
-    boolean is_checkmate;
-    boolean is_en_passan;
-    
-
-    
+    boolean is_checkmate; //special for the king
+    boolean is_en_passant; //special for the pawn
+    boolean is_castling;
+    booolean is_promosi;
 }BOARD;
 
 // Konstruktor

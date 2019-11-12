@@ -3,6 +3,7 @@
 /* Penempatan elemen selalu rapat kiri */
 
 #include "boolean.h"
+#include "../engine/board.h"
 #include "../engine/bidak.h"
 
 #ifndef ARRAY_H 
@@ -16,7 +17,7 @@
 
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType;
-typedef int ElType;
+typedef ELEMEN ElType;
 
 typedef struct 
 {
