@@ -1,13 +1,93 @@
 ## Tugas Besar IF2111 Alstrukdat
-Repo isinya tubes catur buat IF2111
-Direktori dibagi jadi 2 di src ada engine sama adt. Adt isinya adt yang dibuat di kelas, kalau engine code yang mau kita buat di engine chessnya. Cara include file ADT di engine:
-``` c
-#include "../adt/<fileadt.h>"
-```
+Repo isinya tubes catur  IF2111.
+Direktori dibagi jadi 2 di src ada engine sama adt. Adt isinya adt yang dibuat di kelas, kalau engine code yang mau kita buat di engine chessnya.
 
-### List Gawean yang udah mulai dikerjain
-* Board di file `board.h`
-* Bidak di file `bidak.h`
+
+### PERHATIAN UNTUK PEMAKAIAN GIT
+Karena ukuran projek ini lumayan dan kita ada berempat **sangat disarankan** agar saat kita ngoding untuk membuat **branch**. Caranya gimana?? [Tutorial Branch](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches)
+Yang perlu diperhatikan:
+1. Buat nama branch sesuai nama kalian. Contoh bikin branch namanya Abbel
+```bash
+git checkout -b Abbel
+```
+2. Push ke githubnya ke branch kalian aja ya nanti kalau mau dimerge bilang bilang dulu
+3. Update `README.md` di branch `master`
+
+### Progress branch `main`
+* Baru beresin definisi board
+* Baru beresin definisi bidak
+* ADT minus mesinkata
+   
+
+
+### Pembagian Gawe
+* Board di file `board.h` : **Abbel** 
+  * Beresin definisi board sama kondisi
+* Bidak di file `bidak.h` : **Abbel**
+  * Beresin definisi bidak buat di linked-list
+  * Buat algoritma move-generation tiap bidak
+* Cara bergerak bidak di board :
+  * Move : **Abbel**
+    * Implement algoritma move-generation
+  * Special Move : **Vito**
+    * Implement algoritma move-generation
+* Linked list buat info bidak : **Abbel**
+  * Bikin konstruktor listnya
+* Stack buat undo : **Yumna**
+  * Fixin data struct nya
+  * Buat konstruktor stack buat implementasi undo
+* Queue buat giliran : **Shafa**
+  * Fixin data struct nya
+  * Buat konstruktor queue
+* Parsing file sama state game : **Vito**
+  * Pikirin state game isinya apa aja
+  * Algoritma parsing file ke state-game
+  * Tambahin adt mesin kata kesini
+
+
+### Board Representation
+Ya jadi kita akan pakai representasi board dengan array ukuran 10*12. Jadi arraynya ada 120 tapi yang dipake cuman 64 biji, kira kira kaya gini:
+![Papan1](papan1.jpg)
+Ya bisa diliat ya itu jadi kita mulainya dari 21 makanya kita buat enum dari 21 yaitu A1 untuk nandain si papannya. Kira kira gini bray:
+![Papan2](papan2.jpg)
+Gunanya buat apa itu *teh*? Sebenernya mah buat penanda aja biar algoritma kita bisa nemu kalau ternyata papannya off-board gitu.
+Nah nanti setiap *tile* tuh bakal diisi sama integer yang merepresentasikan si kondisi benerannya di papan catur.
+
+### Tipe-tipe bentukan
+##### Board
+Belum fix ya sangat mungkin ditambah lagi terutama mengenai kondisi kondisi spesial contohnya skak dan special moves
+```c
+typedef struct {
+    TabInt Tabel; //Table of int[120]
+    boolean is_checkmate; //special for the king
+    boolean is_en_passant; //special for the pawn
+    boolean is_castling;
+    booolean is_promosi;
+}BOARD;
+```
+##### Bidak (buat Linked List)
+Belum fix juga bisa ditambahin apa aja terutama saat udah implement linked-list
+```c
+typedef struct{
+    PAWN_TYPE tipe;
+    BOARD_SQUARES posisi;
+    //bisa diisi apa aja
+}BIDAK;
+````
+##### Move (hasil generate sama buat Stack juga)
+Ini sebenernya move tuh buat hasil generate biasa tapi juga bisa dijadiin elemen stack tinggal di typedef aja sih
+```c
+ typedef struct{
+      BOARD_SQUARE prev_position;
+      BOARD_SQUARE now_position;
+      boolean is_makan;
+ }MOVE;
+```
+##### Queue 
+Kerjaan shafa
+##### State Game (buat load pake mesin kata)
+Nah ini kerjaan vito buat mikirin state tuh isinya apa aja
+
 
 
 ### Basic Mechanism for Move-Generation
@@ -58,13 +138,7 @@ Direktori dibagi jadi 2 di src ada engine sama adt. Adt isinya adt yang dibuat d
 
 
 
-### List Gawean
-* Board di file `board.h` :
-* Bidak di file `bidak.h`
-* Cara bergerak bidak di board
-* Linked list buat info bidak
-* Stack buat undo 
-* Queue isinya apa
+
 
 
 

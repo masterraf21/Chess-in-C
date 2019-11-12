@@ -4,11 +4,16 @@
 #ifndef BIDAK_H
 #define BIDAK_H
 
-//WHITE=0, BLACK=1
-enum COLOR {WHITE=1,BLACK=-1};
+//WHITE=1, BLACK=-1
+typedef enum
+{
+    WHITE = 1,BLACK = -1
+} COLOR;
 //enum pawns
-enum PAWN_TYPE{PAWNS=1, KNIGHT, BISHOP, ROOK, QUEEN, KING};
-
+typedef enum
+{
+    PAWNS = 1, KNIGHT, BISHOP, ROOK,  QUEEN, KING
+} PAWN_TYPE;
 
 //struct ini dipake buat nanti di linked list, bisa buat generate move juga
 typedef struct{
