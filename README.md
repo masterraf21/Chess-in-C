@@ -4,7 +4,7 @@ Direktori dibagi jadi 2 di src ada engine sama adt. Adt isinya adt yang dibuat d
 
 
 ### PERHATIAN UNTUK PEMAKAIAN GIT
-Karena ukuran projek ini lumayan dan kita ada berempat **sangat disarankan** agar saat kita ngoding untuk membuat **branch**. Caranya gimana?? [Tutorial Branch](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches)
+Karena ukuran projek ini lumayan dan kita ada berempat **sangat disarankan** agar saat kita ngoding untuk membuat **branch**. Caranya gimana?? [Tutorial Branch](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches).
 Yang perlu diperhatikan:
 1. Buat nama branch sesuai nama kalian. Contoh bikin branch namanya Abbel
 ```bash
@@ -18,7 +18,6 @@ git checkout -b Abbel
 * Baru beresin definisi bidak
 * ADT minus mesinkata
    
-
 
 ### Pembagian Gawe
 * Board di file `board.h` : **Abbel** 
@@ -54,7 +53,7 @@ Gunanya buat apa itu *teh*? Sebenernya mah buat penanda aja biar algoritma kita 
 Nah nanti setiap *tile* tuh bakal diisi sama integer yang merepresentasikan si kondisi benerannya di papan catur.
 
 ### Tipe-tipe bentukan
-##### Board
+#### Board
 Belum fix ya sangat mungkin ditambah lagi terutama mengenai kondisi kondisi spesial contohnya skak dan special moves
 ```c
 typedef struct {
@@ -65,7 +64,7 @@ typedef struct {
     booolean is_promosi;
 }BOARD;
 ```
-##### Bidak (buat Linked List)
+#### Bidak (buat Linked List)
 Belum fix juga bisa ditambahin apa aja terutama saat udah implement linked-list
 ```c
 typedef struct{
@@ -83,11 +82,10 @@ Ini sebenernya move tuh buat hasil generate biasa tapi juga bisa dijadiin elemen
       boolean is_makan;
  }MOVE;
 ```
-##### Queue 
+#### Queue 
 Kerjaan shafa
-##### State Game (buat load pake mesin kata)
+#### State Game (buat load pake mesin kata)
 Nah ini kerjaan vito buat mikirin state tuh isinya apa aja
-
 
 
 ### Basic Mechanism for Move-Generation

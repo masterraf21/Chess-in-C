@@ -17,7 +17,7 @@
 
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType;
-typedef ELEMEN ElType;
+typedef int ElType;
 
 typedef struct 
 {
