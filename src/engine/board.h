@@ -1,8 +1,8 @@
-#include "../adt/array.h"
-#include "../adt/listlinier.h"
-
 #ifndef BOARD_H
 #define BOARD_H
+
+#include "../adt/array.h"
+#include "../adt/listlinier.h"
 
 //enum board place starting from 21
 typedef enum {
@@ -22,7 +22,7 @@ typedef struct {
     boolean is_checkmate; //special for the king
     boolean is_en_passant; //special for the pawn
     boolean is_castling;
-    booolean is_promosi;
+    boolean is_promosi;
 }BOARD;
 
 // Konstruktor

@@ -1,4 +1,4 @@
-#include "listlinier.h"
+#include "listbidak.h"
 #include <stdio.h>
 #include <stdlib.h>
 

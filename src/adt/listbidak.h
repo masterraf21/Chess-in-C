@@ -2,13 +2,12 @@
 /* contoh ADT list berkait dengan representasi fisik pointer  */
 /* Representasi address dengan pointer */
 /* infotype adalah integer */
-#include "../engine/bidak.h"
-
-
-#ifndef listlinier_H
-#define listlinier_H
+/* ini isinya buat linked list isi bidak*/
+#ifndef listbidak_H
+#define listbidak_H
 
 #include "boolean.h"
+#include "../engine/chess.h"
 
 #define Nil NULL
 
@@ -18,9 +17,12 @@ typedef struct tElmtlist {
 	infotype info;
 	address next;
 } ElmtList;
+
 typedef struct {
 	address First;
-} List;
+} List_Bidak;
+
+typedef List_Bidak List;
 
 /* Definisi list : */
 /* List kosong : First(L) = Nil */

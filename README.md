@@ -3,7 +3,7 @@ Repo isinya tubes catur  IF2111.
 Direktori dibagi jadi 2 di src ada engine sama adt. Adt isinya adt yang dibuat di kelas, kalau engine code yang mau kita buat di engine chessnya.
 
 
-### PERHATIAN UNTUK PEMAKAIAN GIT
+### PERHATIAN UNTUK PEMAKAIAN GIT ( Ribet Ternyata :( )
 Karena ukuran projek ini lumayan dan kita ada berempat **sangat disarankan** agar saat kita ngoding untuk membuat **branch**. Caranya gimana?? [Tutorial Branch](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches).
 Yang perlu diperhatikan:
 1. Buat nama branch sesuai nama kalian. Contoh bikin branch namanya Abbel
@@ -45,6 +45,8 @@ git checkout -b Abbel
 
 
 ### Board Representation
+Aslinya board tuh gini:\
+![Board](papan.png)\
 Ya jadi kita akan pakai representasi board dengan array ukuran 10*12. Jadi arraynya ada 120 tapi yang dipake cuman 64 biji, kira kira kaya gini:\
 ![Papan1](papan1.jpg)\
 Ya bisa diliat ya itu jadi kita mulainya dari 21 makanya kita buat enum dari 21 yaitu A1 untuk nandain si papannya. Kira kira gini bray:\
@@ -73,7 +75,7 @@ typedef struct{
     //bisa diisi apa aja
 }BIDAK;
 ````
-##### Move (hasil generate sama buat Stack juga)
+#### Move (hasil generate sama buat Stack juga)
 Ini sebenernya move tuh buat hasil generate biasa tapi juga bisa dijadiin elemen stack tinggal di typedef aja sih
 ```c
  typedef struct{
@@ -134,7 +136,9 @@ Nah ini kerjaan vito buat mikirin state tuh isinya apa aja
       3. Nanti info yang masuk ke stack, dipake buat nge-update node bidak yang di linked-list
    8. Kalau dia dimakan, node yang berkesesuaian di dealokasi dan score pemain lawan ditambah
 
-
+### Algoritma generate move untuk setiap bidak
+#### **Pion**
+    
 
 
 
