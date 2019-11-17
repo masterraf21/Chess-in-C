@@ -5,10 +5,6 @@
 #define CHESS_H
 
 #include "../adt/array.h"
-#include "../adt/listbidak.h"
-#include "../adt/listmove.h"
-#include "../adt/queuelist.h"
-#include "../adt/stacklist.h"
 
 
 /*For Board*/
@@ -37,10 +33,10 @@ typedef struct {
 
 /*For Bidak*/
 
-//WHITE=1, BLACK=-1
+//enum tipe warna
 typedef enum
 {
-    WHITE = 1,BLACK = -1
+    WHITE = 0,BLACK,BOTH
 } COLOR;
 
 //enum pawns

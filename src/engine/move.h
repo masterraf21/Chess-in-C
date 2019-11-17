@@ -2,6 +2,7 @@
 #define MOVE_H
 
 #include "chess.h"
+#include "../adt/listmove.h"
 
 
 
