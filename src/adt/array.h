@@ -36,8 +36,8 @@ typedef struct
  * Definisi elemen terakhir yang terdefinisi: T.TI[i] dengan i=T.Neff */
 
 /* ********** KONSTRUKTOR ********** */
-/* Konstruktor : create tabel kosong */
-void MakeEmpty (TabInt *T);
+/* Konstruktor : create tabel penuh */
+void InitTab (TabInt *T);
 /* I.S. sembarang */
 /* F.S. Terbentuk tabel T kosong dengan kapasitas IdxMax-IdxMin+1 */
 

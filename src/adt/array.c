@@ -11,11 +11,11 @@
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong */
-void MakeEmpty (TabInt *T)
+void InitTab (TabInt *T)
 /* I.S. sembarang */
 /* F.S. Terbentuk tabel T kosong dengan kapasitas IdxMax-IdxMin+1 */
 {
-    (*T).Neff = 0;
+    (*T).Neff = IdxMax-IdxMin+1;
 }
 
 /* ********** SELEKTOR ********** */

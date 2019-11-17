@@ -9,6 +9,7 @@
 
 /*For Board*/
 
+//index of the board itself
 typedef enum {
   A1=21, B1, C1, D1, E1, F1, G1, H1,
   A2=31, B2, C2, D2, E2, F2, G2, H2,
@@ -18,8 +19,15 @@ typedef enum {
   A6=71, B6, C6, D6, E6, F6, G6, H6,
   A7=81, B7, C7, D7, E7, F7, G7, H7,
   A8=91, B8, C8, D8, E8, F8, G8, H8,
-  BAD_SQUARE=99, EMPTY_SQUARE=0
-}BOARD_SQUARE;
+}BOARD_INDEX;
+
+//condition of the board aside from pawns
+typedef enum
+{
+   EMPTY_SQUARE = 0, BAD_SQUARE = 99
+}BOARD_CONDITION;
+//the bad square index
+typedef int BAD_INDEX;
 
 typedef struct {
     TabInt Tab; //Table of int[120]
@@ -31,12 +39,13 @@ typedef struct {
     boolean is_promosi;
 }BOARD;
 
+
 /*For Bidak*/
 
 //enum tipe warna
 typedef enum
 {
-    WHITE = 0,BLACK,BOTH
+    WHITE = 1,BLACK=-1,BOTH
 } COLOR;
 
 //enum pawns
@@ -45,10 +54,11 @@ typedef enum
     PAWN=1, KNIGHT, BISHOP, ROOK,  QUEEN, KING
 }PAWN_TYPE;
 
+
 //struct ini dipake buat nanti di linked list, bisa buat generate move juga
 typedef struct{
     PAWN_TYPE tipe;
-    BOARD_SQUARE posisi;
+    BOARD_INDEX posisi;
     COLOR warna;
     //bisa diisi apa aja
 }BIDAK;
@@ -57,8 +67,8 @@ typedef struct{
 /*For Move*/
 
 typedef struct {
-    BOARD_SQUARE prev_position;
-    BOARD_SQUARE new_position;
+    BOARD_INDEX prev_position;
+    BOARD_INDEX new_position;
     boolean is_makan;
     BIDAK victim;
 }MOVE;
