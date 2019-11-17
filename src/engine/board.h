@@ -2,8 +2,19 @@
 #define BOARD_H
 
 #include "chess.h"
+#include "bidak.h"
 
-// Konstruktor
+/****** MACRO *******/
+
+#define Tab(L) (L)->Tab
+#define LPutih(L) (L)->LPutih
+#define LHitam(L) (L)->LHitam
+
+
+
+/******* KONSTRUKTOR ******/
+
+// Init
 void init_board(BOARD *B);
 // Update
 void update_board(BOARD *B, List_Bidak L);
@@ -13,7 +24,5 @@ void draw_board(BOARD B);
 boolean is_check(BOARD B);
 // En passant check
 boolean is_enpassant(BOARD B);
-// Testing illegal board (ini gajelas buat apa sebenernya)
-//boolean is_illegal(ElType T);
 
 #endif

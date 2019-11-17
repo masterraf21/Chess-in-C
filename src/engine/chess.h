@@ -22,9 +22,9 @@ typedef enum {
 }BOARD_SQUARE;
 
 typedef struct {
-    TabInt *T; //Table of int[120]
-    List_Bidak *LPutih; //List bidak yang berkorespondensi
-    List_Bidak *LHitam; //buat yang item
+    TabInt Tab; //Table of int[120]
+    List_Bidak LPutih; //List bidak yang berkorespondensi
+    List_Bidak LHitam; //buat yang item
     boolean is_checkmate; //special for the king
     boolean is_en_passant; //special for the pawn
     boolean is_castling;
