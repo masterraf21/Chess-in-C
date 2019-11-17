@@ -6,8 +6,13 @@
 
 #include "../adt/array.h"
 #include "../adt/listbidak.h"
+#include "../adt/listmove.h"
+#include "../adt/queuelist.h"
+#include "../adt/stacklist.h"
+
 
 /*For Board*/
+
 typedef enum {
   A1=21, B1, C1, D1, E1, F1, G1, H1,
   A2=31, B2, C2, D2, E2, F2, G2, H2,
@@ -29,7 +34,6 @@ typedef struct {
     boolean is_castling;
     boolean is_promosi;
 }BOARD;
-
 
 /*For Bidak*/
 

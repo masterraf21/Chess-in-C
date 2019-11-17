@@ -8,10 +8,10 @@ BIDAK InitBidak(PAWN_TYPE Tipe, BOARD_SQUARE Posisi, COLOR Warna)
     B.tipe = Tipe;
     B.warna = Warna;
 
-    return
+    return B;
 }
 
-void InitGenerate(List_Bidak *L)
+void InitListBidak(List_Bidak *L)
 {
     CreateEmpty(*L);
     /* Generate yang putih dulu gan*/
@@ -24,7 +24,18 @@ void InitGenerate(List_Bidak *L)
     PawnW6 = InitBidak(PAWN, F2, WHITE);
     PawnW7 = InitBidak(PAWN, G2, WHITE);
     PawnW8 = InitBidak(PAWN, H2, WHITE);
-    RookW1 = InitBidak
+    RookW1 = InitBidak(ROOK, A1, WHITE);
+    RookW2 = InitBidak(ROOK, H1, WHITE);
+    KnightW1 = InitBidak(KNIGHT, B1, WHITE);
+    KnightW2 = InitBidak(KNIGHT, G1, WHITE);
+    BishopW1 = InitBidak(BISHOP, C1, WHITE);
+    BishopW2 = InitBidak(BISHOP, F1, WHITE);
+    KingW = InitBidak(KING, D1, WHITE);
+    QueenW = InitBidak(QUEEN, E1, WHITE);
+    
+    /* Generate yang hitam gan */
+    
+
 
 
 }

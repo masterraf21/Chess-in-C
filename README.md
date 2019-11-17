@@ -46,7 +46,7 @@ git checkout -b Abbel
 
 ### Board Representation
 Aslinya board tuh gini:\
-![Board](papan.png)\
+![Board](chess_board.jpg)\
 Ya jadi kita akan pakai representasi board dengan array ukuran 10*12. Jadi arraynya ada 120 tapi yang dipake cuman 64 biji, kira kira kaya gini:\
 ![Papan1](papan1.jpg)\
 Ya bisa diliat ya itu jadi kita mulainya dari 21 makanya kita buat enum dari 21 yaitu A1 untuk nandain si papannya. Kira kira gini bray:\
