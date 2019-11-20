@@ -1,6 +1,10 @@
 #ifndef MOVE_H
 #define MOVE_H
 
+/*yeay*/
+//awadafaa
+//ueueue
+
 #include "chess.h"
 #include "../adt/listmove.h"
 #include "../adt/listbidak.h"
