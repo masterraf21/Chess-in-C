@@ -67,11 +67,14 @@ typedef struct{
 /*For Move*/
 
 typedef struct {
-    BOARD_INDEX prev_position;
+    BOARD_INDEX cur_position;
     BOARD_INDEX new_position;
     boolean is_makan;
     BIDAK victim;
 }MOVE;
+
+typedef MOVE ELMT_STACK;
+
 
 
 

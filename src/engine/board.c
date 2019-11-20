@@ -67,7 +67,7 @@ void update_board(BOARD *B, List_Bidak L);
 void draw_board(BOARD B)
 {
     
-}
+};
 // Checkmate check
 boolean is_check(BOARD B);
 // En passant check

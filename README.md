@@ -89,6 +89,32 @@ Kerjaan shafa
 #### State Game (buat load pake mesin kata)
 Nah ini kerjaan vito buat mikirin state tuh isinya apa aja
 
+### Move Mechanism
+Ya karena kita memakai board 12*10 ada beberapa peraturan yang harus ditaati. Kira kira board nya kaya gini nanti: \
+![10*12](images.jpeg)\
+Ya kan pas sliding bidaknya tuh ada yang :
+1. Up 
+2. Down
+3. Left
+4. Right
+5. Serong Kanan Atas
+6. Serong Kiri Atas
+7. Serong Kanan Bawah
+8. Serong Kiri Bawah\
+Oiya kita definisiin atas,bawah, dkk nya itu dari perspektif si pemain putih ya. Pemain hitam menyesuaikan. Nah jadi, bisa keliatan dari pola di board bahwa bergeraknya tuh:
+```
+    1. Up = Posisi Awal + 10
+    2. Down = Posisi Awal - 10
+    3. Left = Posisi Awal - 1
+    4. Right = Posisi Awal + 1
+    5. Serong Kanan Atas = Posisi Awal + 11
+    6. Serong Kiri Atas = Posisi Awal + 9
+    7. Serong Kanan Bawah = Posisi Awal - 9
+    8. Serong Kiri Bawah = Posisi Awal - 11
+```
+Nah ada lagi yang unik yaitu untuk kuda sebenernya turunan dari yang atas juga sih, jadi gini.
+Kuda tuh kan punya 4 kemungkinan:
+1. 
 
 ### Basic Mechanism for Move-Generation
 1. Jadi kita punya board yang direpresentasikan sebagai array[120] of elemen.
@@ -135,6 +161,8 @@ Nah ini kerjaan vito buat mikirin state tuh isinya apa aja
       2. Kalau ga sesuai, ada dua kemungkinan: *kosong* atau *ditimpa* oleh lawannya
       3. Nanti info yang masuk ke stack, dipake buat nge-update node bidak yang di linked-list
    8. Kalau dia dimakan, node yang berkesesuaian di dealokasi dan score pemain lawan ditambah
+   9. Algoritma bakal menghasilkan list of move yang diperuntukkan untuk setiap list of bidak yang ada. Jadi fungsi move ini argumennya itu list of bidak yang bakal diiterasi satu-satu
+    
 
 ### Algoritma generate move untuk setiap bidak
 #### **Pion**
