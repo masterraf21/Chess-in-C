@@ -112,9 +112,20 @@ Oiya kita definisiin atas,bawah, dkk nya itu dari perspektif si pemain putih ya.
     7. Serong Kanan Bawah = Posisi Awal - 9
     8. Serong Kiri Bawah = Posisi Awal - 11
 ```
-Nah ada lagi yang unik yaitu untuk kuda sebenernya turunan dari yang atas juga sih, jadi gini.
-Kuda tuh kan punya 4 kemungkinan:
-1. 
+Nah ada lagi yang unik yaitu untuk kuda sebenernya turunan dari yang atas juga sih, jadi gini gambarnya: \
+![kuda](kuda.jpg)\
+Kuda tuh kan punya 8 kemungkinan:
+```
+1. Knight1 = Posisi awal + 21
+2. Knight2 = Posisi awal + 12
+3. Knight3 = Posisi awal - 8
+4. Knight4 = Posisi awal - 19
+5. Knight5 = Posisi awal - 21
+6. Knight6 = Posisi awal - 12
+7. Knight7 = Posisi awal + 8
+8. Knight8 = Posisi awal + 19 
+
+```
 
 ### Basic Mechanism for Move-Generation
 1. Jadi kita punya board yang direpresentasikan sebagai array[120] of elemen.

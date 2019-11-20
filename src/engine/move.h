@@ -15,7 +15,7 @@ BOARD_INDEX Left(BIDAK B);
 BOARD_INDEX Left_i(BIDAK B, int i);
 BOARD_INDEX Right(BIDAK B);
 BOARD_INDEX Right_i(BIDAK B, int i);
-
+/* SERONG */
 BOARD_INDEX SerongKananAtas(BIDAK B);
 BOARD_INDEX SerongKananAtas_i(BIDAK B, int i);
 BOARD_INDEX SerongKananBawah(BIDAK B);
@@ -24,6 +24,16 @@ BOARD_INDEX SerongKiriAtas(BIDAK B);
 BOARD_INDEX SerongKiriAtas_i(BIDAK B, int i);
 BOARD_INDEX SerongKiriBawah(BIDAK B);
 BOARD_INDEX SerongKiriBawah_i(BIDAK B, int i);
+/* BUAT KUDA */
+BOARD_INDEX Knight1(BIDAK K);
+BOARD_INDEX Knight2(BIDAK K);
+BOARD_INDEX Knight3(BIDAK K);
+BOARD_INDEX Knight4(BIDAK K);
+BOARD_INDEX Knight5(BIDAK K);
+BOARD_INDEX Knight6(BIDAK K);
+BOARD_INDEX Knight7(BIDAK K);
+BOARD_INDEX Knight8(BIDAK K);
+
 
 /***** SEARCH FUNCTION ******/
 

@@ -39,7 +39,7 @@ BOARD_INDEX Right_i(BIDAK B, int i){
     else 
         return B.posisi+1*i;
 }
-
+/* SERONG */
 BOARD_INDEX SerongKananAtas(BIDAK B){
     return B.posisi+11;
 }
@@ -76,7 +76,31 @@ BOARD_INDEX SerongKiriBawah_i(BIDAK B, int i){
     else 
         return B.posisi-11;
 }
-
+/* BUAT KUDA */
+BOARD_INDEX Knight1(BIDAK K){
+    return K.posisi+21;
+}
+BOARD_INDEX Knight2(BIDAK K){
+    return K.posisi+12;
+}
+BOARD_INDEX Knight3(BIDAK K){
+    return K.posisi-8;
+}
+BOARD_INDEX Knight4(BIDAK K){
+    return K.posisi-19;
+}
+BOARD_INDEX Knight5(BIDAK K){
+    return K.posisi-21;
+}
+BOARD_INDEX Knight6(BIDAK K){
+    return K.posisi-12;
+}
+BOARD_INDEX Knight7(BIDAK K){
+    return K.posisi+8;
+}
+BOARD_INDEX Knight8(BIDAK K){
+    return K.posisi+19;
+}
 /***** MAIN FUNCTION *****/
 List_Move MoveGenerator(List_Bidak L);
 List_Move GenerateWPawn(BIDAK B);
