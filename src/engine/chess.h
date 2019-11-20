@@ -33,11 +33,8 @@ typedef struct {
     TabInt Tab; //Table of int[120]
     List_Bidak LPutih; //List bidak yang berkorespondensi
     List_Bidak LHitam; //buat yang item
-    boolean is_checkmate; //special for the king
-    boolean is_en_passant; //special for the pawn
-    boolean is_castling;
-    boolean is_promosi;
-}BOARD;
+} BOARD;
+
 
 
 /*For Bidak*/
@@ -45,7 +42,7 @@ typedef struct {
 //enum tipe warna
 typedef enum
 {
-    WHITE = 1,BLACK=-1,BOTH
+    WHITE = 1,BLACK=-1
 } COLOR;
 
 //enum pawns
@@ -63,9 +60,7 @@ typedef struct{
     //bisa diisi apa aja
 }BIDAK;
 
-
 /*For Move*/
-
 typedef struct {
     BOARD_INDEX cur_position;
     BOARD_INDEX new_position;

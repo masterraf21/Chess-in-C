@@ -102,11 +102,14 @@ BOARD_INDEX Knight8(BIDAK K){
     return K.posisi+19;
 }
 /***** MAIN FUNCTION *****/
-List_Move MoveGenerator(List_Bidak L);
-List_Move GenerateWPawn(BIDAK B);
-List_Move GenerateBPawn(BIDAK B);
-List_Move GenerateRook(BIDAK B);
-List_Move GenerateKnight(BIDAK B);
-List_Move GenerateBishop(BIDAK B);
-List_Move GenerateQueen(BIDAK B);
-List_Move GenerateKing(BIDAK B);
+boolean IsMove(BIDAK B, BOARD_INDEX KingPos){
+
+    if (B.tipe==PAWN){
+
+    }else if (B.tipe==KNIGHT){
+
+    }else{
+
+    }
+
+}
