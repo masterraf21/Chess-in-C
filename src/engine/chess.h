@@ -68,6 +68,8 @@ typedef struct {
     BIDAK victim;
 }MOVE;
 
+
+//for done moves
 typedef MOVE ELMT_STACK;
 
 
