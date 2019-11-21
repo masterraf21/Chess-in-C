@@ -1,4 +1,4 @@
-/* File : listlinier.h */
+/* File : listbidak.h */
 /* contoh ADT list berkait dengan representasi fisik pointer  */
 /* Representasi address dengan pointer */
 /* infotype adalah integer */
