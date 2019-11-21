@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "queuelist.h"
+#include "queuemove.h"
 
 /* Prototype manajemen memori */
 void Alokasi (address *P, infotype X)

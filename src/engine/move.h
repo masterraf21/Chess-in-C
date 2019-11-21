@@ -4,6 +4,7 @@
 #include "chess.h"
 #include "../adt/listmove.h"
 #include "../adt/listbidak.h"
+#include "../adt/queuemove.h"
 
 /**** HELPER FUNCTION *****/
 BOARD_INDEX Neighbor(BIDAK B);
@@ -38,7 +39,12 @@ BOARD_INDEX Knight8(BIDAK K);
 /***** SEARCH FUNCTION ******/
 
 /***** MAIN FUNCTION *****/
+Queue_Move AvailableMove(List_Bidak B);
+BOARD_INDEX GetKingPos(List_Bidak B);
 boolean IsMove(BIDAK B);
+boolean KingCheck(BIDAK B, BOARD_INDEX KingPos);
+List_Move GenerateMove(BIDAK B);
+
 
 
 

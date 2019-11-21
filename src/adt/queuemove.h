@@ -1,15 +1,16 @@
 /* File : queuelist.h */
 /* Representasi queue dengan list berkait dengan first (HEAD) dan last (TAIL) */
-#ifndef _QUEUELIST_H
-#define _QUEUELIST_H
+#ifndef _QUEUEMOVE_H
+#define _QUEUEMOVE_H
 #include "boolean.h"
+#include "../engine/chess.h"
 #include <stdlib.h>
 
 /* Konstanta */
 #define Nil NULL
 
 /* Deklarasi infotype */
-typedef int infotype;
+typedef ELMT_QUEUE infotype;
 
 /* Queue dengan representasi berkait dengan pointer */
 typedef struct tElmtQueue * address;
@@ -22,7 +23,7 @@ typedef struct tElmtQueue {
 typedef struct { 
   address HEAD;  /* alamat penghapusan */
   address TAIL;  /* alamat penambahan */
-} Queue;
+} Queue_Move;
 
 /* Selektor */
 #define Head(Q) (Q).HEAD

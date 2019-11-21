@@ -8,7 +8,7 @@
 /******KONSTRUKTOR*******/
 
 //Fungsi Konstruktor tiap bidak
-BIDAK InitBidak(PAWN_TYPE Tipe, BOARD_SQUARE Posisi, COLOR Warna);
+BIDAK InitBidak(LIST_ID Id, PAWN_TYPE Tipe, BOARD_INDEX Posisi, COLOR Warna);
 //Konstruktor List buat nyimpen bidak
 //langsung diisi sama bidak 16 biji 
 void InitListBidak(List_Bidak *L, COLOR Warna);

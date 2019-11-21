@@ -5,7 +5,6 @@
 #include "bidak.h"
 
 /****** MACRO *******/
-
 #define Tab(L) (L).Tab
 #define LPutih(L) (L).LPutih
 #define LHitam(L) (L).LHitam

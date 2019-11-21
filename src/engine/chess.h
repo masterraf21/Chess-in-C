@@ -51,16 +51,31 @@ typedef enum
     PAWN=1, KNIGHT, BISHOP, ROOK,  QUEEN, KING
 }PAWN_TYPE;
 
+//typedef list-infotype ids
+//works both for white and black lists
+typedef enum
+{
+    PAWN1, PAWN2, PAWN3, PAWN4,
+    PAWN5, PAWN6, PAWN7, PAWN8,
+    ROOK1, ROOK2,
+    KNIGHT1, KNIGHT2,
+    BISHOP1, BISHOP2,
+    QUEENX, KINGX
+}LIST_ID;
 
 //struct ini dipake buat nanti di linked list, bisa buat generate move juga
 typedef struct{
+    LIST_ID id;
     PAWN_TYPE tipe;
     BOARD_INDEX posisi;
     COLOR warna;
     //bisa diisi apa aja
 }BIDAK;
 
+
 /*For Move*/
+typedef LIST_ID ELMT_QUEUE;
+
 typedef struct {
     BOARD_INDEX cur_position;
     BOARD_INDEX new_position;
@@ -71,6 +86,7 @@ typedef struct {
 
 //for done moves
 typedef MOVE ELMT_STACK;
+
 
 
 

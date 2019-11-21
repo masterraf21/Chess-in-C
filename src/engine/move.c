@@ -102,6 +102,9 @@ BOARD_INDEX Knight8(BIDAK K){
     return K.posisi+19;
 }
 /***** MAIN FUNCTION *****/
+
+Queue_Move AvailableMove(List_Bidak B);
+BOARD_INDEX GetKingPos(List_Bidak B);
 boolean IsMove(BIDAK B, BOARD_INDEX KingPos){
 
     if (B.tipe==PAWN){
@@ -113,3 +116,5 @@ boolean IsMove(BIDAK B, BOARD_INDEX KingPos){
     }
 
 }
+boolean KingCheck(BIDAK B, BOARD_INDEX KingPos);
+List_Move GenerateMove(BIDAK B);
