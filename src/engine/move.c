@@ -26,7 +26,7 @@ BOARD_INDEX Left(BIDAK B){
 }
 BOARD_INDEX Left_i(BIDAK B, int i){
     if (i==1)
-        return Left(i);
+        return Left(B);
     else 
         return B.posisi-1*i;
 }
@@ -102,9 +102,13 @@ BOARD_INDEX Knight8(BIDAK K){
     return K.posisi+19;
 }
 /***** MAIN FUNCTION *****/
-
 Queue_Move AvailableMove(List_Bidak B);
-BOARD_INDEX GetKingPos(List_Bidak B);
+BOARD_INDEX GetKingPos(List_Bidak B){
+    address P = SearchId(B, KINGX);
+    if(P!=Nil)
+        return Info(P).id;
+}
+
 boolean IsMove(BIDAK B, BOARD_INDEX KingPos){
 
     if (B.tipe==PAWN){

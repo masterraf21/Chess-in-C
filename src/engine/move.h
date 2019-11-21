@@ -39,10 +39,15 @@ BOARD_INDEX Knight8(BIDAK K);
 /***** SEARCH FUNCTION ******/
 
 /***** MAIN FUNCTION *****/
+//dipake buat nampilin mana aja yang bisa gerak
+//pake queue biar enak ngeluarinnya
 Queue_Move AvailableMove(List_Bidak B);
+//helper function buat generate legal move
+//3 fungsi dibawah nyambung
 BOARD_INDEX GetKingPos(List_Bidak B);
-boolean IsMove(BIDAK B);
+boolean IsMove(BIDAK B, BOARD_INDEX KingPos);
 boolean KingCheck(BIDAK B, BOARD_INDEX KingPos);
+//Generate move beneran
 List_Move GenerateMove(BIDAK B);
 
 

@@ -25,6 +25,8 @@ typedef struct {
   address TAIL;  /* alamat penambahan */
 } Queue_Move;
 
+typedef Queue_Move Queue;
+
 /* Selektor */
 #define Head(Q) (Q).HEAD
 #define Tail(Q) (Q).TAIL

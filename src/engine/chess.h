@@ -69,7 +69,6 @@ typedef struct{
     PAWN_TYPE tipe;
     BOARD_INDEX posisi;
     COLOR warna;
-    //bisa diisi apa aja
 }BIDAK;
 
 

@@ -72,6 +72,30 @@ address Search (List L, infotype X)
 	return P_nil;
 }
 
+address SearchId (List L, LIST_ID X){
+	address P_nil = Nil;
+	address P_next = First(L);
+	boolean found = false;
+
+	//cek kosong gak
+	//kalau ga kosong di proses
+	//kalau kosong langsung return nil
+	if(!IsEmpty(L)){
+		//cek dulu elemen pertama apapun isinya
+		do{
+			if(Info(P_next).id==X){
+				P_nil = P_next;
+				found = true;
+			}else{
+				P_next = Next(P_next);
+			}
+
+		}while ((P_next!=Nil)&&(!found)); //berhenti pas dia udah diujung atau uda ketemu
+	}
+
+	return P_nil;
+
+}
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
 void InsVFirst (List *L, infotype X)

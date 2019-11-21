@@ -58,6 +58,8 @@ address Search (List L, infotype X);
 /* Mencari apakah ada elemen list dengan info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
+address SearchId (List L, LIST_ID X);
+/* Buat cari id tertentu gan */
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
