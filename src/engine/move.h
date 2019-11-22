@@ -44,6 +44,7 @@ BOARD_INDEX Knight8(BIDAK K);
 Queue_Move AvailableMove(List_Bidak B);
 //helper function buat generate legal move
 //3 fungsi dibawah nyambung
+void GeneratePseudo()
 BOARD_INDEX GetKingPos(List_Bidak B);
 boolean IsMove(BIDAK B, BOARD_INDEX KingPos);
 boolean KingCheck(BIDAK B, BOARD_INDEX KingPos);

@@ -15,7 +15,7 @@
 // Init
 void init_board(BOARD *B);
 // Update
-void update_board(BOARD *B, List_Bidak L);
+void update_board(BOARD *B, List_Bidak L, COLOR C);
 // Draw procedure
 void draw_board(BOARD B);
 
