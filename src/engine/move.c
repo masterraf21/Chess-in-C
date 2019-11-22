@@ -101,24 +101,132 @@ BOARD_INDEX Knight7(BIDAK K){
 BOARD_INDEX Knight8(BIDAK K){
     return K.posisi+19;
 }
+
 /***** MAIN FUNCTION *****/
-Queue_Move AvailableMove(List_Bidak B);
+
+//dipake buat nampilin mana aja yang bisa gerak
+//pake queue biar enak ngeluarinnya
+Queue_Move AvailableMove(List_Bidak B){
+    //siapin Output bray
+    Queue_Move Q;
+    CreateEmpty(&Q);
+
+
+}
+List_Move GenerateMove(BIDAK B){
+    List_Move L;
+    CreateEmpty(&L);
+    
+    if((B.tipe==PAWN)&&(B.warna==WHITE)){
+        GenWPawn(B, &L);
+    }else if(B.tipe==PAWN&&B.warna==BLACK){
+        GenBPawn(B, &L);
+    }else{
+        if (B.tipe==ROOK){
+            GenRook(B, &L);
+        }else if(B.tipe==BISHOP){
+            GenBishop(B, &L);
+        }else if(B.tipe==KNIGHT){
+            GenKnight(B, &L);
+        }else if(B.tipe==QUEEN){
+            GenQueen(B, &L);
+        }else if(B.tipe==KING){
+            GenKing(B, &L);
+        }
+    }
+}
+
+//helper functions
+boolean IsMoveLegal(MOVE M);
 BOARD_INDEX GetKingPos(List_Bidak B){
     address P = SearchId(B, KINGX);
     if(P!=Nil)
         return Info(P).id;
+
+}
+boolean IsKingCheck(BIDAK B, BOARD_INDEX KingPos, int *ray){
+
+}
+boolean IsKingSafe(BOARD_INDEX KingPos, int *ray, int *dummyboard){
+
+}
+int * CreateDummyBoard(BOARD B){
+    int dummy[64];
+    DUMMY_INDEX j = A1x;
+    for (BOARD_INDEX i = A1; i <= H8; i++)
+    {
+        dummy[j] = SetBoard(B, i);
+        j++;        
+    }
+
+    return dummy;
+}
+void DummytoRay(int *dummy, int **ray, DUMMY_INDEX i){
+    i
+
+}
+int * CreateRay(BOARD B){
+    enum PawnBlack {KingB=-6,QueenB,RookB,BishopB,KnightB,PawnB};
+    enum PawnWhite {PawnW=1,KnightW,BishopW,RookW,QueenW,KingW};
+
+    int dummy[64] = CreateDummyBoard(B);
+    int ray[64];
+    //init the ray with 0s
+    for (DUMMY_INDEX i = A1x; i <= H8x; i++)
+    {
+        ray[i] = 0;
+    }
+    
+    for (DUMMY_INDEX i = A1x; i <= H8x; i++){
+
+
+
+
+    }
+}
+int * CheckRay(BOARD B, COLOR C){
+
 }
 
-boolean IsMove(BIDAK B, BOARD_INDEX KingPos){
+//Move generator perbidak
+void GenWPawn(BIDAK WPawn, List_Move *L){
+    BOARD_INDEX pos = WPawn.posisi;
 
-    if (B.tipe==PAWN){
+}
+void GenBPawn(BIDAK BPAWN, List_Move *L){
+    BOARD_INDEX pos = BPAWN.posisi;
+    
+}
+void GenRook(BIDAK R, List_Move *L){
+    BOARD_INDEX pos = R.posisi;
+    //check all sides
+    //upper side first
+    if(SetBoard(R,Up(R))!=BAD_SQUARE){
+        
 
-    }else if (B.tipe==KNIGHT){
-
-    }else{
 
     }
 
+    if(SetBoard(R,Left(R))!=BAD_SQUARE){
+
+    }
+
+    if(SetBoard(R,Right(R))!=BAD_SQUARE){
+
+    }
+
+    if(SetBoard(R,Down(R))!=BAD_SQUARE){
+
+    }
+void GenBishop(BIDAK B, List_Move *L){
+
 }
-boolean KingCheck(BIDAK B, BOARD_INDEX KingPos);
-List_Move GenerateMove(BIDAK B);
+void GenKnight(BIDAK K, List_Move *L){
+
+}
+void GenQueen(BIDAK Q, List_Move *L){
+
+}
+void GenKing(BIDAK K, List_Move *L){
+
+}

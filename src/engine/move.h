@@ -2,6 +2,7 @@
 #define MOVE_H
 
 #include "chess.h"
+#include "board.h"
 #include "../adt/listmove.h"
 #include "../adt/listbidak.h"
 #include "../adt/queuemove.h"
@@ -39,25 +40,32 @@ BOARD_INDEX Knight8(BIDAK K);
 /***** SEARCH FUNCTION ******/
 
 /***** MAIN FUNCTION *****/
+
 //dipake buat nampilin mana aja yang bisa gerak
 //pake queue biar enak ngeluarinnya
 Queue_Move AvailableMove(List_Bidak B);
-//helper function buat generate legal move
-//3 fungsi dibawah nyambung
-void GeneratePseudo()
-BOARD_INDEX GetKingPos(List_Bidak B);
-boolean IsMove(BIDAK B, BOARD_INDEX KingPos);
-boolean KingCheck(BIDAK B, BOARD_INDEX KingPos);
-//Generate move beneran
 List_Move GenerateMove(BIDAK B);
 
+//helper functions conerning ray function
+//and check checking
+boolean IsMoveLegal(MOVE M);
+BOARD_INDEX GetKingPos(List_Bidak B);
+boolean IsKingCheck(BIDAK B, BOARD_INDEX KingPos);
+boolean IsKingSafe(BOARD_INDEX KingPos, int *ray, int *dummyboard);
+int * CreateDummyBoard(BOARD B);
+void DummytoRay(int *dummy, int **ray);
+int * CreateRay(BOARD B);
+int * CheckRay(BOARD B, COLOR C);
 
 
-
-
-
-
-
+//Move generator perbidak
+void GenWPawn(BIDAK WPawn, List_Move *L);
+void GenBPawn(BIDAK BPAWN, List_Move *L);
+void GenRook(BIDAK R, List_Move *L);
+void GenBishop(BIDAK B, List_Move *L);
+void GenKnight(BIDAK K, List_Move *L);
+void GenQueen(BIDAK Q, List_Move *L);
+void GenKing(BIDAK K, List_Move *L);
 
 
 

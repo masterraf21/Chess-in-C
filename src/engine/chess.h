@@ -21,6 +21,17 @@ typedef enum {
   A8=91, B8, C8, D8, E8, F8, G8, H8,
 }BOARD_INDEX;
 
+typedef enum{
+  A1x, B1x, C1x, D1x, E1x, F1x, G1x, H1x,
+  A2x, B2x, C2x, D2x, E2x, F2x, G2x, H2x,
+  A3x, B3x, C3x, D3x, E3x, F3x, G3x, H3x,
+  A4x, B4x, C4x, D4x, E4x, F4x, G4x, H4x,
+  A5x, B5x, C5x, D5x, E5x, F5x, G5x, H5x,
+  A6x, B6x, C6x, D6x, E6x, F6x, G6x, H6x,
+  A7x, B7x, C7x, D7x, E7x, F7x, G7x, H7x,
+  A8x, B8x, C8x, D8x, E8x, F8x, G8x, H8x,
+
+}DUMMY_INDEX;
 //condition of the board aside from pawns
 typedef enum
 {
