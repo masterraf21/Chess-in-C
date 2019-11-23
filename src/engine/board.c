@@ -145,7 +145,7 @@ void PrintBoard()
     for (i=0;i<=7;i++)
     {
         AtasTile();
-        IsiTile((8-i),2,b);
+        IsiTile((i),2,b);
         BawahTile();
     }
 
