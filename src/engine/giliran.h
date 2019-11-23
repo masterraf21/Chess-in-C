@@ -5,6 +5,9 @@
 #include "../adt/listbidak.h"
 #include "../adt/queuemove.h"
 
+void InitGiliran(Queue *Q,)
+
+void Turn(Queue *Q, List_Bidak *player, List_Bidak *enemy);
 
 
 #endif
