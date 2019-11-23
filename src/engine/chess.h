@@ -8,6 +8,7 @@
 
 
 /*For Board*/
+typedef int BOARD_TILE;
 
 //index of the board itself
 typedef enum {

@@ -59,13 +59,13 @@ int * CheckRay(BOARD B, COLOR C);
 
 
 //Move generator perbidak
-void GenWPawn(BIDAK WPawn, List_Move *L);
-void GenBPawn(BIDAK BPAWN, List_Move *L);
-void GenRook(BIDAK R, List_Move *L);
-void GenBishop(BIDAK B, List_Move *L);
-void GenKnight(BIDAK K, List_Move *L);
-void GenQueen(BIDAK Q, List_Move *L);
-void GenKing(BIDAK K, List_Move *L);
+void GenWPawn(BOARD B, BIDAK WPawn, List_Move *L);
+void GenBPawn(BOARD B, BIDAK BPAWN, List_Move *L);
+void GenRook(BOARD B, BIDAK R, List_Move *L);
+void GenBishop(BOARD B, BIDAK Bi, List_Move *L);
+void GenKnight(BOARD B, BIDAK K, List_Move *L);
+void GenQueen(BOARD B, BIDAK Q, List_Move *L);
+void GenKing(BOARD B, BIDAK K, List_Move *L);
 
 
 

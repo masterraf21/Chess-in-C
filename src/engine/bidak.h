@@ -5,8 +5,11 @@
 #include "../adt/listbidak.h"
 
 
-/******KONSTRUKTOR*******/
+/****HELPER FUNCTION******/
+boolean Enemy(BIDAK B, BOARD_TILE T);
+boolean Friend(BIDAK B, BOARD_TILE T);
 
+/******KONSTRUKTOR*******/
 //Fungsi Konstruktor tiap bidak
 BIDAK InitBidak(LIST_ID Id, PAWN_TYPE Tipe, BOARD_INDEX Posisi, COLOR Warna);
 //Konstruktor List buat nyimpen bidak

@@ -189,44 +189,67 @@ int * CheckRay(BOARD B, COLOR C){
 }
 
 //Move generator perbidak
-void GenWPawn(BIDAK WPawn, List_Move *L){
+void GenWPawn(BOARD B, BIDAK WPawn, List_Move *L){
     BOARD_INDEX pos = WPawn.posisi;
 
 }
-void GenBPawn(BIDAK BPAWN, List_Move *L){
+void GenBPawn(BOARD B, BIDAK BPAWN, List_Move *L){
     BOARD_INDEX pos = BPAWN.posisi;
     
 }
-void GenRook(BIDAK R, List_Move *L){
+void GenRook(BOARD B, BIDAK R, List_Move *L){
+    
     BOARD_INDEX pos = R.posisi;
-    //check all sides
+
+    /*CHECK ALL SIDES*/
     //upper side first
-    if(SetBoard(R,Up(R))!=BAD_SQUARE){
+    if(SetBoard(B,Up(R))!=BAD_SQUARE){
+        int i = 1; //iterator tile
+        do
+        {
+            BOARD_TILE nt = SetBoard(B, Up_i(R,i));
+            
+            if(Enemy(R,nt)){
+                
+            }else if(Friend(R,nt)){
+
+            }else/*EMPTY_SQUARE*/{
+                
+            }
+            
+        } while(SetBoard(B,Up_i(R,i))==EMPTY_SQUARE);
+        
+        
         
 
 
     }
 
-    if(SetBoard(R,Left(R))!=BAD_SQUARE){
+    if(SetBoard(B,Left(R))!=BAD_SQUARE){
+        int i = 1;
+
 
     }
 
-    if(SetBoard(R,Right(R))!=BAD_SQUARE){
+    if(SetBoard(B,Right(R))!=BAD_SQUARE){
+        int i = 1;
 
     }
 
-    if(SetBoard(R,Down(R))!=BAD_SQUARE){
+    if(SetBoard(B,Down(R))!=BAD_SQUARE){
+        int i = 1;
 
     }
-void GenBishop(BIDAK B, List_Move *L){
+}
+void GenBishop(BOARD B, BIDAK Bi, List_Move *L){
 
 }
-void GenKnight(BIDAK K, List_Move *L){
+void GenKnight(BOARD B, BIDAK K, List_Move *L){
 
 }
-void GenQueen(BIDAK Q, List_Move *L){
+void GenQueen(BOARD B, BIDAK Q, List_Move *L){
 
 }
-void GenKing(BIDAK K, List_Move *L){
+void GenKing(BOARD B, BIDAK K, List_Move *L){
 
 }

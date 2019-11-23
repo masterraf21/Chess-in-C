@@ -1,6 +1,26 @@
 #include <stdlib.h>
 #include "bidak.h"
 
+
+
+/****HELPER FUNCTION******/
+//check if the following b
+boolean Enemy(BIDAK B, BOARD_TILE T){
+    BOARD_TILE bk = B.tipe*B.warna;
+    boolean retval = false; 
+    retval = ((bk^T)<0);
+
+    return retval;
+}
+
+boolean Friend(BIDAK B, BOARD_TILE T){
+    BOARD_TILE bk = B.tipe*B.warna;
+    boolean retval = false; 
+    retval = ((bk^T)>0);
+
+    return retval;
+}
+
 BIDAK InitBidak(LIST_ID Id, PAWN_TYPE Tipe, BOARD_INDEX Posisi, COLOR Warna)
 {
     BIDAK B;
