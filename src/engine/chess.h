@@ -7,8 +7,6 @@
 #include "../adt/array.h"
 
 
-/*For Board*/
-typedef int BOARD_TILE;
 
 //index of the board itself
 typedef enum {
@@ -61,22 +59,17 @@ typedef enum
     PAWN=1, KNIGHT, BISHOP, ROOK,  QUEEN, KING
 }PAWN_TYPE;
 
-//typedef list-infotype ids
-//works both for white and black lists
-typedef enum
-{
-    PAWN1, PAWN2, PAWN3, PAWN4,
-    PAWN5, PAWN6, PAWN7, PAWN8,
-    ROOK1, ROOK2,
-    KNIGHT1, KNIGHT2,
-    BISHOP1, BISHOP2,
-    QUEENX, KINGX
+//kalau pawn 1-8
+//knight, bishop, rook: 1 atau 2
+//king queen 1
+typedef struct{
+    int number;
+    PAWN_TYPE;
 }LIST_ID;
 
 //struct ini dipake buat nanti di linked list, bisa buat generate move juga
 typedef struct{
     LIST_ID id;
-    PAWN_TYPE tipe;
     BOARD_INDEX posisi;
     COLOR warna;
 }BIDAK;

@@ -14,8 +14,10 @@
 #define IdxUndef -999 /* indeks tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
+/*For Board*/
+typedef int BOARD_TILE;
+typedef BOARD_TILE ElType;
 typedef int IdxType;
-typedef int ElType;
 
 typedef struct 
 {

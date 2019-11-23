@@ -209,20 +209,19 @@ void GenRook(BOARD B, BIDAK R, List_Move *L){
         {
             BOARD_TILE nt = SetBoard(B, Up_i(R,i));
             
-            if(Enemy(R,nt)){
-                
-            }else if(Friend(R,nt)){
+            if(Enemy(R,nt))/*Makan*/{
 
-            }else/*EMPTY_SQUARE*/{
+            }else if(Friend(R,nt))/*Terhalang*/{
+
+
+            }else/*Kosong*/{
                 
-            }
+            }   
             
-        } while(SetBoard(B,Up_i(R,i))==EMPTY_SQUARE);
+        } while(SetBoard(B,Up_i(R,i))!=BAD_SQUARE);
         
         
         
-
-
     }
 
     if(SetBoard(B,Left(R))!=BAD_SQUARE){
@@ -252,4 +251,23 @@ void GenQueen(BOARD B, BIDAK Q, List_Move *L){
 }
 void GenKing(BOARD B, BIDAK K, List_Move *L){
 
+}
+
+//interface
+void AddMove(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index){
+    MOVE M;
+    M.cur_position = Mover.posisi;
+    M.id = Mover.id;
+    M.new_position = Target_Index;
+    M.is_makan = false;
+
+    
+}
+void AddMakan(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index, BIDAK Victim){
+    MOVE M;
+    M.cur_position = Mover.posisi;
+    M.id = Mover.id;
+    M.new_position = Target_Index;
+    M.is_makan = true;
+    M.victim = Victim;
 }

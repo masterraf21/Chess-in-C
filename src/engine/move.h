@@ -67,6 +67,9 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L);
 void GenQueen(BOARD B, BIDAK Q, List_Move *L);
 void GenKing(BOARD B, BIDAK K, List_Move *L);
 
+//interface penghubung list sama move
+void AddMove(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index);
+void AddMakan(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index, BIDAK Victim);
 
 
 
