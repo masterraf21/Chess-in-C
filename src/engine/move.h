@@ -7,6 +7,8 @@
 #include "../adt/listbidak.h"
 #include "../adt/queuemove.h"
 
+typedef List_Bidak List;
+
 /**** HELPER FUNCTION *****/
 BOARD_INDEX Neighbor(BIDAK B);
 BOARD_INDEX Up(BIDAK B);
@@ -44,7 +46,7 @@ BOARD_INDEX Knight8(BIDAK K);
 //dipake buat nampilin mana aja yang bisa gerak
 //pake queue biar enak ngeluarinnya
 Queue_Move AvailableMove(List_Bidak B);
-List_Move GenerateMove(BIDAK B);
+List_Move GenerateMove(BIDAK B, BOARD BO);
 
 //helper functions conerning ray function
 //and check checking
@@ -53,7 +55,7 @@ BOARD_INDEX GetKingPos(List_Bidak B);
 boolean IsKingCheck(BIDAK B, BOARD_INDEX KingPos);
 boolean IsKingSafe(BOARD_INDEX KingPos, int *ray, int *dummyboard);
 int * CreateDummyBoard(BOARD B);
-void DummytoRay(int *dummy, int **ray);
+void DummytoRay(int *dummy, int **ray, DUMMY_INDEX i);
 int * CreateRay(BOARD B);
 int * CheckRay(BOARD B, COLOR C);
 
