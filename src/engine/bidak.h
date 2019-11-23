@@ -11,7 +11,7 @@ boolean Friend(BIDAK B, BOARD_TILE T);
 
 /******KONSTRUKTOR*******/
 //Fungsi Konstruktor tiap bidak
-BIDAK InitBidak(LIST_ID Id, PAWN_TYPE Tipe, BOARD_INDEX Posisi, COLOR Warna);
+BIDAK InitBidak(PAWN_ID num,PAWN_TYPE Tipe, BOARD_INDEX Posisi, COLOR Warna);
 //Konstruktor List buat nyimpen bidak
 //langsung diisi sama bidak 16 biji 
 void InitListBidak(List_Bidak *L, COLOR Warna);

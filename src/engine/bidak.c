@@ -6,7 +6,7 @@
 /****HELPER FUNCTION******/
 //check if the following b
 boolean Enemy(BIDAK B, BOARD_TILE T){
-    BOARD_TILE bk = B.tipe*B.warna;
+    BOARD_TILE bk = B.id.type*B.warna;
     boolean retval = false; 
     retval = ((bk^T)<0);
 
@@ -14,19 +14,19 @@ boolean Enemy(BIDAK B, BOARD_TILE T){
 }
 
 boolean Friend(BIDAK B, BOARD_TILE T){
-    BOARD_TILE bk = B.tipe*B.warna;
+    BOARD_TILE bk = B.id.type*B.warna;
     boolean retval = false; 
     retval = ((bk^T)>0);
 
     return retval;
 }
 
-BIDAK InitBidak(LIST_ID Id, PAWN_TYPE Tipe, BOARD_INDEX Posisi, COLOR Warna)
+BIDAK InitBidak(PAWN_ID num,PAWN_TYPE Tipe, BOARD_INDEX Posisi, COLOR Warna)
 {
     BIDAK B;
-    B.id = Id;
+    B.id.number = num;
     B.posisi = Posisi;
-    B.tipe = Tipe;
+    B.id.type = Tipe;
     B.warna = Warna;
 
     return B;
@@ -40,56 +40,56 @@ void InitListBidak(List_Bidak *L, COLOR Warna)
     //nanti bakal ada dua list, white or black
     if (Warna==WHITE){
         /* Generate yang putih dulu gan*/
-        PawnW1 = InitBidak(PAWN1, PAWN, A2, WHITE);
-        PawnW2 = InitBidak(PAWN2, PAWN, B2, WHITE);
-        PawnW3 = InitBidak(PAWN3, PAWN, C2, WHITE);
-        PawnW4 = InitBidak(PAWN4, PAWN, D2, WHITE);
-        PawnW5 = InitBidak(PAWN5, PAWN, E2, WHITE);
-        PawnW6 = InitBidak(PAWN6, PAWN, F2, WHITE);
-        PawnW7 = InitBidak(PAWN7, PAWN, G2, WHITE);
-        PawnW8 = InitBidak(PAWN8, PAWN, H2, WHITE);
-        RookW1 = InitBidak(ROOK1, ROOK, A1, WHITE);
-        RookW2 = InitBidak(ROOK2, ROOK, H1, WHITE);
-        KnightW1 = InitBidak(KNIGHT1, KNIGHT, B1, WHITE);
-        KnightW2 = InitBidak(KNIGHT2, KNIGHT, G1, WHITE);
-        BishopW1 = InitBidak(BISHOP1, C1, WHITE);
-        BishopW2 = InitBidak(BISHOP2, F1, WHITE);
-        KingW = InitBidak(KINGX, KING, D1, WHITE);
-        QueenW = InitBidak(QUEENX, QUEEN, E1, WHITE);
+        BIDAK PawnW1 = InitBidak(ONE, PAWN, A2, WHITE);
+        BIDAK PawnW2 = InitBidak(TWO, PAWN, B2, WHITE);
+        BIDAK PawnW3 = InitBidak(THREE, PAWN, C2, WHITE);
+        BIDAK PawnW4 = InitBidak(FOUR, PAWN, D2, WHITE);
+        BIDAK PawnW5 = InitBidak(FIVE, PAWN, E2, WHITE);
+        BIDAK PawnW6 = InitBidak(SIX, PAWN, F2, WHITE);
+        BIDAK PawnW7 = InitBidak(SEVEN, PAWN, G2, WHITE);
+        BIDAK PawnW8 = InitBidak(EIGHT, PAWN, H2, WHITE);
+        BIDAK RookW1 = InitBidak(ONE, ROOK, A1, WHITE);
+        BIDAK RookW2 = InitBidak(TWO, ROOK, H1, WHITE);
+        BIDAK KnightW1 = InitBidak(ONE, KNIGHT, B1, WHITE);
+        BIDAK KnightW2 = InitBidak(TWO, KNIGHT, G1, WHITE);
+        BIDAK BishopW1 = InitBidak(ONE, BISHOP, C1, WHITE);
+        BIDAK BishopW2 = InitBidak(TWO, BISHOP, F1, WHITE);
+        BIDAK KingW = InitBidak(ONE, KING, D1, WHITE);
+        BIDAK QueenW = InitBidak(ONE, QUEEN, E1, WHITE);
 
         //Isi Linked list dengan bidak yang baru dibuat
-        InsVLast(L, PawnW1);InsVLast(L, PawnW2);InsVLast(L, PawnW3);InsVLast(L, PawnW4);
-        InsVLast(L, PawnW5);InsVLast(L, PawnW6);InsVLast(L, PawnW7);InsVLast(L, PawnW8);
-        InsVLast(L, RookW1);InsVLast(L, RookW2);
-        InsVLast(L, KnightW1);InsVLast(L, KnightW2);
-        InsVLast(L, BishopW1);InsVLast(L, BishopW2);
-        InsVLast(L, QueenW);InsVLast(L, KingW);
+        InsVFirst(L, PawnW1);InsVFirst(L, PawnW2);InsVFirst(L, PawnW3);InsVFirst(L, PawnW4);
+        InsVFirst(L, PawnW5);InsVFirst(L, PawnW6);InsVFirst(L, PawnW7);InsVFirst(L, PawnW8);
+        InsVFirst(L, RookW1);InsVFirst(L, RookW2);
+        InsVFirst(L, KnightW1);InsVFirst(L, KnightW2);
+        InsVFirst(L, BishopW1);InsVFirst(L, BishopW2);
+        InsVFirst(L, QueenW);InsVFirst(L, KingW);
     }else{
         /* Generate yang hitam gan */
-        PawnB1 = InitBidak(PAWN1, PAWN, A7, BLACK);
-        PawnB2 = InitBidak(PAWN2, PAWN, B7, BLACK);
-        PawnB3 = InitBidak(PAWN3, PAWN, C7, BLACK);
-        PawnB4 = InitBidak(PAWN4, PAWN, D7, BLACK);
-        PawnB5 = InitBidak(PAWN5, PAWN, E7, BLACK);
-        PawnB6 = InitBidak(PAWN6, PAWN, F7, BLACK);
-        PawnB7 = InitBidak(PAWN7, PAWN, G7, BLACK);
-        PawnB8 = InitBidak(PAWN8, PAWN, H7, BLACK);
-        RookB1 = InitBidak(ROOK1 ROOK, A8, BLACK);
-        RookB2 = InitBidak(ROOK2, ROOK, H8, BLACK);
-        KnightB1 = InitBidak(KNIGHT1, KNIGHT, B8, BLACK);
-        KnightB2 = InitBidak(KNIGHT2, KNIGHT, G8, BLACK);
-        BishopB1 = InitBidak(BISHOP1, BISHOP, C8, BLACK);
-        BishopB2 = InitBidak(BISHOP2, BISHOP, F8, BLACK);
-        KingB = InitBidak(KINGX, KING, D8, BLACK);
-        QueenB = InitBidak(QUEENX, QUEEN, E8, BLACK);
+        BIDAK PawnB1 = InitBidak(ONE, PAWN, A2, BLACK);
+        BIDAK PawnB2 = InitBidak(TWO, PAWN, B2, BLACK);
+        BIDAK PawnB3 = InitBidak(THREE, PAWN, C2, BLACK);
+        BIDAK PawnB4 = InitBidak(FOUR, PAWN, D2, BLACK);
+        BIDAK PawnB5 = InitBidak(FIVE, PAWN, E2, BLACK);
+        BIDAK PawnB6 = InitBidak(SIX, PAWN, F2, BLACK);
+        BIDAK PawnB7 = InitBidak(SEVEN, PAWN, G2, BLACK);
+        BIDAK PawnB8 = InitBidak(EIGHT, PAWN, H2, BLACK);
+        BIDAK RookB1 = InitBidak(ONE, ROOK, A1, BLACK);
+        BIDAK RookB2 = InitBidak(TWO, ROOK, H1, BLACK);
+        BIDAK KnightB1 = InitBidak(ONE, KNIGHT, B1, BLACK);
+        BIDAK KnightB2 = InitBidak(TWO, KNIGHT, G1, BLACK);
+        BIDAK BishopB1 = InitBidak(ONE, BISHOP, C1, BLACK);
+        BIDAK BishopB2 = InitBidak(TWO, BISHOP, F1, BLACK);
+        BIDAK KingB = InitBidak(ONE, KING, D1, BLACK);
+        BIDAK QueenB = InitBidak(ONE, QUEEN, E1, BLACK);
 
         //Isi Linked list dengan bidak yang baru dibuat
-        InsVLast(L, PawnB1);InsVLast(L, PawnB2);InsVLast(L, PawnB3);InsVLast(L, PawnB4);
-        InsVLast(L, PawnB5);InsVLast(L, PawnB6);InsVLast(L, PawnB7);InsVLast(L, PawnB8);
-        InsVLast(L, RookB1);InsVLast(L, RookB2);
-        InsVLast(L, KnightB1);InsVLast(L, KnightB2);
-        InsVLast(L, BishopB1);InsVLast(L, BishopB2);
-        InsVLast(L, QueenB);InsVLast(L, KingB);
+        InsVFirst(L, PawnB1);InsVFirst(L, PawnB2);InsVFirst(L, PawnB3);InsVFirst(L, PawnB4);
+        InsVFirst(L, PawnB5);InsVFirst(L, PawnB6);InsVFirst(L, PawnB7);InsVFirst(L, PawnB8);
+        InsVFirst(L, RookB1);InsVFirst(L, RookB2);
+        InsVFirst(L, KnightB1);InsVFirst(L, KnightB2);
+        InsVFirst(L, BishopB1);InsVFirst(L, BishopB2);
+        InsVFirst(L, QueenB);InsVFirst(L, KingB);
     }
 
 

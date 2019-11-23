@@ -62,9 +62,14 @@ typedef enum
 //kalau pawn 1-8
 //knight, bishop, rook: 1 atau 2
 //king queen 1
+typedef enum{
+    ONE=1, TWO, THREE, FOUR,
+    FIVE, SIX, SEVEN, EIGHT
+}PAWN_ID;
+
 typedef struct{
-    int number;
-    PAWN_TYPE;
+    PAWN_ID number;
+    PAWN_TYPE type;
 }LIST_ID;
 
 //struct ini dipake buat nanti di linked list, bisa buat generate move juga
