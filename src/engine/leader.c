@@ -29,8 +29,8 @@ while (! IsEOP()) {
 (*B).Neff = count;
 }
 	
-void PrintLeaderboard(LeaderBoard *B) {
-	int count = (*B).Neff;
+void PrintLeaderboard(LeaderBoard B) {
+	int count = B.Neff;
 	int nomor = 1;
 	if (count == 0) {
 		printf("Belum ada Leaderboard !\n");
@@ -42,7 +42,7 @@ void PrintLeaderboard(LeaderBoard *B) {
 		printf("+-----+----------+----------+ \n");
 
 		while (count != 0) {
-			printf("|  %d  |   %s    |    %d   | \n",nomor,(*B).Tab[nomor-1].Nama,(*B).Tab[nomor-1].Nilai);
+			printf("|  %d  |   %s    |    %d   | \n",nomor,B.Tab[nomor-1].Nama,B.Tab[nomor-1].Nilai);
 			nomor++;
 			count--;
 		}

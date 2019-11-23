@@ -9,7 +9,7 @@ int StrToInt(Kata kat);
 
 void ReadLeaderBoard(LeaderBoard *B);
 	
-void PrintLeaderboard(LeaderBoard *B);
+void PrintLeaderboard(LeaderBoard B);
 			 	
 void SwapScore(Score *a, Score *b);
 
