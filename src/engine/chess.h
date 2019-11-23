@@ -8,6 +8,7 @@
 
 
 
+
 //index of the board itself
 typedef enum {
   A1=21, B1, C1, D1, E1, F1, G1, H1,
@@ -109,7 +110,17 @@ typedef struct {
 } LeaderBoard;
 
 
+void IsiTile(int nobaris, int nokolom, char bidak);
+//bakal berhubungan sama array posisi bidak
 
+void AtasTile();
+//framing atas
+
+void BawahTile();
+//framing bawah
+
+void PrintBoard();
+//main board
 
 
 #endif
