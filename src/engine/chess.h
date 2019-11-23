@@ -47,8 +47,6 @@ typedef struct {
     List_Bidak LHitam; //buat yang item
 } BOARD;
 
-
-
 /*For Bidak*/
 
 //enum tipe warna
@@ -101,7 +99,16 @@ typedef struct {
 //for done moves
 typedef MOVE ELMT_STACK;
 
+/* typedef struct for LeaderBoard */
+typedef struct {
+	char Nama[4];
+	int Nilai;
+} Score;
 
+typedef struct {
+	Score Tab[100];
+	int Neff;
+} LeaderBoard;
 
 
 
