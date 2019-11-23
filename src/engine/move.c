@@ -113,25 +113,25 @@ Queue_Move AvailableMove(List_Bidak B){
 
 
 }
-List_Move GenerateMove(BIDAK B){
+List_Move GenerateMove(BIDAK B, BOARD BO){
     List_Move L;
     CreateEmpty(&L);
     
-    if((B.tipe==PAWN)&&(B.warna==WHITE)){
-        GenWPawn(B, &L);
-    }else if(B.tipe==PAWN&&B.warna==BLACK){
-        GenBPawn(B, &L);
+    if((B.id.type==PAWN)&&(B.warna==WHITE)){
+        GenWPawn(BO, B, &L);
+    }else if(B.id.type==PAWN&&B.warna==BLACK){
+        GenBPawn(BO, B, &L);
     }else{
-        if (B.tipe==ROOK){
-            GenRook(B, &L);
-        }else if(B.tipe==BISHOP){
-            GenBishop(B, &L);
-        }else if(B.tipe==KNIGHT){
-            GenKnight(B, &L);
-        }else if(B.tipe==QUEEN){
-            GenQueen(B, &L);
-        }else if(B.tipe==KING){
-            GenKing(B, &L);
+        if (B.id.type==ROOK){
+            GenRook(BO, B, &L);
+        }else if(B.id.type==BISHOP){
+            GenBishop(BO, B, &L);
+        }else if(B.id.type==KNIGHT){
+            GenKnight(BO, B, &L);
+        }else if(B.id.type==QUEEN){
+            GenQueen(BO, B, &L);
+        }else if(B.id.type==KING){
+            GenKing(BO, B, &L);
         }
     }
 }
@@ -139,9 +139,9 @@ List_Move GenerateMove(BIDAK B){
 //helper functions
 boolean IsMoveLegal(MOVE M);
 BOARD_INDEX GetKingPos(List_Bidak B){
-    address P = SearchId(B, KINGX);
+    address P = SearchId(B, KING);
     if(P!=Nil)
-        return Info(P).id;
+        return Info(P).id.type;
 
 }
 boolean IsKingCheck(BIDAK B, BOARD_INDEX KingPos, int *ray){
@@ -162,7 +162,7 @@ int * CreateDummyBoard(BOARD B){
     return dummy;
 }
 void DummytoRay(int *dummy, int **ray, DUMMY_INDEX i){
-    i
+    
 
 }
 int * CreateRay(BOARD B){
@@ -190,16 +190,14 @@ int * CheckRay(BOARD B, COLOR C){
 
 //Move generator perbidak
 void GenWPawn(BOARD B, BIDAK WPawn, List_Move *L){
-    BOARD_INDEX pos = WPawn.posisi;
+    
 
 }
 void GenBPawn(BOARD B, BIDAK BPAWN, List_Move *L){
-    BOARD_INDEX pos = BPAWN.posisi;
     
 }
+
 void GenRook(BOARD B, BIDAK R, List_Move *L){
-    
-    BOARD_INDEX pos = R.posisi;
 
     /*CHECK ALL SIDES*/
     //upper side first
@@ -211,32 +209,83 @@ void GenRook(BOARD B, BIDAK R, List_Move *L){
             
             if(Enemy(R,nt))/*Makan*/{
 
+
+
             }else if(Friend(R,nt))/*Terhalang*/{
-
-
+                //kalau terhalang yaudah gausah jalan lagi kedepan
+                break;
             }else/*Kosong*/{
                 
             }   
-            
+
+            i++;
         } while(SetBoard(B,Up_i(R,i))!=BAD_SQUARE);
-        
-        
-        
+    
     }
 
     if(SetBoard(B,Left(R))!=BAD_SQUARE){
         int i = 1;
+        do
+        {
+            BOARD_TILE nt = SetBoard(B, Left_i(R,i));
+            
+            if(Enemy(R,nt))/*Makan*/{
+
+
+
+            }else if(Friend(R,nt))/*Terhalang*/{
+                //kalau terhalang yaudah gausah jalan lagi kedepan
+                break;
+            }else/*Kosong*/{
+                
+            }   
+
+            i++;
+        } while(SetBoard(B,Left_i(R,i))!=BAD_SQUARE);
 
 
     }
 
     if(SetBoard(B,Right(R))!=BAD_SQUARE){
         int i = 1;
+        do
+        {
+            BOARD_TILE nt = SetBoard(B, Right_i(R,i));
+            
+            if(Enemy(R,nt))/*Makan*/{
+
+
+
+            }else if(Friend(R,nt))/*Terhalang*/{
+                //kalau terhalang yaudah gausah jalan lagi kedepan
+                break;
+            }else/*Kosong*/{
+                
+            }   
+
+            i++;
+        } while(SetBoard(B,Right_i(R,i))!=BAD_SQUARE);
 
     }
 
     if(SetBoard(B,Down(R))!=BAD_SQUARE){
         int i = 1;
+        do
+        {
+            BOARD_TILE nt = SetBoard(B, Down_i(R,i));
+            
+            if(Enemy(R,nt))/*Makan*/{
+
+
+            }else if(Friend(R,nt))/*Terhalang*/{
+                //kalau terhalang yaudah gausah jalan lagi kedepan
+                break;
+            }else/*Kosong*/{
+                
+            }   
+
+            i++;
+        } while(SetBoard(B,Down_i(R,i))!=BAD_SQUARE);
 
     }
 }
@@ -257,7 +306,8 @@ void GenKing(BOARD B, BIDAK K, List_Move *L){
 void AddMove(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index){
     MOVE M;
     M.cur_position = Mover.posisi;
-    M.id = Mover.id;
+    M.id.type = Mover.id.type;
+    M.id.number = Mover.id.number;
     M.new_position = Target_Index;
     M.is_makan = false;
 
@@ -266,7 +316,8 @@ void AddMove(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index){
 void AddMakan(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index, BIDAK Victim){
     MOVE M;
     M.cur_position = Mover.posisi;
-    M.id = Mover.id;
+    M.id.type = Mover.id.type;
+    M.id.number = Mover.id.number;
     M.new_position = Target_Index;
     M.is_makan = true;
     M.victim = Victim;
