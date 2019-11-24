@@ -37,7 +37,11 @@ BOARD_INDEX Knight5(BIDAK K);
 BOARD_INDEX Knight6(BIDAK K);
 BOARD_INDEX Knight7(BIDAK K);
 BOARD_INDEX Knight8(BIDAK K);
-
+/* PAWN FIRST INDEX(s) */
+boolean PawnWFirst(BOARD B, BIDAK P);
+boolean PawnBFirst(BOARD B, BIDAK P);
+boolean IsUpKosong(BOARD B, BIDAK P);
+boolean IsDownKosong(BOARD B, BIDAK P);
 
 /***** SEARCH FUNCTION ******/
 
