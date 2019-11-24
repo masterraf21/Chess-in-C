@@ -243,8 +243,82 @@ void BawahTile()
 }
 
 // Draw - procedure
-void IsiTile(int nobaris, int nokolom, char bidak)
+void IsiTile(int nobaris, int nokolom, char bidak){
+    printf("%d", nobaris);
+    int i;
+
+   for (i=1; i <=9; ++i)
+   {
+       //if (i!=nokolom)
+       //{
+           if (i!=9)
+           {
+                if (i==1)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  ");
+                }
+                else if (i ==2)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  ");
+                }
+                else if (i == 3)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  ");
+                }
+                else if (i == 4)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  "); 
+                }
+                else if (i == 5)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  ");
+                }
+                else if (i == 6)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  ");
+                }
+                else if (i == 7)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  ");
+                }
+                else if (i == 8)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  ");
+                }
+           } 
+           else
+           {
+               printf("|%d", nobaris);
+           }
+           
+       //}   GAJADI KAYA GINI TAR MO DIAPUS HEHE MAAP
+        //else if (i=nokolom) {
+           //printf("|  %c  ",bidak);
+       //}
+        
+        
+        }
+       
+       printf("\n");
+
 }
+
 
 void PrintBoard(BOARD B)
 {
