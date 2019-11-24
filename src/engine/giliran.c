@@ -4,8 +4,8 @@
 
 void InitGiliran(Queue *Q, infotype *currPlayerInfo)
 //dipanggil sebelum game loop (pas inisialisasi)
-// I.S.: currPlayerInfo sembarang, Queue sembarang
-// F.S.:Player White (yang pertama main) itu udah langsung dimasukin ke currPlayerInfo
+// I.S.: currPlayerInfo sembarang, Q sembarang
+// F.S.:Player WHITE (yang pertama main) itu udah langsung dimasukin ke currPlayerInfo
 //		Jadi InitGiliran cukup menginisiasi giliran selanjutnya yaitu BLACK.
 {
 	/*KAMUS*/
@@ -22,16 +22,16 @@ void InitGiliran(Queue *Q, infotype *currPlayerInfo)
 	(*currPlayerInfo).poin = 0;
 }
 
-void changeTurn(Queue *Q, infotype *currPlayerInfo) /* parameternya boleh jadi ditambahin: Queue *stateCurrQueue yang I.S. nya sembarang
+void changeTurn(Queue *Q, infotype *currPlayerInfo) /* parameternya mungkin ditambahin: 'Queue *stateCurrQueue' yang I.S. nya sembarang
 (awalnya sembarang, isinya bakal jadi Queue yang bakal masuk ke stack undo),
 ada atau nggaknya si parameter ini tergantung undo yang dibikin yumna. Yumnanya mau ngepush current game statenya dimana?
 kalo misalnya yumna mau ngepush di dalam changeTurn : letakkan pushnya kek kode dibawah ini (setelah add, tp sebelum del)
-tapi kalo misalnya yumna mau ngepushnya di main program atau bikin prosedur sendiri
-berarti gaperlu ngePush current game state di dalem changeTurn
+tapi kalo misalnya yumna mau ngepushnya di main program atau bikin prosedur sendiri,
+berarti gaperlu ngePush current game state di dalem changeTurn.
 current game state itu disini maksudnya posisi bidak ada dimana aja, dsb*/
 
 
-// changeTurn ini dipanggil di akhir game loop
+// changeTurn dipanggil di akhir game loop
 /*intinya disini nanti bakal nge Del elemen Q yang lg giliran, terus setelah melakukan move si 
 	elemennya di Add lagi kedalem Q*/
 /*Sekaligus nge-update counter giliran + poin kalo terjadi makan memakan*/
