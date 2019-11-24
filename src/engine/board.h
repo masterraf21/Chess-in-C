@@ -17,12 +17,17 @@ typedef struct {
 #define LHitam(L) (L).LHitam
 #define SetBoard(B,X) Tab(B).TI[X]
 
-
 /******* KONSTRUKTOR ******/
 // Init
 void init_board(BOARD *B);
 // Update
 void update_board(BOARD *B, List_Bidak L, COLOR C);
+// Pra- Draw procedure
+char IntToCharBidak(int n);
+int NoBarisToTileIndex(int m);
+void IsiTile(int nobaris, BOARD B);
+void AtasTile();
+void BawahTile();
 // Draw procedure
 void draw_board(BOARD B);
 
