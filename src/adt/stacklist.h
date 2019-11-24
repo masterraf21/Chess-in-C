@@ -3,13 +3,14 @@
 #define _STACKLIST_H
 
 #include "boolean.h"
+#include "../engine/chess.h"
 #include <stdlib.h>
 
 /* Konstanta */
 #define Nil NULL
 
 /* Deklarasi infotype */
-typedef int infotype;
+typedef MOVE infotype;
 
 /* Stack dengan representasi berkait dengan pointer */
 typedef struct tElmtStack * address;

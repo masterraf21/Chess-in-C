@@ -193,6 +193,8 @@ List_Move GenerateMove(BIDAK B, BOARD BO){
             GenKing(BO, B, &L);
         }
     }
+
+    return L;
 }
 
 //helper functions
@@ -248,35 +250,44 @@ int * CheckRay(BOARD B, COLOR C){
 }
 
 //Move generator perbidak
+
 void GenWPawn(BOARD B, BIDAK WPawn, List_Move *L){
 
     if(IsUpKosong(B,WPawn)){
         if(PawnWFirst(B,WPawn)){
-            //jalan dua
-
-
             //jalan satu
-
+            AddMove(L, WPawn, Up(WPawn));
+            //jalan satu
+            AddMove(L, WPawn, Up_i(WPawn, 2));
 
             //makan
             if(Enemy(WPawn, SerongKananAtas(WPawn))){
+                BOARD_INDEX vid = SerongKananAtas(WPawn);
+                BOARD_TILE vtile = SetBoard(B, vid);
+                AddMakan(B, L, WPawn, vid, vtile);
 
             }
             if(Enemy(WPawn, SerongKiriAtas(WPawn))){
+                BOARD_INDEX vid = SerongKiriAtas(WPawn);
+                BOARD_TILE vtile = SetBoard(B, vid);
+                AddMakan(B, L, WPawn, vid, vtile);
 
             }
-
-            
-
         }else{
             //cuman jalan satu aja
-
+            AddMove(L, WPawn, Up(WPawn));
 
             //makan
             if(Enemy(WPawn, SerongKananAtas(WPawn))){
+                BOARD_INDEX vid = SerongKananAtas(WPawn);
+                BOARD_TILE vtile = SetBoard(B, vid);
+                AddMakan(B, L, WPawn, vid, vtile);
 
             }
             if(Enemy(WPawn, SerongKiriAtas(WPawn))){
+                BOARD_INDEX vid = SerongKiriAtas(WPawn);
+                BOARD_TILE vtile = SetBoard(B, vid);
+                AddMakan(B, L, WPawn, vid, vtile);
 
             }
 
@@ -287,8 +298,16 @@ void GenWPawn(BOARD B, BIDAK WPawn, List_Move *L){
     else{        
         if(Enemy(WPawn, SerongKananAtas(WPawn))){
 
+            BOARD_INDEX vid = SerongKananAtas(WPawn);
+            BOARD_TILE vtile = SetBoard(B, vid);
+            AddMakan(B, L, WPawn, vid, vtile);
+
         }
         if(Enemy(WPawn, SerongKiriAtas(WPawn))){
+
+            BOARD_INDEX vid = SerongKiriAtas(WPawn);
+            BOARD_TILE vtile = SetBoard(B, vid);
+            AddMakan(B, L, WPawn, vid, vtile);
 
         }
     }
@@ -850,12 +869,12 @@ void AddMove(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index){
     InsVFirst(L, M);
 }
 
-void AddMakan(BOARD B, List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index, BOARD_INDEX VictimIdx, BOARD_TILE VictimTile){
+void AddMakan(BOARD B, List_Move *L, BIDAK Mover, BOARD_INDEX VictimIdx, BOARD_TILE VictimTile){
     MOVE M;
     M.cur_position = Mover.posisi;
     M.id.type = Mover.id.type;
     M.id.number = Mover.id.number;
-    M.new_position = Target_Index;
+    M.new_position = VictimIdx;
     M.is_makan = true;
 
     BIDAK Victim = SearchMakan(VictimIdx, VictimTile, B, Mover.warna);

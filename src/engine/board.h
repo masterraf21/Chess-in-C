@@ -3,6 +3,8 @@
 
 #include "chess.h"
 #include "bidak.h"
+#include "../adt/stacklist.h"
+#include "move.h"
 
 /** TYPEDEF KHUSUS **/
 typedef struct {
@@ -17,13 +19,21 @@ typedef struct {
 #define LHitam(L) (L).LHitam
 #define SetBoard(B,X) Tab(B).TI[X]
 
+/****HELPER FUNCTION USING STACK***/
+void UpdateStack(Stack *S, MOVE M);
+void UpdateList(List_Bidak *L, MOVE M);
+void UpdateBoard(BOARD *B, List_Bidak L, COLOR C);
+
 
 /******* KONSTRUKTOR ******/
 // Init
 void init_board(BOARD *B);
-// Update
-void update_board(BOARD *B, List_Bidak L, COLOR C);
+
+/****** DRAW ******/
 // Draw procedure
-void draw_board(BOARD B);
+void IsiTile(int nobaris, int nokolom, char bidak);
+void AtasTile();
+void BawahTile();
+void PrintBoard();
 
 #endif

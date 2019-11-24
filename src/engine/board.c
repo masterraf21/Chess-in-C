@@ -2,6 +2,18 @@
 #include <stdlib.h>
 
 
+/****HELPER FUNCTION USING STACK***/
+void UpdateStack(Stack *S, MOVE M){
+
+}
+void UpdateList(List_Bidak *L, MOVE M){
+
+}
+void UpdateBoard(BOARD *B, List_Bidak L, COLOR C){
+
+}
+
+/***** KONSTRUKTOR *******/
 // Init board kita kondisikan
 // agar dia seperti kondisi awal chess
 void init_board(BOARD *B)
@@ -56,16 +68,8 @@ void init_board(BOARD *B)
     for (BAD_INDEX i = 29; i <= 99; i += 10)
         SetBoard(*B,i) = BAD_SQUARE;
 }
-// Update
-void update_board(BOARD *B, List_Bidak L){
 
-}
 // Draw procedure
-void draw_board(BOARD B)
-{
-    
-}
-
 void IsiTile(int nobaris, int nokolom, char bidak)
 {
   printf("%d", nobaris);

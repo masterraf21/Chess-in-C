@@ -77,7 +77,7 @@ void GenKing(BOARD B, BIDAK K, List_Move *L);
 //color dirinya sendiri
 BIDAK SearchMakan(BOARD_INDEX bi, BOARD_TILE bt, BOARD B, COLOR SelfColor);
 void AddMove(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index);
-void AddMakan(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index, BOARD_INDEX VictimIdx, BOARD_TILE VictimTile);
+void AddMakan(BOARD B, List_Move *L, BIDAK Mover, BOARD_INDEX VictimIdx, BOARD_TILE VictimTile);
 
 
 

@@ -3,8 +3,8 @@
 /* Representasi address dengan pointer */
 /* infotype adalah integer */
 /* ini isinya buat linked List_Move isi bidak*/
-#ifndef List_Movemove_H
-#define List_Movemove_H
+#ifndef List_move_H
+#define List_move_H
 
 #include "boolean.h"
 #include "../engine/chess.h"

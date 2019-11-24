@@ -3,8 +3,8 @@
 /* Representasi address dengan pointer */
 /* infotype adalah integer */
 /* ini isinya buat linked List_Bidak isi bidak*/
-#ifndef List_Bidakbidak_H
-#define List_Bidakbidak_H
+#ifndef List_bidak_H
+#define List_bidak_H
 
 #include "boolean.h"
 #include "../engine/chess.h"
