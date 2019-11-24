@@ -11,13 +11,12 @@
 
 typedef struct {
 	COLOR player;
-	int counter
+	int counter;
 	int poin;
 }infotype; 
 
 /* Deklarasi infotype */
 typedef ELMT_QUEUE infotype;
-
 
 /* Queue dengan representasi berkait dengan pointer */
 typedef struct tElmtQueue * address;

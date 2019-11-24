@@ -25,15 +25,22 @@ void UpdateList(List_Bidak *L, MOVE M);
 void UpdateBoard(BOARD *B, List_Bidak L, COLOR C);
 
 
+
+
 /******* KONSTRUKTOR ******/
 // Init
 void init_board(BOARD *B);
 
+
 /****** DRAW ******/
-// Draw procedure
-void IsiTile(int nobaris, int nokolom, char bidak);
+// Pra- Draw procedure
+char IntToCharBidak(int n);
+int NoBarisToTileIndex(int m);
+void IsiTile(int nobaris, BOARD B);
 void AtasTile();
 void BawahTile();
+// Draw procedure
+void IsiTile(int nobaris, int nokolom, char bidak);
 void PrintBoard();
 
 #endif

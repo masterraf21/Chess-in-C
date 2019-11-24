@@ -69,35 +69,147 @@ void init_board(BOARD *B)
         SetBoard(*B,i) = BAD_SQUARE;
 }
 
-// Draw procedure
-void IsiTile(int nobaris, int nokolom, char bidak)
+
+// Pra-Draw procedure
+char IntToCharBidak(int n)
+{
+    char c;
+    if (n== -1)
+    {
+        c = 'P'; //black pawn
+    }
+    else if (n == (-2))
+    {
+        c = 'H'; //black knight
+    }
+    else if (n == (-3))
+    {
+        c = 'B'; //black bishop
+    }
+    else if (n == (-4))
+    {
+        c = 'R'; //black rook
+    }
+    else if (n== (-5))
+    {
+        c = 'Q'; //black queen
+    }
+    else if (n== (-6))
+    {
+        c = 'K';  //black king
+    }
+    else if (n == (1))
+    {
+        c = 'p'; //white pawn
+    }
+    else if (n == (2))
+    {
+        c = 'h'; //white knight
+    }
+    else if (n == (3))
+    {
+        c = 'b'; //white bishop
+    }
+    else if (n == (4))
+    {
+        c = 'r'; //white rook
+    }
+    else if (n== (5))
+    {
+        c = 'q'; //white queen
+    }
+    else if (n== 6)
+    {
+        c = 'k';  //white king
+    }
+    
+    return c;
+}
+
+int NoBarisToTileIndex(int m)
+{
+    int Idx;
+    Idx = 10+(m*10);
+    return Idx;
+}
+
+void IsiTile(int nobaris, BOARD B)
 {
   printf("%d", nobaris);
-   int i, last;
-   last = 9;
+   int i;
+
    for (i=1; i <=9; ++i)
    {
-       if (i!=nokolom)
-       {
+       //if (i!=nokolom)
+       //{
            if (i!=9)
            {
-           printf("|     ");
+                if (i==1)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  ");
+                }
+                else if (i ==2)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  ");
+                }
+                else if (i == 3)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  ");
+                }
+                else if (i == 4)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  "); 
+                }
+                else if (i == 5)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  ");
+                }
+                else if (i == 6)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  ");
+                }
+                else if (i == 7)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  ");
+                }
+                else if (i == 8)
+                {
+                printf("|  ");
+                printf("%c",IntToCharBidak(SetBoard(B,(NoBarisToTileIndex(nobaris)+i))));
+                printf("  ");
+                }
            } 
            else
            {
                printf("|%d", nobaris);
            }
            
-       }
-        else if (i=nokolom) {
-           printf("|  %c  ",bidak);
-       }
+       //}   GAJADI KAYA GINI TAR MO DIAPUS HEHE MAAP
+        //else if (i=nokolom) {
+           //printf("|  %c  ",bidak);
+       //}
         
         
         }
        
        printf("\n");
    }
+
+   
 void AtasTile()
 {
     int i;
@@ -130,10 +242,11 @@ void BawahTile()
     printf("\n");
 }
 
-//misal karakter bidaknya pake h
-b = 'h';
+// Draw - procedure
+void IsiTile(int nobaris, int nokolom, char bidak)
+}
 
-void PrintBoard()
+void PrintBoard(BOARD B)
 {
     printf("  __A__ ");
     printf("__B__ ");
@@ -143,13 +256,13 @@ void PrintBoard()
     printf("__F__ ");
     printf("__G__ ");
     printf("__H__\n");
-    
+
     int i;
 
-    for (i=0;i<=7;i++)
+    for (i=1;i<=8;i++)
     {
         AtasTile();
-        IsiTile((i),2,b);
+        IsiTile(i,B);
         BawahTile();
     }
 
@@ -164,4 +277,3 @@ void PrintBoard()
 
 }
 
-;

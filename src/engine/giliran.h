@@ -5,9 +5,14 @@
 #include "../adt/listbidak.h"
 #include "../adt/queuemove.h"
 
-void InitGiliran(Queue *Q,)
+/*inisialisasi queue ketika game dimulai*/
+void InitGiliran(Queue *Q, infotype *currPlayerInfo);
+// I.S: Player White (yang pertama main) itu udah langsung dimasukin ke currPlayerInfo
+// Jadi InitGiliran cukup menginisiasi giliran selanjutnya yaitu BLACK.
 
-void Turn(Queue *Q, List_Bidak *player, List_Bidak *enemy);
-
-
+/*proses pergantian giliran*/
+void changeTurn(Queue *Q, infotype *currPlayerInfo);
+/*intinya disini nanti bakal nge Del elemen Q yang lg giliran, terus setelah melakukan move si 
+	elemennya di Add lagi kedalem Q*/
+/*Sekaligus nge-update counter giliran + poin kalo terjadi makan memakan*/
 #endif
