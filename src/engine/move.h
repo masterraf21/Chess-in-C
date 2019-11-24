@@ -7,7 +7,6 @@
 #include "../adt/listbidak.h"
 #include "../adt/queuemove.h"
 
-typedef List_Bidak List;
 
 /**** HELPER FUNCTION *****/
 BOARD_INDEX Neighbor(BIDAK B);
@@ -73,9 +72,12 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L);
 void GenQueen(BOARD B, BIDAK Q, List_Move *L);
 void GenKing(BOARD B, BIDAK K, List_Move *L);
 
-//interface penghubung list sama move
+/*** INTERFACE BETWEEN MOVE AND LIST ******/
+
+//color dirinya sendiri
+BIDAK SearchMakan(BOARD_INDEX bi, BOARD_TILE bt, BOARD B, COLOR SelfColor);
 void AddMove(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index);
-void AddMakan(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index, BIDAK Victim);
+void AddMakan(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index, BOARD_INDEX VictimIdx, BOARD_TILE VictimTile);
 
 
 
