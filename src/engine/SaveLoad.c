@@ -3,7 +3,7 @@
 
 
 char AmbilWarna(COLOR c){
-    if (c = WHITE){
+    if (c == WHITE){
         return 'P';
     } else {
         return 'H';
@@ -52,7 +52,7 @@ void ReadFile(List_Bidak *W, List_Bidak *B,Queue_Giliran *Q){
             tempB.id = tempL;
             tempB.posisi = (CKata.TabKata[2] - '0')*10 + (CKata.TabKata[3] - '0');
             tempB.warna = getcolor(CKata.TabKata[4]);
-            if (tempB.warna = 1){
+            if (tempB.warna == 1){
                 InsVFirst (W, tempB);
             } else {
                 InsVFirst (B, tempB);
@@ -66,7 +66,7 @@ void ReadFile(List_Bidak *W, List_Bidak *B,Queue_Giliran *Q){
             tempQ.counter = StrToInt(CKata);
             ADVKATA();
             tempQ.poin = StrToInt(CKata);
-            Add(Q,tempQ);
+            AddTurn(Q,tempQ);
             ADVKATA();
         }  
     }   
@@ -88,14 +88,14 @@ void SaveFile(List_Bidak W, List_Bidak B, Queue_Giliran Q){
     printf("Masukkan nama save file : ");
     scanf("%s",Namfile);
     catur = fopen(Namfile,"w");
-    PB = First(W);
+    PB = FirstBidak(W);
     while (PB != Nil){
         BD = InfoBidak(PB);
         fprintf(catur,"%d%d%dP;",BD.id.number,BD.id.type,BD.posisi);
         PB = NextBidak(PB);
     }
     fprintf(catur,"\n");
-    PB = First(B);
+    PB = FirstBidak(B);
     while (PB != Nil){
         BD = InfoBidak(PB);
         fprintf(catur,"%d%d%dH;",BD.id.number,BD.id.type,BD.posisi);
@@ -107,7 +107,7 @@ void SaveFile(List_Bidak W, List_Bidak B, Queue_Giliran Q){
         R = InfoT(PR);
         warna = AmbilWarna(R.player);
         fprintf(catur,"%c;%d;%d\n",warna,R.counter,R.poin);
-        PR = Next(PR);
+        PR = NextT(PR);
     }
     //Print ke file isi queue giliran dengan format <warna><count>;<score>
     //contoh P;XXX30;105

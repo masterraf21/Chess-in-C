@@ -118,7 +118,7 @@ void DelAfterM (List_Move *L, address_move *Pdel, address_move Prec);
 /*      Pdel adalah alamat elemen List_Move yang dihapus  */
 
 /****************** PROSES SEMUA ELEMEN List_Move ******************/
-void PrintInfoM (List_Move L);
+// void PrintInfoM (List_Move L);
 /* I.S. List_Move mungkin kosong */
 /* F.S. Jika List_Move tidak kosong, iai List_Move dicetak ke kanan: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
@@ -141,7 +141,7 @@ int NbElmtM (List_Move L);
 
 /****************** PROSES TERHADAP List_Move ******************/
 
-void InversList_Move (List_Move *L);
+// void InversList_Move (List_Move *L);
 /* I.S. sembarang. */
 /* F.S. elemen List_Move dibalik : */
 /* Elemen terakhir menjadi elemen pertama, dan seterusnya. */

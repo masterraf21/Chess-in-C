@@ -241,32 +241,32 @@ void DelAfterM (List_Move *L, address_move *Pdel, address_move Prec)
 }
 
 /****************** PROSES SEMUA ELEMEN List_Move ******************/
-void PrintInfoM (List_Move L)
-/* I.S. List_Move mungkin kosong */
-/* F.S. Jika List_Move tidak kosong, iai List_Move dicetak ke kanan: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika List_Move kosong : menulis [] */
-/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
-{
-	printf("[");
-	if (!IsEmptyM(L)){
-		address_move P = FirstMove(L);
+// void PrintInfoM (List_Move L)
+// /* I.S. List_Move mungkin kosong */
+// /* F.S. Jika List_Move tidak kosong, iai List_Move dicetak ke kanan: [e1,e2,...,en] */
+// /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
+// /* Jika List_Move kosong : menulis [] */
+// /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
+// {
+// 	printf("[");
+// 	if (!IsEmptyM(L)){
+// 		address_move P = FirstMove(L);
 
-		do{
-			printf("%d", InfoMove(P));
-			P = NextMove(P);
+// 		do{
+// 			printf("%d", InfoMove(P));
+// 			P = NextMove(P);
 
-			if (P!=Nil){
-				printf(",");
-			}
+// 			if (P!=Nil){
+// 				printf(",");
+// 			}
 
-		}while(P!=Nil);
+// 		}while(P!=Nil);
 
 
-	}
-	printf("]");
+// 	}
+// 	printf("]");
 
-}
+// }
 int NbElmtM (List_Move L)
 /* Mengirimkan banyaknya elemen List_Move; mengirimkan 0 jika List_Move kosong */
 {
@@ -363,30 +363,30 @@ int NbElmtM (List_Move L)
 
 /****************** PROSES TERHADAP List_Move ******************/
 
-void InversList_Move (List_Move *L)
-/* I.S. sembarang. */
-/* F.S. elemen List_Move dibalik : */
-/* Elemen terakhir menjadi elemen pertama, dan seterusnya. */
-/* Membalik elemen List_Move, tanpa melakukan alokasi/dealokasi. */
-{
+// void InversList_Move (List_Move *L)
+// /* I.S. sembarang. */
+// /* F.S. elemen List_Move dibalik : */
+// /* Elemen terakhir menjadi elemen pertama, dan seterusnya. */
+// /* Membalik elemen List_Move, tanpa melakukan alokasi/dealokasi. */
+// {
 
-	address_move P,Q;
-	address_move FirstMove = FirstMove(*L);
+// 	address_move P,Q;
+// 	address_move FirstMove = FirstMove(*L);
 
-	P = FirstMove(*L);
-	Q = NextMove(P);
+// 	P = FirstMove(*L);
+// 	Q = NextMove(P);
 
-	while(Q != Nil){
+// 	while(Q != Nil){
 
-		P = Q;
-		Q = NextMove(Q);
+// 		P = Q;
+// 		Q = NextMove(Q);
 
-		P;
-		InsertFirstM(L, P);
-		NextMove(FirstMove) = Q;
-	}
+// 		P;
+// 		InsertFirstM(L, P);
+// 		NextMove(FirstMove) = Q;
+// 	}
 
-}
+// }
 void Konkat1M (List_Move *L1, List_Move *L2, List_Move *L3)
 /* I.S. L1 dan L2 sembarang */
 /* F.S. L1 dan L2 kosong, L3 adalah hasil konkatenasi L1 & L2 */

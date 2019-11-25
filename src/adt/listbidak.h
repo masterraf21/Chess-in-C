@@ -123,7 +123,7 @@ void DelAfter (List_Bidak *L, address_bidak *Pdel, address_bidak Prec);
 /*      Pdel adalah alamat elemen List_Bidak yang dihapus  */
 
 /****************** PROSES SEMUA ELEMEN List_Bidak ******************/
-void PrintInfo (List_Bidak L);
+// void PrintInfo (List_Bidak L);
 /* I.S. List_Bidak mungkin kosong */
 /* F.S. Jika List_Bidak tidak kosong, iai List_Bidak dicetak ke kanan: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
@@ -146,7 +146,7 @@ int NbElmt (List_Bidak L);
 
 /****************** PROSES TERHADAP List_Bidak ******************/
 
-void InversList_Bidak (List_Bidak *L);
+// void InversList_Bidak (List_Bidak *L);
 /* I.S. sembarang. */
 /* F.S. elemen List_Bidak dibalik : */
 /* Elemen terakhir menjadi elemen pertama, dan seterusnya. */

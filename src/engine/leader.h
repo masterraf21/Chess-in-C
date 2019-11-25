@@ -17,7 +17,6 @@ void SaveLeaderBoard(LeaderBoard B);
 
 void AddScore(LeaderBoard *B,Score S);
 #endif
-ß
 
 
  

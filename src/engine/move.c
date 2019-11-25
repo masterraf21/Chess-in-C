@@ -183,7 +183,7 @@ boolean IsNeighbor(BOARD B, BIDAK Bi){
     else if ((Bi.id.type==PAWN)&&(Bi.warna==BLACK)){
         return (down==EMPTY_SQUARE)||(Enemy(Bi,skab))||(Enemy(Bi,skib));
     }else/*BISHOP*/{
-        ((skat==EMPTY_SQUARE)||(Enemy(Bi,skat))||(skab==EMPTY_SQUARE)||(Enemy(Bi,skab))
+        return ((skat==EMPTY_SQUARE)||(Enemy(Bi,skat))||(skab==EMPTY_SQUARE)||(Enemy(Bi,skab))
         ||(skit==EMPTY_SQUARE)||(Enemy(Bi,skit))||(skib==EMPTY_SQUARE)||(Enemy(Bi,skib)));
     }
 }

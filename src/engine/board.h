@@ -27,7 +27,7 @@ void UpdateList(List_Bidak *L, MOVE M);
 void UpdateUndoList(List_Bidak *LSelf, MOVE M);
 void UpdateMakan(List_Bidak *LEnemy, MOVE M);
 void UpdateBoard(BOARD *B, MOVE M);
-void UndoBoard(BOARD *B, Stack *S, List_Bidak *Acu, List_Bidak *Lawanacu);
+// void UndoBoard(BOARD *B, Stack *S, List_Bidak *Acu, List_Bidak *Lawanacu);
 
 /******* KONSTRUKTOR ******/
 // Init

@@ -296,32 +296,32 @@ void DelAfter (List_Bidak *L, address_bidak *Pdel, address_bidak Prec)
 }
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void PrintInfo (List_Bidak L)
-/* I.S. List_Bidak mungkin kosong */
-/* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika list kosong : menulis [] */
-/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
-{
-	printf("[");
-	if (!IsEmptyBidak(L)){
-		address_bidak P = FirstBidak(L);
+// void PrintInfo (List_Bidak L)
+// /* I.S. List_Bidak mungkin kosong */
+// /* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
+// /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
+// /* Jika list kosong : menulis [] */
+// /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
+// {
+// 	printf("[");
+// 	if (!IsEmptyBidak(L)){
+// 		address_bidak P = FirstBidak(L);
 
-		do{
-			printf("%d", InfoBidak(P));
-			P = NextBidak(P);
+// 		do{
+// 			printf("%d", InfoBidak(P));
+// 			P = NextBidak(P);
 
-			if (P!=Nil){
-				printf(",");
-			}
+// 			if (P!=Nil){
+// 				printf(",");
+// 			}
 
-		}while(P!=Nil);
+// 		}while(P!=Nil);
 
 
-	}
-	printf("]");
+// 	}
+// 	printf("]");
 
-}
+// }
 int NbElmt (List_Bidak L)
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 {
@@ -419,42 +419,42 @@ int NbElmt (List_Bidak L)
 
 /****************** PROSES TERHADAP LIST ******************/
 
-void InversList (List_Bidak *L)
-/* I.S. sembarang. */
-/* F.S. elemen list dibalik : */
-/* Elemen terakhir menjadi elemen pertama, dan seterusnya. */
-/* Membalik elemen list, tanpa melakukan alokasi/dealokasi. */
-{
+// void InversList (List_Bidak *L)
+// /* I.S. sembarang. */
+// /* F.S. elemen list dibalik : */
+// /* Elemen terakhir menjadi elemen pertama, dan seterusnya. */
+// /* Membalik elemen list, tanpa melakukan alokasi/dealokasi. */
+// {
 
-	// address_bidak prev = Nil;
-	// address_bidak curr = FirstBidak(*L);
-	// address_bidak next = Nil;
+// 	// address_bidak prev = Nil;
+// 	// address_bidak curr = FirstBidak(*L);
+// 	// address_bidak next = Nil;
 
-	// while(curr != Nil){
-	// 	next = NextBidak(curr);
-	// 	NextBidak(curr) = prev;
+// 	// while(curr != Nil){
+// 	// 	next = NextBidak(curr);
+// 	// 	NextBidak(curr) = prev;
 
-	// 	prev = curr;
-	// 	curr = next;
-	// }
+// 	// 	prev = curr;
+// 	// 	curr = next;
+// 	// }
 
-	address_bidak P,Q;
-	address_bidak FirstBidak = FirstBidak(*L);
+// 	address_bidak P,Q;
+// 	address_bidak FirstBidak = FirstBidak(*L);
 
-	P = FirstBidak(*L);
-	Q = NextBidak(P);
+// 	P = FirstBidak(*L);
+// 	Q = NextBidak(P);
 
-	while(Q != Nil){
+// 	while(Q != Nil){
 
-		P = Q;
-		Q = NextBidak(Q);
+// 		P = Q;
+// 		Q = NextBidak(Q);
 
-		P;
-		InsertFirst(L, P);
-		NextBidak(FirstBidak) = Q;
-	}
+// 		P;
+// 		InsertFirst(L, P);
+// 		NextBidak(FirstBidak) = Q;
+// 	}
 
-}
+// }
 void Konkat1 (List_Bidak *L1, List_Bidak *L2, List_Bidak *L3)
 /* I.S. L1 dan L2 sembarang */
 /* F.S. L1 dan L2 kosong, L3 adalah hasil konkatenasi L1 & L2 */

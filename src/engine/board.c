@@ -65,33 +65,33 @@ void UpdateBoard(BOARD *B, MOVE M){
 
 }
 
-void UndoBoard(BOARD *B, Stack *S, List_Bidak *Acu, List_Bidak *Lawanacu)
-{
-    /*kamus lokal*/
-    MOVE StepLawan, Stepku;
+// void UndoBoard(BOARD *B, Stack *S, List_Bidak *Acu, List_Bidak *Lawanacu)
+// {
+//     /*kamus lokal*/
+//     MOVE StepLawan, Stepku;
 
 
-    /*Algoritma*/
-    POP(S, &StepLawan);
+//     /*Algoritma*/
+//     Pop(S, &StepLawan);
 
-    if (StepLawan.is_makan) //kalo dia ga abis makan
-    {
-        InsVFirst(&Acu, StepLawan.victim); //realokasi bidak victim
-    }
-    UpdateUndoList(&Lawanacu, StepLawan);
-    SwapTile(B, StepLawan.new_position, StepLawan.cur_position);
+//     if (StepLawan.is_makan) //kalo dia ga abis makan
+//     {
+//         InsVFirst(&Acu, StepLawan.victim); //realokasi bidak victim
+//     }
+//     UpdateUndoList(&Lawanacu, StepLawan);
+//     SwapTile(B, StepLawan.new_position, StepLawan.cur_position);
     
-    POP(S, &Stepku);
+//     POP(S, &Stepku);
 
-    if (Stepku.is_makan) //kalo aku ga abis makan
-    {
-        InsVFirst(&Lawanacu, Stepku.victim); //realokasi bidak victim
-    }
-    UpdateUndoList(&Acu, Stepku);
-    SwapTile(B,Stepku.new_position, Stepku.cur_position);
+//     if (Stepku.is_makan) //kalo aku ga abis makan
+//     {
+//         InsVFirst(&Lawanacu, Stepku.victim); //realokasi bidak victim
+//     }
+//     UpdateUndoList(&Acu, Stepku);
+//     SwapTile(B,Stepku.new_position, Stepku.cur_position);
    
   //tidak dipush kembali karena undo bisa dilakukan berulang2 berturut2
-}
+//}
 
 /***** KONSTRUKTOR *******/
 // Init board kita kondisikan
