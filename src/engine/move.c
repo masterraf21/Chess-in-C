@@ -253,42 +253,35 @@ int * CheckRay(BOARD B, COLOR C){
 
 void GenWPawn(BOARD B, BIDAK WPawn, List_Move *L){
 
+    BOARD_INDEX IdxKanan = SerongKananAtas(WPawn);
+    BOARD_TILE TKanan = SetBoard(B, IdxKanan);
+    BOARD_INDEX IdxKiri = SerongKiriAtas(WPawn);
+    BOARD_TILE TKiri = SetBoard(B, IdxKiri);
+
     if(IsUpKosong(B,WPawn)){
         if(PawnWFirst(B,WPawn)){
             //jalan satu
             AddMove(L, WPawn, Up(WPawn));
-            //jalan satu
+            //jalan dua
             AddMove(L, WPawn, Up_i(WPawn, 2));
 
             //makan
-            if(Enemy(WPawn, SerongKananAtas(WPawn))){
-                BOARD_INDEX vid = SerongKananAtas(WPawn);
-                BOARD_TILE vtile = SetBoard(B, vid);
-                AddMakan(B, L, WPawn, vid, vtile);
-
+            if(Enemy(WPawn, TKanan)){
+                AddMakan(B, L, WPawn, IdxKanan, TKanan);
             }
-            if(Enemy(WPawn, SerongKiriAtas(WPawn))){
-                BOARD_INDEX vid = SerongKiriAtas(WPawn);
-                BOARD_TILE vtile = SetBoard(B, vid);
-                AddMakan(B, L, WPawn, vid, vtile);
-
+            if(Enemy(WPawn, TKiri)){;
+                AddMakan(B, L, WPawn, IdxKiri, TKiri);
             }
         }else{
             //cuman jalan satu aja
             AddMove(L, WPawn, Up(WPawn));
 
             //makan
-            if(Enemy(WPawn, SerongKananAtas(WPawn))){
-                BOARD_INDEX vid = SerongKananAtas(WPawn);
-                BOARD_TILE vtile = SetBoard(B, vid);
-                AddMakan(B, L, WPawn, vid, vtile);
-
+            if(Enemy(WPawn, TKanan)){
+                AddMakan(B, L, WPawn, IdxKanan, TKanan);
             }
-            if(Enemy(WPawn, SerongKiriAtas(WPawn))){
-                BOARD_INDEX vid = SerongKiriAtas(WPawn);
-                BOARD_TILE vtile = SetBoard(B, vid);
-                AddMakan(B, L, WPawn, vid, vtile);
-
+            if(Enemy(WPawn, TKiri)){;
+                AddMakan(B, L, WPawn, IdxKiri, TKiri);
             }
 
         }
@@ -296,73 +289,62 @@ void GenWPawn(BOARD B, BIDAK WPawn, List_Move *L){
     }
     //kalau gak kosong cek dia bisa makan ga di serongnya
     else{        
-        if(Enemy(WPawn, SerongKananAtas(WPawn))){
-
-            BOARD_INDEX vid = SerongKananAtas(WPawn);
-            BOARD_TILE vtile = SetBoard(B, vid);
-            AddMakan(B, L, WPawn, vid, vtile);
-
+        if(Enemy(WPawn, TKanan)){
+            AddMakan(B, L, WPawn, IdxKanan, TKanan);
         }
-        if(Enemy(WPawn, SerongKiriAtas(WPawn))){
-
-            BOARD_INDEX vid = SerongKiriAtas(WPawn);
-            BOARD_TILE vtile = SetBoard(B, vid);
-            AddMakan(B, L, WPawn, vid, vtile);
-
+        if(Enemy(WPawn, TKiri)){
+            AddMakan(B, L, WPawn, IdxKiri, TKiri);
         }
     }
 
 }
 void GenBPawn(BOARD B, BIDAK BPawn, List_Move *L){
+
+    BOARD_INDEX IdxKanan = SerongKananBawah(BPawn);
+    BOARD_TILE TKanan = SetBoard(B, IdxKanan);
+    BOARD_INDEX IdxKiri = SerongKiriBawah(BPawn);
+    BOARD_TILE TKiri = SetBoard(B, IdxKiri);
+
     
     if(IsDownKosong(B,BPawn)){
+       
         if(PawnWFirst(B,BPawn)){
-            //jalan dua
-
-
-
             //jalan satu
-
+            AddMove(L, BPawn, Down(BPawn));
+            //jalan dua
+            AddMove(L, BPawn, Down_i(BPawn,2));
 
             //makan
-            if(Enemy(BPawn, SerongKananBawah(BPawn))){
-
+            if(Enemy(BPawn, TKanan)){
+                AddMakan(B, L, BPawn, IdxKanan, TKanan);
             }
-            if(Enemy(BPawn, SerongKiriBawah(BPawn))){
-
+            if(Enemy(BPawn, TKiri)){
+                AddMakan(B, L, BPawn, IdxKiri, TKiri);
             }
 
             
-
         }else{
             //cuman jalan satu aja
-
-
+            AddMove(L, BPawn, Down(BPawn));
 
             //makan
-            if(Enemy(BPawn, SerongKananBawah(BPawn))){
-
+            if(Enemy(BPawn, TKanan)){
+                AddMakan(B, L, BPawn, IdxKanan, TKanan);
             }
-            if(Enemy(BPawn, SerongKiriBawah(BPawn))){
-
+            if(Enemy(BPawn, TKiri)){
+                AddMakan(B, L, BPawn, IdxKiri, TKiri);
             }
-
         }
-
     }
     //kalau gak kosong cek dia bisa makan ga di serongnya
     else{
         //makan
-        if(Enemy(BPawn, SerongKananBawah(BPawn))){
-
+       if(Enemy(BPawn, TKanan)){
+            AddMakan(B, L, BPawn, IdxKanan, TKanan);
         }
-        if(Enemy(BPawn, SerongKiriBawah(BPawn))){
-
+        if(Enemy(BPawn, TKiri)){
+            AddMakan(B, L, BPawn, IdxKiri, TKiri);
         }
-    }
-
-   
-    
 }
 
 void GenRook(BOARD B, BIDAK R, List_Move *L){
@@ -371,89 +353,93 @@ void GenRook(BOARD B, BIDAK R, List_Move *L){
     //upper side first
     if(SetBoard(B,Up(R))!=BAD_SQUARE){
         int i = 1; //iterator tile
+        BOARD_INDEX ni = Up_i(R,i);
+        BOARD_TILE nt = SetBoard(B, ni);    
         do
         {
-            BOARD_TILE nt = SetBoard(B, Up_i(R,i));
+            ni = Up_i(R,i);
+            nt = SetBoard(B, ni);
             
             if(Enemy(R,nt))/*Makan*/{
-
-
-
+                AddMakan(B, L, R, ni, nt);
             }else if(Friend(R,nt))/*Terhalang*/{
                 //kalau terhalang yaudah gausah jalan lagi kedepan
                 break;
             }else/*Kosong*/{
-                
+                //maju kesana gan
+                AddMove(L, R, ni);
             }   
-
             i++;
-        } while(SetBoard(B,Up_i(R,i))!=BAD_SQUARE);
+        }while(nt!=BAD_SQUARE);
     
     }
 
     if(SetBoard(B,Left(R))!=BAD_SQUARE){
         int i = 1;
+        BOARD_INDEX ni = Left_i(R,i);
+        BOARD_TILE nt = SetBoard(B, ni);    
         do
         {
-            BOARD_TILE nt = SetBoard(B, Left_i(R,i));
+            ni = Left_i(R,i);
+            nt = SetBoard(B,ni);
             
             if(Enemy(R,nt))/*Makan*/{
-
-
-
+                AddMakan(B, L, R, ni, nt);
             }else if(Friend(R,nt))/*Terhalang*/{
                 //kalau terhalang yaudah gausah jalan lagi kedepan
                 break;
             }else/*Kosong*/{
-                
+                AddMove(L, R, ni);
             }   
-
             i++;
-        } while(SetBoard(B,Left_i(R,i))!=BAD_SQUARE);
+        } while(nt!=BAD_SQUARE);
 
 
     }
 
     if(SetBoard(B,Right(R))!=BAD_SQUARE){
         int i = 1;
+        BOARD_INDEX ni = Right_i(R,i);
+        BOARD_TILE nt = SetBoard(B, ni);  
         do
         {
-            BOARD_TILE nt = SetBoard(B, Right_i(R,i));
+            ni = Right_i(R,i);
+            nt = SetBoard(B,ni);
             
             if(Enemy(R,nt))/*Makan*/{
-
-
-
+                AddMakan(B, L, R, ni, nt);
             }else if(Friend(R,nt))/*Terhalang*/{
                 //kalau terhalang yaudah gausah jalan lagi kedepan
                 break;
             }else/*Kosong*/{
-                
+                AddMove(L, R, ni);
             }   
 
             i++;
-        } while(SetBoard(B,Right_i(R,i))!=BAD_SQUARE);
+        } while(nt!=BAD_SQUARE);
 
     }
 
     if(SetBoard(B,Down(R))!=BAD_SQUARE){
         int i = 1;
+        BOARD_INDEX ni = Down_i(R,i);
+        BOARD_TILE nt = SetBoard(B, ni); 
         do
         {
-            BOARD_TILE nt = SetBoard(B, Down_i(R,i));
+            ni = Down_i(R,i);
+            nt = SetBoard(B,ni);
             
             if(Enemy(R,nt))/*Makan*/{
-
-
+                AddMakan(B, L, R, ni, nt);
             }else if(Friend(R,nt))/*Terhalang*/{
                 //kalau terhalang yaudah gausah jalan lagi kedepan
                 break;
             }else/*Kosong*/{
-                
+                AddMove(L, R, ni);
             }   
 
             i++;
-        } while(SetBoard(B,Down_i(R,i))!=BAD_SQUARE);
+        } while(nt!=BAD_SQUARE);
 
     }
 }
@@ -461,165 +447,186 @@ void GenBishop(BOARD B, BIDAK Bi, List_Move *L){
 
     if(SetBoard(B,SerongKananAtas(Bi))!=BAD_SQUARE){
         int i = 1;
+        BOARD_INDEX ni = SerongKananAtas_i(Bi,i);
+        BOARD_TILE nt = SetBoard(B, ni); 
         do
         {
-            BOARD_TILE nt = SetBoard(B,SerongKananAtas_i(Bi,i));
+            ni = SerongKananAtas_i(Bi,i);
+            nt = SetBoard(B, ni); 
             if (Friend(Bi, nt)){
                 break;
             }else if(Enemy(Bi,nt)){
-
+                AddMakan(B, L, Bi, ni, nt);
             }else{
-
+                AddMove(L, Bi, ni); 
             }
-        } while (SetBoard(B, SerongKananAtas_i(Bi,i))!=BAD_SQUARE);
+            i++;
+        } while (nt!=BAD_SQUARE);
         
     }
 
     if(SetBoard(B,SerongKiriAtas(Bi))!=BAD_SQUARE){
         int i = 1;
+        BOARD_INDEX ni = SerongKiriAtas_i(Bi,i);
+        BOARD_TILE nt = SetBoard(B, ni); 
         do
         {
-            BOARD_TILE nt = SetBoard(B,SerongKiriAtas_i(Bi,i));
-            if (Friend(Bi, nt)){
+            ni = SerongKiriAtas_i(Bi,i);
+            nt = SetBoard(B, ni); 
+            if(Friend(Bi, nt)){
                 break;
             }else if(Enemy(Bi,nt)){
-
+                AddMakan(B, L, Bi, ni, nt);
             }else{
-                
+                AddMove(L, Bi, ni);
             }
-            
-        } while (SetBoard(B, SerongKiriAtas_i(Bi,i))!=BAD_SQUARE);
+            i++;
+        } while (nt!=BAD_SQUARE);
     }    
 
 
     if(SetBoard(B,SerongKananBawah(Bi))!=BAD_SQUARE){
         int i = 1;
+        BOARD_INDEX ni = SerongKananBawah_i(Bi,i);
+        BOARD_TILE nt = SetBoard(B, ni); 
         do
         {
-            BOARD_TILE nt = SetBoard(B,SerongKananBawah_i(Bi,i));
+            ni = SerongKananBawah_i(Bi,i);
+            nt = SetBoard(B, ni); 
             if (Friend(Bi, nt)){
                 break;
             }else if(Enemy(Bi,nt)){
-
+                AddMakan(B, L, Bi, ni, nt);
             }else{
-                
+                AddMove(L, Bi, ni); 
             }
-            
-        } while (SetBoard(B, SerongKananBawah_i(Bi,i))!=BAD_SQUARE);
-    }  
-
-    
+            i++;
+        } while (nt!=BAD_SQUARE);
+        
+    }
+  
     if(SetBoard(B,SerongKiriBawah(Bi))!=BAD_SQUARE){
         int i = 1;
+        BOARD_INDEX ni = SerongKiriBawah_i(Bi,i);
+        BOARD_TILE nt = SetBoard(B, ni); 
         do
         {
-            BOARD_TILE nt = SetBoard(B,SerongKiriBawah_i(Bi,i));
+            ni = SerongKiriBawah_i(Bi,i);
+            nt = SetBoard(B, ni); 
             if (Friend(Bi, nt)){
                 break;
             }else if(Enemy(Bi,nt)){
-
+                AddMakan(B, L, Bi, ni, nt);
             }else{
-                
+                AddMove(L, Bi, ni); 
             }
-            
-        } while (SetBoard(B, SerongKiriBawah_i(Bi,i))!=BAD_SQUARE);
-    }  
+            i++;
+        } while (nt!=BAD_SQUARE);
+        
+    }
 }
+
 void GenKnight(BOARD B, BIDAK K, List_Move *L){
 
     if(SetBoard(B,Knight1(K))!=BAD_SQUARE){
 
-        BOARD_TILE kn = SetBoard(B,Knight1(K));
+        BOARD_INDEX ki = Knight1(K);
+        BOARD_TILE kn = SetBoard(B,ki);
         if(Friend(K,kn)){
-
+            break;
         }else if(Enemy(K,kn)){
-
+            AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
-
+            AddMove(L, K, ki);
         }
-
     }
     if(SetBoard(B,Knight2(K))!=BAD_SQUARE){
         
-        BOARD_TILE kn = SetBoard(B,Knight2(K));
+        BOARD_INDEX ki = Knight2(K);
+        BOARD_TILE kn = SetBoard(B,ki);
         if(Friend(K,kn)){
-
+            break;
         }else if(Enemy(K,kn)){
-
+            AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
-
+            AddMove(L, K, ki);
         }
     }
     if(SetBoard(B,Knight3(K))!=BAD_SQUARE){
 
-        BOARD_TILE kn = SetBoard(B,Knight3(K));
+        BOARD_INDEX ki = Knight3(K);
+        BOARD_TILE kn = SetBoard(B,ki);
         if(Friend(K,kn)){
-
+            break;
         }else if(Enemy(K,kn)){
-
+            AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
-
+            AddMove(L, K, ki);
         }
 
     }
     if(SetBoard(B,Knight4(K))!=BAD_SQUARE){
 
-        BOARD_TILE kn = SetBoard(B,Knight4(K));
+        BOARD_INDEX ki = Knight4(K);
+        BOARD_TILE kn = SetBoard(B,ki);
         if(Friend(K,kn)){
-
+            break;
         }else if(Enemy(K,kn)){
-
+            AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
-
+            AddMove(L, K, ki);
         }
 
     }
     if(SetBoard(B,Knight5(K))!=BAD_SQUARE){
 
-        BOARD_TILE kn = SetBoard(B,Knight5(K));
+        BOARD_INDEX ki = Knight5(K);
+        BOARD_TILE kn = SetBoard(B,ki);
         if(Friend(K,kn)){
-
+            break;
         }else if(Enemy(K,kn)){
-
+            AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
-
+            AddMove(L, K, ki);
         }
     } 
     if(SetBoard(B,Knight6(K))!=BAD_SQUARE){
 
-
-        BOARD_TILE kn = SetBoard(B,Knight6(K));
+        BOARD_INDEX ki = Knight6(K);
+        BOARD_TILE kn = SetBoard(B,ki);
         if(Friend(K,kn)){
-
+            break;
         }else if(Enemy(K,kn)){
-
+            AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
-
+            AddMove(L, K, ki);
         }
     } 
     if(SetBoard(B,Knight7(K))!=BAD_SQUARE){
 
 
-        BOARD_TILE kn = SetBoard(B,Knight7(K));
+        BOARD_INDEX ki = Knight7(K);
+        BOARD_TILE kn = SetBoard(B,ki);
         if(Friend(K,kn)){
-
+            break;
         }else if(Enemy(K,kn)){
-
+            AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
-
+            AddMove(L, K, ki);
         }
 
     }
     if(SetBoard(B,Knight8(K))!=BAD_SQUARE){
 
 
-        BOARD_TILE kn = SetBoard(B,Knight8(K));
+        BOARD_INDEX ki = Knight8(K);
+        BOARD_TILE kn = SetBoard(B,ki);
         if(Friend(K,kn)){
-
+            break;
         }else if(Enemy(K,kn)){
-
+            AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
-
+            AddMove(L, K, ki);
         }
     }  
 
@@ -628,121 +635,136 @@ void GenQueen(BOARD B, BIDAK Q, List_Move *L){
 
     if(SetBoard(B,Up(Q))!=BAD_SQUARE){
         int i = 1;
-        BOARD_TILE qt = SetBoard(B,Up_i(Q,i));
+        BOARD_INDEX qi = Up_i(Q,i);
+        BOARD_TILE qt = SetBoard(B, qi);
         do
         {
             if(Friend(Q,qt)){
-
+                break;
             }else if(Enemy(Q,qt)){
-
+                AddMakan(B, L, Q, qi, qt);
             }else/*kosong*/{
-
+                AddMove(L, Q, qi);
             }
-        } while (SetBoard(B,Up_i(Q,i))!=BAD_SQUARE);
+            i++;
+        } while (qt!=BAD_SQUARE);
     }
     if(SetBoard(B,Down(Q))!=BAD_SQUARE){
         int i = 1;
-        BOARD_TILE qt = SetBoard(B,Down_i(Q,i));
+        BOARD_INDEX qi = Down_i(Q,i);
+        BOARD_TILE qt = SetBoard(B, qi);
         do
         {
             if(Friend(Q,qt)){
-
+                break;
             }else if(Enemy(Q,qt)){
-
+                AddMakan(B, L, Q, qi, qt);
             }else/*kosong*/{
-
+                AddMove(L, Q, qi);
             }
-
-        } while (SetBoard(B,Up_i(Q,i))!=BAD_SQUARE);
+            i++;
+        } while (qt!=BAD_SQUARE);
     }
     if(SetBoard(B,Left(Q))!=BAD_SQUARE){
         int i = 1;
-        BOARD_TILE qt = SetBoard(B,Left_i(Q,i));
+        BOARD_INDEX qi = Left_i(Q,i);
+        BOARD_TILE qt = SetBoard(B, qi);
         do
         {
             if(Friend(Q,qt)){
-
+                break;
             }else if(Enemy(Q,qt)){
-
+                AddMakan(B, L, Q, qi, qt);
             }else/*kosong*/{
-
+                AddMove(L, Q, qi);
             }
-        } while (SetBoard(B,Up_i(Q,i))!=BAD_SQUARE);
+            i++;
+        } while (qt!=BAD_SQUARE);
         
     }
     if(SetBoard(B,Right(Q))!=BAD_SQUARE){
         int i = 1;
-        BOARD_TILE qt = SetBoard(B,Right_i(Q,i));
+        BOARD_INDEX qi = Right_i(Q,i);
+        BOARD_TILE qt = SetBoard(B, qi);
         do
         {
             if(Friend(Q,qt)){
-
+                break;
             }else if(Enemy(Q,qt)){
-
+                AddMakan(B, L, Q, qi, qt);
             }else/*kosong*/{
-
+                AddMove(L, Q, qi);
             }
-        } while (SetBoard(B,Up_i(Q,i))!=BAD_SQUARE);
+            i++;
+        } while (qt!=BAD_SQUARE);
         
     }
     if(SetBoard(B,SerongKananAtas(Q))!=BAD_SQUARE){
         int i = 1;
-        BOARD_TILE qt = SetBoard(B,SerongKananAtas_i(Q,i));
+        BOARD_INDEX qi = SerongKananAtas_i(Q,i);
+        BOARD_TILE qt = SetBoard(B, qi);
         do
         {
             if(Friend(Q,qt)){
-
+                break;
             }else if(Enemy(Q,qt)){
-
+                AddMakan(B, L, Q, qi, qt);
             }else/*kosong*/{
-
+                AddMove(L, Q, qi);
             }
-        } while (SetBoard(B,Up_i(Q,i))!=BAD_SQUARE);
+            i++;
+        } while (qt!=BAD_SQUARE);
         
     }
     if(SetBoard(B,SerongKananBawah(Q))!=BAD_SQUARE){
         int i = 1;
-        BOARD_TILE qt = SetBoard(B,SerongKananBawah_i(Q,i));
+        BOARD_INDEX qi = SerongKananBawah_i(Q,i);
+        BOARD_TILE qt = SetBoard(B, qi);
         do
         {
             if(Friend(Q,qt)){
-
+                break;
             }else if(Enemy(Q,qt)){
-
+                AddMakan(B, L, Q, qi, qt);
             }else/*kosong*/{
-
+                AddMove(L, Q, qi);
             }
-        } while (SetBoard(B,Up_i(Q,i))!=BAD_SQUARE);
+            i++;
+        } while (qt!=BAD_SQUARE);
         
     }
     if(SetBoard(B,SerongKiriAtas(Q))!=BAD_SQUARE){
-       int i = 1;
-        BOARD_TILE qt = SetBoard(B,SerongKiriAtas_i(Q,i));
+        int i = 1;
+        BOARD_INDEX qi = SerongKiriAtas_i(Q,i);
+        BOARD_TILE qt = SetBoard(B, qi);
         do
         {
             if(Friend(Q,qt)){
-
+                break;
             }else if(Enemy(Q,qt)){
-
+                AddMakan(B, L, Q, qi, qt);
             }else/*kosong*/{
-
+                AddMove(L, Q, qi);
             }
-        } while (SetBoard(B,Up_i(Q,i))!=BAD_SQUARE); 
+            i++;
+        } while (qt!=BAD_SQUARE); 
         
     }
     if(SetBoard(B,SerongKiriBawah(Q))!=BAD_SQUARE){
         int i = 1;
-        BOARD_TILE qt = SetBoard(B,SerongKiriBawah_i(Q,i));
+        BOARD_INDEX qi = SerongKiriBawah_i(Q,i);
+        BOARD_TILE qt = SetBoard(B, qi);
         do
         {
             if(Friend(Q,qt)){
-
+                break;
             }else if(Enemy(Q,qt)){
-
+                AddMakan(B, L, Q, qi, qt);
             }else/*kosong*/{
-
+                AddMove(L, Q, qi);
             }
-        } while (SetBoard(B,Up_i(Q,i))!=BAD_SQUARE);
+            i++;
+        } while (qt!=BAD_SQUARE);
         
     }
 
@@ -750,93 +772,96 @@ void GenQueen(BOARD B, BIDAK Q, List_Move *L){
 void GenKing(BOARD B, BIDAK K, List_Move *L){
 
     if (SetBoard(B,Up(K))!=BAD_SQUARE){
-        BOARD_TILE kt = SetBoard(B,Up(K));
+        BOARD_INDEX ki = Up(K);
+        BOARD_TILE kt = SetBoard(B,ki);
         if(Friend(K,kt)){
-
+            break;
         }else if(Enemy(K,kt)){
-
+            AddMakan(B, L, K, ki, kt);
         }else{
-
+            AddMove(L,K,ki);
         }
-
     }
     if (SetBoard(B,Down(K))!=BAD_SQUARE){
-        BOARD_TILE kt = SetBoard(B,Down(K));
+        BOARD_INDEX ki = Down(K);
+        BOARD_TILE kt = SetBoard(B,ki);
         if(Friend(K,kt)){
-
+            break;
         }else if(Enemy(K,kt)){
-
+            AddMakan(B, L, K, ki, kt);
         }else{
-            
+            AddMove(L,K,ki);
         }
         
     }
     if (SetBoard(B,Left(K))!=BAD_SQUARE){
-        BOARD_TILE kt = SetBoard(B,Left(K));
+        BOARD_INDEX ki = Left(K);
+        BOARD_TILE kt = SetBoard(B,ki);
         if(Friend(K,kt)){
-
+            break;
         }else if(Enemy(K,kt)){
-
+            AddMakan(B, L, K, ki, kt);
         }else{
-            
+            AddMove(L,K,ki);
         }
         
     }
     if (SetBoard(B,Right(K))!=BAD_SQUARE){
-        BOARD_TILE kt = SetBoard(B,Right(K));
+        BOARD_INDEX ki = Right(K);
+        BOARD_TILE kt = SetBoard(B,ki);
         if(Friend(K,kt)){
-
+            break;
         }else if(Enemy(K,kt)){
-
+            AddMakan(B, L, K, ki, kt);
         }else{
-            
+            AddMove(L,K,ki);
         }
     }
     if (SetBoard(B,SerongKananAtas(K))!=BAD_SQUARE){
-        BOARD_TILE kt = SetBoard(B,SerongKananAtas(K));
+        BOARD_INDEX ki = SerongKiriAtas(K);
+        BOARD_TILE kt = SetBoard(B,ki);
         if(Friend(K,kt)){
-
+            break;
         }else if(Enemy(K,kt)){
-
+            AddMakan(B, L, K, ki, kt);
         }else{
-            
+            AddMove(L,K,ki);
         }
-        
     }
     if (SetBoard(B,SerongKananBawah(K))!=BAD_SQUARE){
-        BOARD_TILE kt = SetBoard(B,SerongKananBawah(K));
+        BOARD_INDEX ki = SerongKananBawah(K);
+        BOARD_TILE kt = SetBoard(B,ki);
         if(Friend(K,kt)){
-
+            break;
         }else if(Enemy(K,kt)){
-
+            AddMakan(B, L, K, ki, kt);
         }else{
-            
-        }
-        
+            AddMove(L,K,ki);
+        }  
     }
     if (SetBoard(B,SerongKiriAtas(K))!=BAD_SQUARE){
-        BOARD_TILE kt = SetBoard(B,SerongKiriAtas(K));
+        BOARD_INDEX ki = SerongKiriAtas(K);
+        BOARD_TILE kt = SetBoard(B,ki);
         if(Friend(K,kt)){
-
+            break;
         }else if(Enemy(K,kt)){
-
+            AddMakan(B, L, K, ki, kt);
         }else{
-            
-        }
+            AddMove(L,K,ki);
+        } 
         
     }
     if (SetBoard(B,SerongKiriBawah(K))!=BAD_SQUARE){
-        BOARD_TILE kt = SetBoard(B,SerongKiriBawah(K));
+        BOARD_INDEX ki = SerongKiriBawah(K);
+        BOARD_TILE kt = SetBoard(B,ki);
         if(Friend(K,kt)){
-
+            break;
         }else if(Enemy(K,kt)){
-
+            AddMakan(B, L, K, ki, kt);
         }else{
-            
-        }
-        
+            AddMove(L,K,ki);
+        } 
     }
-
 }
 
 //interface

@@ -4,12 +4,12 @@
 
 /****HELPER FUNCTION USING STACK***/
 void SwapTile(BOARD *B, BOARD_INDEX curpos, BOARD_INDEX newpos){
-    BOARD TILE tmp = SetBoard(*B, curpos);
+    BOARD_TILE tmp = SetBoard(*B, curpos);
     SetBoard(*B, curpos) = SetBoard(*B, newpos);
     SetBoard(*B, newpos) = tmp;
 }
 void MakanTile(BOARD *B, BOARD_INDEX prey, BOARD_INDEX victim){
-    BOARD TILE tmp = SetBoard(*B, prey);
+    BOARD_TILE tmp = SetBoard(*B, prey);
     SetBoard(*B, victim) = tmp;
     SetBoard(*B, prey) = EMPTY_SQUARE;
 }
