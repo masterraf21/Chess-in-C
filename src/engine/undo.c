@@ -6,6 +6,8 @@ void CreateEmptyElmtStack(ELMT_STACK S)
 
 }
 
+//prosedur swap
+//prosedur isundopossible -> cek udh 2 langkah apa blm
 
 void Undo(BOARD B, Stack *S, List_Bidak *Acu, List_Bidak *Lawanacu)
 {
