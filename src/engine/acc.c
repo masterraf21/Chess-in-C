@@ -35,13 +35,9 @@ void RunNewGame(LeaderBoard *B){
         scanf("%s",namput);
         printf("Masukkan nama pemain hitam : ");
         scanf("%s",namhit);
-        List_Bidak Putih;
-        List_Bidak Hitam;
         Queue_Giliran Q;
         init_board(&D);
-        InitListBidak(&Putih,WHITE);
-        InitListBidak(&Hitam,BLACK);
-        RunGame(D,Putih,Hitam,&Q,&done);
+        RunGame(D,&Q,&done);
         if (done) {
                 idx = getIdent(Q);
                 if (idx == 1){
@@ -66,14 +62,18 @@ void RunNewGame(LeaderBoard *B){
 }
 
 void RunSavedGame(LeaderBoard *B){ /* belum mempertimbangkan nama */
-// -> prosedur mulai game dari saveffie, read savefile dulu baru ngejalanin game 
+// -> prosedur mulai game dari saveffie, read savefile dulu baru ngejalanin game
+
+
         
 }
 
-void RunGame(BOARD D,List_Bidak W, List_Bidak B, Queue_Giliran *Q,boolean *done){
+void RunGame(BOARD D, Queue_Giliran *Q,boolean *done){
         boolean exit = false;
         char cmd[15];
         int x;
+        Stack S;
+        CreateEmptyStack(&S);
         while((! exit) && (! Is50Turn(*Q)) && !(*done)) {
                 PrintBoard(D);
                 printf("Masukkan command : ");
@@ -88,7 +88,7 @@ void RunGame(BOARD D,List_Bidak W, List_Bidak B, Queue_Giliran *Q,boolean *done)
                                 break;
                         case 4 : exit = true;
                                 break;
-                        default : "Input salah !\n";
+                        default : printf("Input salah !\n");
                                 break;
                 }
         }
@@ -114,7 +114,7 @@ int getIdent(Queue_Giliran Q){
         }
 }
 
-int getnum(char *cmd){
+int getNum(char *cmd){
         char mov[] = "MOVE";
         char spc[] = "SPECIAL_MOVE";
         char und[] = "UNDO";

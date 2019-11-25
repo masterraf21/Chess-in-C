@@ -93,4 +93,5 @@ void PrintMoveBidak(List_Move L);
 void PrintBerpindah (MOVE M);
 
 
+
 #endif
