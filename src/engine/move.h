@@ -9,7 +9,6 @@
 
 
 /**** HELPER FUNCTION *****/
-BOARD_INDEX Neighbor(BIDAK B);
 BOARD_INDEX Up(BIDAK B);
 BOARD_INDEX Up_i(BIDAK B, int i);
 BOARD_INDEX Down(BIDAK B);
@@ -43,24 +42,27 @@ boolean IsUpKosong(BOARD B, BIDAK P);
 boolean IsDownKosong(BOARD B, BIDAK P);
 
 /***** SEARCH FUNCTION ******/
+boolean IsNeighbor(BOARD B, BIDAK Bi);
+boolean IsNeighborKnight(BOARD B, BIDAK Bi);
+
 
 /***** MAIN FUNCTION *****/
 
 //dipake buat nampilin mana aja yang bisa gerak
 //pake queue biar enak ngeluarinnya
-Queue_Move AvailableMove(List_Bidak B);
+Queue_Move AvailableMove(BOARD B, List_Bidak L);
 List_Move GenerateMove(BIDAK B, BOARD BO);
 
 //helper functions conerning ray function
 //and check checking
-boolean IsMoveLegal(MOVE M);
-BOARD_INDEX GetKingPos(List_Bidak B);
-boolean IsKingCheck(BIDAK B, BOARD_INDEX KingPos);
-boolean IsKingSafe(BOARD_INDEX KingPos, int *ray, int *dummyboard);
-int * CreateDummyBoard(BOARD B);
-void DummytoRay(int *dummy, int **ray, DUMMY_INDEX i);
-int * CreateRay(BOARD B);
-int * CheckRay(BOARD B, COLOR C);
+// boolean IsMoveLegal(MOVE M);
+// BOARD_INDEX GetKingPos(List_Bidak B);
+// boolean IsKingCheck(BIDAK B, BOARD_INDEX KingPos);
+// boolean IsKingSafe(BOARD_INDEX KingPos, int *ray, int *dummyboard);
+// int * CreateDummyBoard(BOARD B);
+// void DummytoRay(int *dummy, int **ray, DUMMY_INDEX i);
+// int * CreateRay(BOARD B);
+// int * CheckRay(BOARD B, COLOR C);
 
 
 //Move generator perbidak

@@ -9,14 +9,8 @@
 /* Konstanta */
 #define Nil NULL
 
-typedef struct {
-	COLOR player;
-	int counter;
-	int poin;
-}infotype; 
-
 /* Deklarasi infotype */
-typedef ELMT_QUEUE infotype;
+typedef LIST_ID infotype;
 
 /* Queue dengan representasi berkait dengan pointer */
 typedef struct tElmtQueue * address;

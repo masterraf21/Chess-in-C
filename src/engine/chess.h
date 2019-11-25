@@ -81,9 +81,6 @@ typedef struct{
 }BIDAK;
 
 
-/*For Move*/
-typedef LIST_ID ELMT_QUEUE;
-
 typedef struct {
     LIST_ID id;
     COLOR warna;
