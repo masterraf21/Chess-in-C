@@ -17,11 +17,11 @@ typedef struct {
 
 
 /* Queue dengan representasi berkait dengan pointer */
-typedef struct tElmtQueue * address;
-typedef struct tElmtQueue { 
+typedef struct tElmtQueueTurn * address;
+typedef struct tElmtQueueTurn { 
   infotypeturn Info;
   address Next; 
-} ElmtQueue; 
+} ElmtQueueTurnTurn; 
 
 /* Type queue dengan ciri HEAD dan TAIL : */
 typedef struct { 

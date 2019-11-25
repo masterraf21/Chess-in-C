@@ -9,7 +9,7 @@ void Alokasi (address *P, infotypeturn X)
         Next(P)=Nil */
 /*      P=Nil jika alokasi gagal */
 {
-	*P = (address) malloc(sizeof(ElmtQueue));
+	*P = (address) malloc(sizeof(ElmtQueueTurn));
 
 	if(*P!=Nil){
 		Info(*P) = X;
