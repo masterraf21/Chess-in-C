@@ -3,7 +3,7 @@
 #include "queuegiliran.h"
 
 /* Prototype manajemen memori */
-void Alokasi (address *P, infotypeturn X)
+void AlokasiTurn (address *P, infotypeturn X)
 /* I.S. Sembarang */
 /* F.S. Alamat P dialokasi, jika berhasil maka Info(P)=X dan 
         Next(P)=Nil */
@@ -16,18 +16,18 @@ void Alokasi (address *P, infotypeturn X)
 		Next(*P) = Nil;
 	}
 }
-void Dealokasi (address  P)
+void DealokasiTurn (address  P)
 /* I.S. P adalah hasil alokasi, P != Nil */
 /* F.S. Alamat P didealokasi, dikembalikan ke sistem */
 {
 	free(P);
 }
-boolean IsEmpty (Queue Q)
+boolean IsEmptyTurn (Queue Q)
 /* Mengirim true jika Q kosong: HEAD(Q)=Nil and TAIL(Q)=Nil */
 {
 	return ((Head(Q)==Nil)&&(Tail(Q)==Nil));
 }
-int NbElmt(Queue Q)
+int NbElmtTurn(Queue Q)
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong */
 {
 	int count = 0;
@@ -41,15 +41,15 @@ int NbElmt(Queue Q)
 	return count;
 }
 /*** Kreator ***/
-void CreateEmpty(Queue * Q)
+void CreateEmptyTurn(Queue * Q)
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk */
 {
 	Head(*Q) = Nil;
 	Tail(*Q) = Nil;
 }
-/*** Primitif Add/Delete ***/
-void Add (Queue * Q, infotypeturn X)
+/*** Primitif AddTurn/DelTurnete ***/
+void AddTurn (Queue * Q, infotypeturn X)
 /* Proses: Mengalokasi X dan menambahkan X pada bagian TAIL dari Q
    jika alokasi berhasil; jika alokasi gagal Q tetap */
 /* Pada dasarnya adalah proses insert last */
@@ -57,10 +57,10 @@ void Add (Queue * Q, infotypeturn X)
 /* F.S. X menjadi TAIL, TAIL "maju" */
 {
 	address P;
-	Alokasi(&P, X);
+	AlokasiTurn(&P, X);
 
 	if (P!=Nil){
-		if (IsEmpty(*Q)){
+		if (IsEmptyTurn(*Q)){
 			Head(*Q) = P;
 			Tail(*Q) = P;
 		}else{
@@ -71,7 +71,7 @@ void Add (Queue * Q, infotypeturn X)
 		}
 	}
 }
-void Del(Queue * Q, infotypeturn * X)
+void DelTurn(Queue * Q, infotypeturn * X)
 /* Proses: Menghapus X pada bagian HEAD dari Q dan mendealokasi
    elemen HEAD */
 /* Pada dasarnya operasi delete first */
@@ -82,12 +82,12 @@ void Del(Queue * Q, infotypeturn * X)
 
 	if(Next(Head(*Q))==Nil)
 		//only one element, then create empty
-		CreateEmpty(Q);
+		CreateEmptyTurn(Q);
 	else
 		//get the next one
 		Head(*Q) = Next(Head(*Q));
 
 	//get the info then deallocate
 	*X = Info(P);
-	Dealokasi(P);
+	DealokasiTurn(P);
 }
