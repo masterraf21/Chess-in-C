@@ -9,6 +9,11 @@ boolean IsEmptyM (List_Move L)
 {
 	return (FirstMove(L)==Nil);
 }
+boolean IsMoveSama(MOVE a, MOVE b){
+	return (a.cur_position==b.cur_position)&&(a.id.number==b.id.number)
+	&&(a.id.type==b.id.type)&&(a.is_makan==b.is_makan)&&
+	(a.warna==b.warna)&&(IsBidakSama(a.victim,b.victim));
+}
 
 /****************** PEMBUATAN List_Move KOSONG ******************/
 void CreateEmptyM (List_Move *L)
@@ -59,7 +64,7 @@ address_move SearchMove (List_Move L, infotypelm X)
 	if(!IsEmptyM(L)){
 		//cek dulu elemen pertama apapun isinya
 		do{
-			if(InfoMove(P_next)==X){
+			if(IsMoveSama(InfoMove(P_next),X)){
 				P_nil = P_next;
 				found = true;
 			}else{

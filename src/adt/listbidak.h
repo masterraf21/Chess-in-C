@@ -29,9 +29,11 @@ typedef struct {
 /* Elemen terakhir List_Bidak : jika address_bidaknya Last, maka NextBidak(Last)=Nil */
 #define InfoBidak(P) (P)->infob
 #define NextBidak(P) (P)->next
-#define FirstBidak(L) ((L).First)
+#define FirstBidak(L) (L).First
 
 /* PROTOTYPE */
+boolean IsBidakSama(BIDAK B1, BIDAK B2);
+boolean IsIdSama(LIST_ID a, LIST_ID b);
 /****************** TEST List_Bidak KOSONG ******************/
 boolean IsEmptyBidak (List_Bidak L);
 /* Mengirim true jika List_Bidak kosong */
