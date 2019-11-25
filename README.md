@@ -46,11 +46,11 @@ git checkout -b Abbel
 
 ### Board Representation
 Aslinya board tuh gini:\
-![Board](chess_board.jpg)\
+![Board](docs/chess_board.jpg)\
 Ya jadi kita akan pakai representasi board dengan array ukuran 10*12. Jadi arraynya ada 120 tapi yang dipake cuman 64 biji, kira kira kaya gini:\
-![Papan1](papan1.jpg)\
+![Papan1](docs/papan1.jpg)\
 Ya bisa diliat ya itu jadi kita mulainya dari 21 makanya kita buat enum dari 21 yaitu A1 untuk nandain si papannya. Kira kira gini bray:\
-![Papan2](papan2.jpg)\
+![Papan2](docs/papan2.jpg)\
 Gunanya buat apa itu *teh*? Sebenernya mah buat penanda aja biar algoritma kita bisa nemu kalau ternyata papannya off-board gitu.
 Nah nanti setiap *tile* tuh bakal diisi sama integer yang merepresentasikan si kondisi benerannya di papan catur.
 
@@ -91,7 +91,7 @@ Nah ini kerjaan vito buat mikirin state tuh isinya apa aja
 
 ### Move Mechanism
 Ya karena kita memakai board 12*10 ada beberapa peraturan yang harus ditaati. Kira kira board nya kaya gini nanti: \
-![10*12](images.jpeg)\
+![10*12](docs/images.jpeg)\
 Ya kan pas sliding bidaknya tuh ada yang :
 1. Up 
 2. Down
@@ -113,7 +113,7 @@ Oiya kita definisiin atas,bawah, dkk nya itu dari perspektif si pemain putih ya.
     8. Serong Kiri Bawah = Posisi Awal - 11
 ```
 Nah ada lagi yang unik yaitu untuk kuda sebenernya turunan dari yang atas juga sih, jadi gini gambarnya: \
-![kuda](kuda.jpg)\
+![kuda](docs/kuda.jpg)\
 Kuda tuh kan punya 8 kemungkinan:
 ```
 1. Knight1 = Posisi awal + 21
