@@ -4,6 +4,13 @@
 
 
 /* PROTOTYPE */
+boolean IsBidakSama(BIDAK B1, BIDAK B2){
+	return (B1.id.number==B2.id.number)&&(B1.id.type==B2.id.type)
+	&&(B1.posisi==B2.posisi)&&(B1.warna==B2.warna);
+}
+boolean IsIdSama(LIST_ID a, LIST_ID b){
+	return (a.number==b.number)&&(a.type==b.type);
+}
 /****************** TEST LIST KOSONG ******************/
 boolean IsEmptyBidak (List_Bidak L)
 /* Mengirim true jika list kosong */
@@ -57,10 +64,10 @@ address_bidak SearchB (List_Bidak L, infotypelb X)
 	//cek kosong gak
 	//kalau ga kosong di proses
 	//kalau kosong langsung return nil
-	if(!IsEmpty(L)){
+	if(!IsEmptyBidak(L)){
 		//cek dulu elemen pertama apapun isinya
 		do{
-			if(InfoBidak(P_next)==X){
+			if(IsBidakSama(InfoBidak(P_next),X)){
 				P_nil = P_next;
 				found = true;
 			}else{
@@ -81,10 +88,11 @@ address_bidak SearchId (List_Bidak L, LIST_ID X){
 	//cek kosong gak
 	//kalau ga kosong di proses
 	//kalau kosong langsung return nil
-	if(!IsEmpty(L)){
+	if(!IsEmptyBidak(L)){
 		//cek dulu elemen pertama apapun isinya
 		do{
-			if(InfoBidak(P_next).id==X){
+			if(IsIdSama(InfoBidak(P_next).id,X))
+			{
 				P_nil = P_next;
 				found = true;
 			}else{
@@ -106,7 +114,7 @@ address_bidak SearchCustom(List_Bidak L, BOARD_INDEX idx, BOARD_TILE type){
 	//cek kosong gak
 	//kalau ga kosong di proses
 	//kalau kosong langsung return nil
-	if(!IsEmpty(L)){
+	if(!IsEmptyBidak(L)){
 		//cek dulu elemen pertama apapun isinya
 		do{
 			BOARD_INDEX idxp = InfoBidak(P_next).posisi;
@@ -198,7 +206,7 @@ void InsertLast (List_Bidak *L, address_bidak P)
 {
 	
 
-	if(IsEmpty(*L)){
+	if(IsEmptyBidak(*L)){
 		NextBidak(P) = Nil;
 		FirstBidak(*L) = P;
 		
@@ -221,7 +229,7 @@ void DelFirst (List_Bidak *L, address_bidak *P)
 {
 	(*P) = FirstBidak(*L);
 	if(NextBidak(FirstBidak(*L))==Nil){ //cuman ada satu
-		CreateEmpty(L);
+		CreateEmptyBidak(L);
 	}
 	else{
 		FirstBidak(*L) = NextBidak(FirstBidak(*L));
@@ -296,7 +304,7 @@ void PrintInfo (List_Bidak L)
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
 {
 	printf("[");
-	if (!IsEmpty(L)){
+	if (!IsEmptyBidak(L)){
 		address_bidak P = FirstBidak(L);
 
 		do{
@@ -455,9 +463,9 @@ void Konkat1 (List_Bidak *L1, List_Bidak *L2, List_Bidak *L3)
 /* dan L1 serta L2 menjadi list kosong.*/
 /* Tidak ada alokasi/dealokasi pada prosedur ini */
 {
-	CreateEmpty(L3);
+	CreateEmptyBidak(L3);
 
-    if (!(IsEmpty(*L1))){
+    if (!(IsEmptyBidak(*L1))){
         FirstBidak(*L3) = FirstBidak(*L1);
 
         address_bidak last1 = FirstBidak(*L1);
@@ -473,7 +481,7 @@ void Konkat1 (List_Bidak *L1, List_Bidak *L2, List_Bidak *L3)
     }
 
 
-    CreateEmpty(L1);
-    CreateEmpty(L2);
+    CreateEmptyBidak(L1);
+    CreateEmptyBidak(L2);
 
 }

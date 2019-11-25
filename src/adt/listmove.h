@@ -8,6 +8,7 @@
 
 #include "boolean.h"
 #include "../engine/chess.h"
+#include "listbidak.h"
 
 #define Nil NULL
 

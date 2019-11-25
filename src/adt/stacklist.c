@@ -14,7 +14,7 @@ void AlokasiStack (address_stack *P, infotypestack X)
 		NextStack(*P) = Nil;
 	}
 }
-void DealokasiStacks (address_stack P)
+void DealokasiStack (address_stack P)
 /* I.S. P adalah hasil alokasi, P != Nil */
 /* F.S. Alamat P didealokasi, dikembalikan ke sistem */ 
 {
@@ -40,7 +40,7 @@ void Push (Stack * S, infotypestack X)
 /* Pada dasarnya adalah operasi Insert First pada list linier */
 {
 	address_stack P;
-	Alokasi(&P,X);
+	AlokasiStack(&P,X);
 
 	if(P!=Nil){
 		//add the current top to next of
@@ -60,10 +60,10 @@ void Pop (Stack * S, infotypestack * X)
 	address_stack P = Top(*S);
 	//kalo kosong
 	if (NextStack(Top(*S))==Nil)
-		CreateEmpty(S);
+		CreateEmptyStack(S);
 	else
 		Top(*S) = NextStack(Top(*S));
 
 	*X = InfoStack(P);
-	Dealokasi(P);
+	DealokasiStack(P);
 }
