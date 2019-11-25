@@ -1,5 +1,4 @@
 #include "giliran.h"
-#include "undo.h"
 #include <stdlib.h>
 
 void InitGiliran(Queue_Giliran *Q, infotypeturn *currPlayerInfo)
@@ -43,7 +42,7 @@ void changeTurnMove(Queue_Giliran *Q, infotypeturn *currPlayerInfo, MOVE *M)
 	}
 	(*currPlayerInfo).counter ++;
 	AddTurn(Q, (*currPlayerInfo));
-	DelTurn(Q, (*currPlayerInfo));
+	DelTurn(Q, (currPlayerInfo));
 }
 
 void changeTurnUndo(Queue_Giliran *Q, infotypeturn *currPlayerInfo, MOVE *M)
@@ -57,7 +56,7 @@ void changeTurnUndo(Queue_Giliran *Q, infotypeturn *currPlayerInfo, MOVE *M)
 }
 
 
-boolean Is50Turn(Queue_Giliran *Q)
+boolean Is50Turn(Queue_Giliran Q)
 {
-	return (((InfoHeadT(*Q).counter) == 50) && ((InfoTailT(*Q).counter) == 50));
+	return (((InfoHeadT(Q).counter) == 50) && ((InfoTailT(Q).counter) == 50));
 }

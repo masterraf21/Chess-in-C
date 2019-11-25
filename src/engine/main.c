@@ -1,9 +1,8 @@
 
-// for adt
-#include "../adt/boolean.h"
-
 // for engine
 #include "leader.h"
+
+
 int main(){
     int pil;
     LeaderBoard B;

@@ -40,6 +40,6 @@ void IsiTile(int nobaris, BOARD B);
 void AtasTile();
 void BawahTile();
 // Draw procedure
-void PrintBoard();
+void PrintBoard(BOARD B);
 
 #endif

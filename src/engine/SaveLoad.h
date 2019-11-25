@@ -6,6 +6,7 @@
 #include "../adt/listbidak.h"
 #include "../adt/queuegiliran.h"
 #include "../adt/mesin_kata.h"
+
 char AmbilWarna(COLOR c);
 
 COLOR getcolor (char c);

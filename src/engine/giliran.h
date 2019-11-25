@@ -29,7 +29,7 @@ int Poin(MOVE *M);
 /*I.S. : M terdefinisi
 F.S. : Menghasilkan poin yang bersesuaian berdasarkan type bidak yang dimakan (M.victim.id.type)*/
 
-boolean Is50Turn(Queue_Giliran *Q);
+boolean Is50Turn(Queue_Giliran Q);
 /* I.S. : Q terdefinisi
 F.S. : Menghasilkan true apabila InfoHeadT(Q).counter dan InfoTailT(Q).counter keduanya bernilai 50*/
 
