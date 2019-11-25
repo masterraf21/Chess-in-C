@@ -2,16 +2,16 @@
 #include <stdio.h>
 #include "queuegiliran.h"
 
-void AlokasiTurn (address *P, infotypeturn X)
+void AlokasiTurn (address_turn *P, infotypeturn X)
 {
-	*P = (address) malloc(sizeof(ElmtQueueTurn));
+	*P = (address_turn) malloc(sizeof(ElmtQueueTurn));
 
 	if(*P!=Nil){
 		InfoT(*P) = X;
 		NextT(*P) = Nil;
 	}
 }
-void DealokasiTurn (address  P)
+void DealokasiTurn (address_turn  P)
 {
 	free(P);
 }
@@ -22,7 +22,7 @@ boolean IsEmptyTurn (Queue Q)
 int NbElmtTurn(Queue Q)
 {
 	int count = 0;
-	address P = HeadT(Q);
+	address_turn P = HeadT(Q);
 
 	while(P!=Nil){
 		P = NextT(P);
@@ -39,7 +39,7 @@ void CreateEmptyTurn(Queue * Q)
 }
 void AddTurn (Queue * Q, infotypeturn X)
 {
-	address P;
+	address_turn P;
 	AlokasiTurn(&P, X);
 
 	if (P!=Nil){
@@ -56,7 +56,7 @@ void AddTurn (Queue * Q, infotypeturn X)
 }
 void DelTurn(Queue * Q, infotypeturn * X)
 {
-	address P = HeadT(*Q);
+	address_turn P = HeadT(*Q);
 
 	if(NextT(HeadT(*Q))==Nil)
 		//only one element, then create empty

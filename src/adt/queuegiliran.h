@@ -17,16 +17,16 @@ typedef struct {
 
 
 /* Queue dengan representasi berkait dengan pointer */
-typedef struct tElmtQueueTurn * address;
+typedef struct tElmtQueueTurn * address_turn;
 typedef struct tElmtQueueTurn { 
   infotypeturn InfoT;
-  address NextT; 
+  address_turn NextT; 
 } ElmtQueueTurn; 
 
 /* Type queue dengan ciri HEAD dan TAIL : */
 typedef struct { 
-  address HEADT;  /* alamat penghapusan */
-  address TAILT;  /* alamat penambahan */
+  address_turn HEADT;  /* alamat penghapusan */
+  address_turn TAILT;  /* alamat penambahan */
 } Queue_Giliran;
 
 typedef Queue_Giliran Queue;
@@ -40,12 +40,12 @@ typedef Queue_Giliran Queue;
 #define InfoT(P) (P)->InfoT
 
 /* Prototype manajemen memori */
-void AlokasiTurn (address *P, infotypeturn X);
+void AlokasiTurn (address_turn *P, infotypeturn X);
 /* I.S. Sembarang */
 /* F.S. Alamat P dialokasi, jika berhasil maka InfoT(P)=X dan 
         NextT(P)=Nil */
 /*      P=Nil jika alokasi gagal */
-void DealokasiTurn (address  P);
+void DealokasiTurn (address_turn  P);
 /* I.S. P adalah hasil alokasi, P != Nil */
 /* F.S. Alamat P didealokasi, dikembalikan ke sistem */
 boolean IsEmptyTurn (Queue Q);
