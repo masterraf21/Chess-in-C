@@ -54,8 +54,9 @@ void ReadFile(List_Bidak *W, List_Bidak *B,Queue_Giliran *Q){
         }
         ADVKATA();
         for(int i =1;i<= 1;i++){
-            tempQ.player = CKata.TabKata[0];
-            tempQ.counter = counttoint(CKata);
+            tempQ.player = getcolor(CKata.TabKata[0]);
+            ADVKATA();
+            tempQ.counter = strtoint(CKata);
             ADVKATA();
             tempQ.poin = strtoint(CKata);
             Add(Q,tempQ);
@@ -92,7 +93,7 @@ void SaveFile(List_Bidak W, List_Bidak B){
     }
     fprintf(catur,"\n|\n");
     //Print ke file isi queue giliran dengan format <warna><count>;<score>
-    //contoh P30;105
+    //contoh P;30;105
     fprintf(catur,".");
     fclose(catur);
 }

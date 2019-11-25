@@ -5,8 +5,6 @@
 #include "../adt/mesin_kata.h"
 #include "chess.h"
 
-int StrToInt(Kata kat); 
-
 void ReadLeaderBoard(LeaderBoard *B);
 	
 void PrintLeaderboard(LeaderBoard B);
@@ -19,7 +17,7 @@ void SaveLeaderBoard(LeaderBoard B);
 
 void AddScore(LeaderBoard *B,Score S);
 #endif
-
+ß
 
 
  
