@@ -1,7 +1,14 @@
 #include "SaveLoad.h"
-#include "../adt/listbidak.h"
-#include "../adt/queuegiliran.h"
 #include <stdio.h>
+
+
+char AmbilWarna(COLOR c){
+    if (c = WHITE){
+        return 'P';
+    } else {
+        return 'H';
+    }
+}
 
 COLOR getcolor (char c){
     if(c == 'P'){
@@ -56,16 +63,16 @@ void ReadFile(List_Bidak *W, List_Bidak *B,Queue_Giliran *Q){
         for(int i =1;i<= 1;i++){
             tempQ.player = getcolor(CKata.TabKata[0]);
             ADVKATA();
-            tempQ.counter = strtoint(CKata);
+            tempQ.counter = StrToInt(CKata);
             ADVKATA();
-            tempQ.poin = strtoint(CKata);
+            tempQ.poin = StrToInt(CKata);
             Add(Q,tempQ);
             ADVKATA();
         }  
     }   
 }
 
-void SaveFile(List_Bidak W, List_Bidak B){
+void SaveFile(List_Bidak W, List_Bidak B, Queue_Giliran Q){
     /* 
     reverse engineer ReadFile
     per bidak diseparate semicolon(;)
@@ -73,25 +80,35 @@ void SaveFile(List_Bidak W, List_Bidak B){
     */
     char *Namfile;
     FILE *catur;
-    address P;
+    address_bidak PB;
+    address_turn PR;
     BIDAK BD;
+    infotypeturn R;
+    char warna;
     printf("Masukkan nama save file : ");
     scanf("%s",Namfile);
     catur = fopen(Namfile,"w");
-    P = First(W);
-    while (P != Nil){
-        BD = Info(P);
+    PB = First(W);
+    while (PB != Nil){
+        BD = InfoBidak(PB);
         fprintf(catur,"%d%d%dP;",BD.id.number,BD.id.type,BD.posisi);
-        P = Next(P);
+        PB = NextBidak(PB);
     }
     fprintf(catur,"\n");
-    P = First(B);
-    while (P != Nil){
-        BD = Info(P);
+    PB = First(B);
+    while (PB != Nil){
+        BD = InfoBidak(PB);
         fprintf(catur,"%d%d%dH;",BD.id.number,BD.id.type,BD.posisi);
-        P = Next(P);
+        PB = NextBidak(PB);
     }
     fprintf(catur,"\n|\n");
+    PR = HeadT(Q);
+    while(PR != Nil){
+        R = InfoT(PR);
+        warna = AmbilWarna(R.player);
+        fprintf(catur,"%c;%d;%d\n",warna,R.counter,R.poin);
+        PR = Next(PR);
+    }
     //Print ke file isi queue giliran dengan format <warna><count>;<score>
     //contoh P;30;105
     fprintf(catur,".");

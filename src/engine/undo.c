@@ -1,48 +1,101 @@
 #include "undo.h"
 #include "board.h"
-//#include ""
-void CreateEmptyElmtStack(ELMT_STACK S)
-{
 
-}
 
 //prosedur swap
 //prosedur isundopossible -> cek udh 2 langkah apa blm
 
-void Undo(BOARD B, Stack *S, List_Bidak *Acu, List_Bidak *Lawanacu)
+/****HELPER FUNCTION USING STACK***/
+void SwapTile(BOARD *B, BOARD_INDEX curpos, BOARD_INDEX newpos){
+    BOARD_TILE tmp = SetBoard(*B, curpos);
+    SetBoard(*B, curpos) = SetBoard(*B, newpos);
+    SetBoard(*B, newpos) = tmp;
+}
+void MakanTile(BOARD *B, BOARD_INDEX prey, BOARD_INDEX victim){
+    BOARD_TILE tmp = SetBoard(*B, prey);
+    SetBoard(*B, victim) = tmp;
+    SetBoard(*B, prey) = EMPTY_SQUARE;
+}
+void UpdateStack(Stack *S, MOVE M){
+    Push(S, M);
+}
+void UpdateList(List_Bidak *LSelf, MOVE M){
+    LIST_ID id = M.id;
+    address P = SearchId(*LSelf, id);
+    Info(P).posisi = M.new_position;
+}
+void UpdateMakan(List_Bidak *LEnemy, MOVE M){
+    BIDAK Victim = M.victim;
+    //Karena dia dimakan jadi di dealokasiin dari list musuh
+    DelP(LEnemy, Victim);
+}
+
+void UndoBoard(BOARD *B, Stack *S, List_Bidak *Acu, List_Bidak *Lawanacu)
 {
-    /*Kamus Lokal*/
-    ELMT_STACK UndoStack;
-    MOVE StepLawan;
-    MOVE Stepku;
-    BOARD_INDEX temp, temp1;
+    /*kamus lokal*/
+    MOVE StepLawan, Stepku;
+
 
     /*Algoritma*/
-    CreateEmptyElmtStack(UndoStack);
+    POP(S, &StepLawan);
 
-    Pop(S, &StepLawan);
-    Pop(S, &Stepku);
+    if (!StepLawan.is_makan) //kalo dia ga abis makan
+    {
+        UpdateList(&Lawanacu, StepLawan);
+        SwapTile(B, StepLawan.new_position, StepLawan.cur_position);
+    }
 
-    //swap cur pos dengan prev pos
-    temp = StepLawan.cur_position;
-    StepLawan.cur_position = StepLawan.new_position;
-    StepLawan.new_position = temp;
-    UpdateList(Lawanacu,StepLawan);
-    UpdateBoard(&B,StepLawan);
+    else //dia abis makan
+    {
 
+    }
 
-    temp1 = Stepku.cur_position;
-    Stepku.cur_position = Stepku.new_position;
-    Stepku.new_position = temp;
-    UpdateList(Acu,Stepku);
-    UpdateBoard(&B,Stepku);
+    POP(S, &Stepku);
 
-    //jika makan kembaliin bidak yang lama
-    //push lagi apa kaga sih
-   
-    PrintBoard(B);
-
-
-
+    if (Stepku.is_makan) //kalo aku ga abis makan
+    {
+        UpdateList(&Acu, Stepku);
+        SwapTile(B,Stepku.new_position, Stepku.cur_position);
+    }
+    else //aku abis makan
+    {
+        
+    }
+    
 }
+
+void UpdateBoard(BOARD *B, MOVE M){
+    List_Bidak LPutih = (*B).LPutih;
+    List_Bidak LHitam = (*B).LHitam;
+    //Yang ga makan dulu
+    
+    if (!M.is_makan){
+
+        if (M.warna==WHITE)
+            UpdateList(&LPutih, M);
+        else/*Black*/
+            UpdateList(&LHitam, M);
+        
+        //Karna ga makan, kita cuman swap nilai di cur pos
+        //sama new pos di board
+
+        SwapTile(B, M.cur_position, M.new_position);
+
+    }else{
+        if (M.warna==WHITE){
+            UpdateList(&LPutih, M);
+            UpdateMakan(&LHitam, M);
+        }else{
+            UpdateList(&LHitam, M);
+            UpdateMakan(&LPutih, M); 
+        }
+        MakanTile(B, M.cur_position, M.new_position);
+    }
+    
+//jika makan kembaliin bidak yang lama
+    //push lagi apa kaga sih
+    //kalo undo berkali-kali swapnya gimana
+    PrintBoard(B);
+}
+
 
