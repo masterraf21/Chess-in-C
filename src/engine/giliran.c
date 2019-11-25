@@ -48,19 +48,3 @@ current game state itu disini maksudnya posisi bidak ada dimana aja, dsb*/
 	// Push(S, Q) -> masukin state ini ke dalam Stack utk di Undo
 	Del(Q, currPlayerInfo);
 }
-
-/* ini abaikan aja nanti shafa hapus
-setup: init, currPlayerInfo->WHITE,0,0
-main: maingame, endturn: Turn->currPlayerInfo
-
-W B
-B W'
-W' B'
-
-mekanisme undo:
-sekarang kita di W' B'
-hasil pop-> Q(W B)
-Del Queue -> X yang isinya W -> currPlayerInfo dan Q(B)
-yang harus di update setelah undo (pada konteks ini): currPlayerInfo dan Q yang sudah di Del
-mekanisme undo: Queue yang udah disimpen di Stack bakalan di Del,
-infotypeturn Xnya bakal jadi info siapa yang main pada giliran turn itu*/
