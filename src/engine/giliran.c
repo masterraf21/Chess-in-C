@@ -4,17 +4,17 @@
 void InitGiliran(Queue_Giliran *Q, infotypeturn *currPlayerInfo)
 {
 	/*KAMUS*/
-	infotypeturn B;
+	infotypeturn B, W;
 	B.player = BLACK;
 	B.counter = 0;
 	B.poin = 0;
+	W.player = WHITE;
+	W.counter = 0;
+	W.poin = 0;
 	/*ALGORITMA*/
 	CreateEmptyTurn(Q);
+	AddTurn(Q,W);
 	AddTurn(Q,B);
-	// memberi tau giliran pertama siapa
-	(*currPlayerInfo).player = WHITE;
-	(*currPlayerInfo).counter = 0;
-	(*currPlayerInfo).poin = 0;
 }
 
 int Poin(MOVE *M)
