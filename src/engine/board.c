@@ -1,6 +1,7 @@
 #include "board.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "../adt/listbidak.h"
 
 /****HELPER FUNCTION USING STACK***/
 void SwapTile(BOARD *B, BOARD_INDEX curpos, BOARD_INDEX newpos){
@@ -55,6 +56,45 @@ void UpdateBoard(BOARD *B, MOVE M){
     }
     
 
+}
+
+void UndoBoard(BOARD *B, Stack *S, List_Bidak *Acu, List_Bidak *Lawanacu)
+{
+    /*kamus lokal*/
+    MOVE StepLawan, Stepku;
+
+
+    /*Algoritma*/
+    POP(S, &StepLawan);
+
+    if (!StepLawan.is_makan) //kalo dia ga abis makan
+    {
+        UpdateList(&Lawanacu, StepLawan);
+        SwapTile(B, StepLawan.new_position, StepLawan.cur_position);
+    }
+
+    else //dia abis makan
+    {
+        InsVFirst(&Acu, StepLawan.victim); //realokasi bidak victim
+        UpdateList(&Lawanacu,StepLawan);
+        SwapTile(B, StepLawan.new_position, StepLawan.cur_position);
+    }
+
+    POP(S, &Stepku);
+
+    if (Stepku.is_makan) //kalo aku ga abis makan
+    {
+        UpdateList(&Acu, Stepku);
+        SwapTile(B,Stepku.new_position, Stepku.cur_position);
+    }
+    else //aku abis makan
+    {
+        InsVFirst(&Lawanacu, Stepku.victim); //realokasi bidak victim
+        UpdateList(&Acu,Stepku);
+        SwapTile(B, StepLawan.new_position, StepLawan.cur_position);
+    }
+   
+  //tidak dipush kembali karena undo bisa dilakukan berulang2 berturut2
 }
 
 /***** KONSTRUKTOR *******/
