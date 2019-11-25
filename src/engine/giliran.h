@@ -13,10 +13,14 @@ void InitGiliran(Queue_Giliran *Q, infotypeturn *currPlayerInfo);
 // Jadi InitGiliran cukup menginisiasi giliran selanjutnya yaitu BLACK.
 
 /*proses pergantian giliran*/
-void changeTurn(Queue_Giliran *Q, infotypeturn *currPlayerInfo);
+void changeTurn(Queue_Giliran *Q, infotypeturn *currPlayerInfo, MOVE *M);
 /*intinya disini nanti bakal nge Del elemen Q yang lg giliran, terus setelah melakukan move si 
 	elemennya di Add lagi kedalem Q*/
 /*Sekaligus nge-update counter giliran + poin kalo terjadi makan memakan*/
+
+int Poin(MOVE *M);
+/*I.S. : M terdefinisi
+F.S. : Menghasilkan poin yang bersesuaian berdasarkan type bidak yang dimakan (M.victim.id.type)*/
 
 boolean Is50Turn(Queue_Giliran *Q);
 /* I.S. : Q terdefinisi
