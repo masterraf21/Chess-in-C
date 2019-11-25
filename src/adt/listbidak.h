@@ -130,17 +130,17 @@ void PrintInfo (List_Bidak L);
 int NbElmt (List_Bidak L);
 /* Mengirimkan banyaknya elemen List_Bidak; mengirimkan 0 jika List_Bidak kosong */
 
-/*** Prekondisi untuk Max/Min/rata-rata : List_Bidak tidak kosong ***/
-infotypelb Max (List_Bidak L);
-/* Mengirimkan nilai info(P) yang maksimum */
-address_bidak AdrMax (List_Bidak L);
-/* Mengirimkan address_bidak P, dengan info(P) yang bernilai maksimum */
-infotypelb Min (List_Bidak L);
-/* Mengirimkan nilai info(P) yang minimum */
-address_bidak AdrMin (List_Bidak L);
-/* Mengirimkan address_bidak P, dengan info(P) yang bernilai minimum */
-float Average (List_Bidak L);
-/* Mengirimkan nilai rata-rata info(P) */
+// /*** Prekondisi untuk Max/Min/rata-rata : List_Bidak tidak kosong ***/
+// infotypelb Max (List_Bidak L);
+// /* Mengirimkan nilai info(P) yang maksimum */
+// address_bidak AdrMax (List_Bidak L);
+// /* Mengirimkan address_bidak P, dengan info(P) yang bernilai maksimum */
+// infotypelb Min (List_Bidak L);
+// /* Mengirimkan nilai info(P) yang minimum */
+// address_bidak AdrMin (List_Bidak L);
+// /* Mengirimkan address_bidak P, dengan info(P) yang bernilai minimum */
+// float Average (List_Bidak L);
+// /* Mengirimkan nilai rata-rata info(P) */
 
 /****************** PROSES TERHADAP List_Bidak ******************/
 

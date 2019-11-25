@@ -23,13 +23,13 @@ void CreateEmptyBidak (List_Bidak *L)
 address_bidak Alokasi (infotypelb X)
 /* Mengirimkan address_bidak hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address_bidak tidak nil, dan misalnya */
-/* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
+/* menghasilkan P, maka InfoBidak(P)=X, Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
 {
-	ElmtList *P = (ElmtList *) malloc(sizeof(ElmtList));
+	ElmtListb *P = (ElmtListb *) malloc(sizeof(ElmtListb));
 
 	if (P != Nil){
-		Info(P) = X;
+		InfoBidak(P) = X;
 		Next(P) = Nil;
 		return P;
 	}else{
@@ -46,7 +46,7 @@ void Dealokasi (address_bidak *P)
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
 address_bidak Search (List_Bidak L, infotypelb X)
-/* Mencari apakah ada elemen list dengan Info(P)= X */
+/* Mencari apakah ada elemen list dengan InfoBidak(P)= X */
 /* Jika ada, mengirimkan address_bidak elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 {
@@ -60,7 +60,7 @@ address_bidak Search (List_Bidak L, infotypelb X)
 	if(!IsEmpty(L)){
 		//cek dulu elemen pertama apapun isinya
 		do{
-			if(Info(P_next)==X){
+			if(InfoBidak(P_next)==X){
 				P_nil = P_next;
 				found = true;
 			}else{
@@ -84,7 +84,7 @@ address_bidak SearchId (List_Bidak L, LIST_ID X){
 	if(!IsEmpty(L)){
 		//cek dulu elemen pertama apapun isinya
 		do{
-			if(Info(P_next).id==X){
+			if(InfoBidak(P_next).id==X){
 				P_nil = P_next;
 				found = true;
 			}else{
@@ -109,8 +109,8 @@ address_bidak SearchCustom(List_Bidak L, BOARD_INDEX idx, BOARD_TILE type){
 	if(!IsEmpty(L)){
 		//cek dulu elemen pertama apapun isinya
 		do{
-			BOARD_INDEX idxp = Info(P_next).posisi;
-			BOARD_TILE tilep = Info(P_next).warna*Info(P_next).id.type;
+			BOARD_INDEX idxp = InfoBidak(P_next).posisi;
+			BOARD_TILE tilep = InfoBidak(P_next).warna*InfoBidak(P_next).id.type;
 			if((idxp==idx)&&(tilep==type)){
 				P_nil = P_next;
 				found = true;
@@ -156,7 +156,7 @@ void DelVFirst (List_Bidak *L, infotypelb *X)
 {
 	address_bidak P;
 	DelFirst(L, &P);
-	*X = Info(P);
+	*X = InfoBidak(P);
 	Dealokasi(&P);
 }
 void DelVLast (List_Bidak *L, infotypelb *X)
@@ -166,7 +166,7 @@ void DelVLast (List_Bidak *L, infotypelb *X)
 {
 	address_bidak P;
 	DelLast(L, &P);
-	*X = Info(P);
+	*X = InfoBidak(P);
 	Dealokasi(&P);
 }
 
@@ -229,9 +229,9 @@ void DelFirst (List_Bidak *L, address_bidak *P)
 }
 void DelP (List_Bidak *L, infotypelb X)
 /* I.S. Sembarang */
-/* F.S. Jika ada elemen list beraddress P, dengan Info(P)=X  */
+/* F.S. Jika ada elemen list beraddress P, dengan InfoBidak(P)=X  */
 /* Maka P dihapus dari list dan di-dealokasi */
-/* Jika tidak ada elemen list dengan Info(P)=X, maka list tetap */
+/* Jika tidak ada elemen list dengan InfoBidak(P)=X, maka list tetap */
 /* List_Bidak mungkin menjadi kosong karena penghapusan */
 {
 	address_bidak P = Search(*L, X); //P bakal jadi output
@@ -300,7 +300,7 @@ void PrintInfo (List_Bidak L)
 		address_bidak P = First(L);
 
 		do{
-			printf("%d", Info(P));
+			printf("%d", InfoBidak(P));
 			P = Next(P);
 
 			if (P!=Nil){
@@ -325,88 +325,89 @@ int NbElmt (List_Bidak L)
 	}
 	return count;
 }
-/*** Prekondisi untuk Max/Min/rata-rata : List_Bidak tidak kosong ***/
-infotypelb Max (List_Bidak L)
-/* Mengirimkan nilai Info(P) yang maksimum */{
-	address_bidak P = First(L);
-	infotypelb Max = Info(P);
 
-	while(P!=Nil){
-		if(Info(P)>Max){
-			Max = Info(P);
-		}
+// /*** Prekondisi untuk Max/Min/rata-rata : List_Bidak tidak kosong ***/
+// infotypelb Max (List_Bidak L)
+// /* Mengirimkan nilai InfoBidak(P) yang maksimum */{
+// 	address_bidak P = First(L);
+// 	infotypelb Max = InfoBidak(P);
 
-		P = Next(P);
-	}
+// 	while(P!=Nil){
+// 		if(InfoBidak(P)>Max){
+// 			Max = InfoBidak(P);
+// 		}
 
-	return Max;
-}
+// 		P = Next(P);
+// 	}
 
-address_bidak AdrMax (List_Bidak L)
-/* Mengirimkan address_bidak P, dengan info(P) yang bernilai maksimum */
-{
-	address_bidak P = First(L);
-	address_bidak Max = First(L);
+// 	return Max;
+// }
 
-	while(P!=Nil){
-		if(Info(P)>Info(Max)){
-			Max = P;
-		}
+// address_bidak AdrMax (List_Bidak L)
+// /* Mengirimkan address_bidak P, dengan info(P) yang bernilai maksimum */
+// {
+// 	address_bidak P = First(L);
+// 	address_bidak Max = First(L);
 
-		P = Next(P);
-	}
+// 	while(P!=Nil){
+// 		if(InfoBidak(P)>InfoBidak(Max)){
+// 			Max = P;
+// 		}
 
-	return Max;
-}
-infotypelb Min (List_Bidak L)
-/* Mengirimkan nilai info(P) yang minimum */
-{
-	address_bidak P = First(L);
-	infotypelb Min = Info(P);
+// 		P = Next(P);
+// 	}
 
-	while(P!=Nil){
-		if(Info(P)<Min){
-			Min = Info(P);
-		}
+// 	return Max;
+// }
+// infotypelb Min (List_Bidak L)
+// /* Mengirimkan nilai info(P) yang minimum */
+// {
+// 	address_bidak P = First(L);
+// 	infotypelb Min = InfoBidak(P);
 
-		P = Next(P);
-	}
+// 	while(P!=Nil){
+// 		if(InfoBidak(P)<Min){
+// 			Min = InfoBidak(P);
+// 		}
 
-	return Min;
+// 		P = Next(P);
+// 	}
 
-}
-address_bidak AdrMin (List_Bidak L)
-/* Mengirimkan address_bidak P, dengan info(P) yang bernilai minimum */
-{
-	address_bidak P = First(L);
-	address_bidak Min = First(L);
+// 	return Min;
 
-	while(P!=Nil){
-		if(Info(P)<Info(Min)){
-			Min = P;
-		}
+// }
+// address_bidak AdrMin (List_Bidak L)
+// /* Mengirimkan address_bidak P, dengan info(P) yang bernilai minimum */
+// {
+// 	address_bidak P = First(L);
+// 	address_bidak Min = First(L);
 
-		P = Next(P);
-	}
+// 	while(P!=Nil){
+// 		if(InfoBidak(P)<InfoBidak(Min)){
+// 			Min = P;
+// 		}
 
-	return Min;
-}
+// 		P = Next(P);
+// 	}
 
-float Average (List_Bidak L)
-/* Mengirimkan nilai rata-rata info(P) */
-{
-	int nb = NbElmt(L);
-	int jml = 0;
-	address_bidak P  = First(L);
+// 	return Min;
+// }
 
-	while(P!=Nil){
-		jml += Info(P);
-		P = Next(P);
-	}
+// float Average (List_Bidak L)
+// /* Mengirimkan nilai rata-rata info(P) */
+// {
+// 	int nb = NbElmt(L);
+// 	int jml = 0;
+// 	address_bidak P  = First(L);
 
-	float rat = (float) jml / (float) nb;
-	return rat;
-}
+// 	while(P!=Nil){
+// 		jml += InfoBidak(P);
+// 		P = Next(P);
+// 	}
+
+// 	float rat = (float) jml / (float) nb;
+// 	return rat;
+// }
 
 /****************** PROSES TERHADAP LIST ******************/
 

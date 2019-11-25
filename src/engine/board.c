@@ -8,10 +8,10 @@ void SwapTile(BOARD *B, BOARD_INDEX curpos, BOARD_INDEX newpos){
     SetBoard(*B, curpos) = SetBoard(*B, newpos);
     SetBoard(*B, newpos) = tmp;
 }
-void MakanTile(BOARD *B, BOARD_INDEX prey, BOARD_INDEX victim){
-    BOARD_TILE tmp = SetBoard(*B, prey);
-    SetBoard(*B, victim) = tmp;
-    SetBoard(*B, prey) = EMPTY_SQUARE;
+void MakanTile(BOARD *B, BOARD_INDEX pemangsa, BOARD_INDEX korban){
+    BOARD_TILE tmp = SetBoard(*B, pemangsa);
+    SetBoard(*B, korban) = tmp;
+    SetBoard(*B, pemangsa) = EMPTY_SQUARE;
 }
 void UpdateStack(Stack *S, MOVE M){
     Push(S, M);
@@ -40,6 +40,7 @@ void UpdateBoard(BOARD *B, MOVE M){
         //Karna ga makan, kita cuman swap nilai di cur pos
         //sama new pos di board
 
+        //update board
         SwapTile(B, M.cur_position, M.new_position);
 
     }else{
