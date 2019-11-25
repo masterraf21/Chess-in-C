@@ -15,12 +15,5 @@ BIDAK InitBidak(PAWN_ID num,PAWN_TYPE Tipe, BOARD_INDEX Posisi, COLOR Warna);
 //Konstruktor List buat nyimpen bidak
 //langsung diisi sama bidak 16 biji 
 void InitListBidak(List_Bidak *L, COLOR Warna);
-void UpdateList(List_Bidak *L, MOVE M);
-
-
-
-
-
-
 
 #endif
