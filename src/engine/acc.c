@@ -36,6 +36,7 @@ void RunNewGame(LeaderBoard *B){
         printf("Masukkan nama pemain hitam : ");
         scanf("%s",namhit);
         Queue_Giliran Q;
+        InitGiliran(&Q);
         init_board(&D);
         RunGame(D,&Q,&done);
         if (done) {
@@ -74,23 +75,27 @@ void RunGame(BOARD D, Queue_Giliran *Q,boolean *done){
         int x;
         Stack S;
         CreateEmptyStack(&S);
+        infotypeturn currplayer;
         while((! exit) && (! Is50Turn(*Q)) && !(*done)) {
+                DelTurn(Q,&currplayer);
                 PrintBoard(D);
                 printf("Masukkan command : ");
                 scanf("%s",cmd);
                 x = getNum(cmd);
                 switch (x){
-                        case 1 : Move(); /* -> kondisi game selesai ada di done */
+                        case 1 : MoveCore(&D,&S,&currplayer,done); /* -> kondisi game selesai ada di done */
                                 break;
                         case 2 : specialmove();
                                 break;
-                        case 3 : undo();
+                        case 3 : UndoCore(&D,&S,&currplayer); AddTurn(Q,currplayer);
+                                 DelTurn(Q,&currplayer); UndoCore(&D,&S,&currplayer);
                                 break;
                         case 4 : exit = true;
                                 break;
                         default : printf("Input salah !\n");
                                 break;
                 }
+                AddTurn(Q,currplayer);
         }
         // if (/* cek penuh */){
         //         *done = true;

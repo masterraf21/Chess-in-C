@@ -110,7 +110,7 @@ void SaveFile(List_Bidak W, List_Bidak B, Queue_Giliran Q){
         PR = Next(PR);
     }
     //Print ke file isi queue giliran dengan format <warna><count>;<score>
-    //contoh P;30;105
+    //contoh P;XXX30;105
     fprintf(catur,".");
     fclose(catur);
 }

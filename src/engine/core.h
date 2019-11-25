@@ -6,12 +6,11 @@
 #include "bidak.h"
 #include "board.h"
 #include "giliran.h"
-//#include "undo.h"
 #include "SaveLoad.h"
 
 
-void MoveCore(BOARD *D, Stack *S, Queue_Giliran *Q, boolean *done);
+void MoveCore(BOARD *B, Stack *S, infotypeturn *R, boolean *done);
 
-void UndoCore(BOARD *D, Stack *S, Queue_Giliran *Q, boolean *done);
+void UndoCore(BOARD *D, Stack *S, infotypeturn *R);
 
 #endif

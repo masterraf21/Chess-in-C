@@ -5,6 +5,7 @@
 #include "board.h"
 #include "giliran.h"
 #include "SaveLoad.h"
+#include "core.h"
 
 
 void Welcome();

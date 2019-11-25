@@ -1,7 +1,7 @@
 #include "giliran.h"
 #include <stdlib.h>
 
-void InitGiliran(Queue_Giliran *Q, infotypeturn *currPlayerInfo)
+void InitGiliran(Queue_Giliran *Q)
 {
 	/*KAMUS*/
 	infotypeturn B, W;
@@ -17,9 +17,9 @@ void InitGiliran(Queue_Giliran *Q, infotypeturn *currPlayerInfo)
 	AddTurn(Q,B);
 }
 
-int Poin(MOVE *M)
+int Poin(MOVE M)
 {
-	switch ((*M).victim.id.type) {
+	switch (M.victim.id.type) {
             case PAWN : return 1;
                     break;
             case KNIGHT : return 2;
@@ -35,25 +35,25 @@ int Poin(MOVE *M)
         }
 }
 
-void changeTurnMove(Queue_Giliran *Q, infotypeturn *currPlayerInfo, MOVE *M)
-{
-	if ((*M).is_makan) {
-		(*currPlayerInfo).poin = (*currPlayerInfo).poin + Poin(M);
-	}
-	(*currPlayerInfo).counter ++;
-	AddTurn(Q, (*currPlayerInfo));
-	DelTurn(Q, (currPlayerInfo));
-}
+// void changeTurnMove(Queue_Giliran *Q, infotypeturn *currPlayerInfo, MOVE *M)
+// {
+// 	if ((*M).is_makan) {
+// 		(*currPlayerInfo).poin = (*currPlayerInfo).poin + Poin(M);
+// 	}
+// 	(*currPlayerInfo).counter ++;
+// 	AddTurn(Q, (*currPlayerInfo));
+// 	DelTurn(Q, (currPlayerInfo));
+// }
 
-void changeTurnUndo(Queue_Giliran *Q, infotypeturn *currPlayerInfo, MOVE *M)
-{
-	if ((*M).is_makan) {
-		(*currPlayerInfo).poin = (*currPlayerInfo).poin - Poin(M);
-	}
-	(*currPlayerInfo).counter --;
-	DelTurn(Q, currPlayerInfo);
-	AddTurn(Q, (*currPlayerInfo));
-}
+// void changeTurnUndo(Queue_Giliran *Q, infotypeturn *currPlayerInfo, MOVE *M)
+// {
+// 	if ((*M).is_makan) {
+// 		(*currPlayerInfo).poin = (*currPlayerInfo).poin - Poin(M);
+// 	}
+// 	(*currPlayerInfo).counter --;
+// 	DelTurn(Q, currPlayerInfo);
+// 	AddTurn(Q, (*currPlayerInfo));
+// }
 
 
 boolean Is50Turn(Queue_Giliran Q)

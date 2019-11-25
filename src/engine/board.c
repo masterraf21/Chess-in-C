@@ -22,6 +22,13 @@ void UpdateList(List_Bidak *LSelf, MOVE M){
     address_bidak P = SearchId(*LSelf, id);
     InfoBidak(P).posisi = M.new_position;
 }
+
+void UpdateUndoList(List_Bidak *LSelf, MOVE M){
+    LIST_ID id = M.id;
+    address_bidak P = SearchId(*LSelf, id);
+    InfoBidak(P).posisi = M.cur_position;
+}
+
 void UpdateMakan(List_Bidak *LEnemy, MOVE M){
     BIDAK Victim = M.victim;
     //Karena dia dimakan jadi di dealokasiin dari list musuh
@@ -34,7 +41,7 @@ void UpdateBoard(BOARD *B, MOVE M){
     if (!M.is_makan){
 
         if (M.warna==WHITE)
-            UpdateList(&LPutih, M);
+            UpdateUndoList(&LPutih, M);
         else/*Black*/
             UpdateList(&LHitam, M);
         
@@ -67,32 +74,21 @@ void UndoBoard(BOARD *B, Stack *S, List_Bidak *Acu, List_Bidak *Lawanacu)
     /*Algoritma*/
     POP(S, &StepLawan);
 
-    if (!StepLawan.is_makan) //kalo dia ga abis makan
-    {
-        UpdateList(&Lawanacu, StepLawan);
-        SwapTile(B, StepLawan.new_position, StepLawan.cur_position);
-    }
-
-    else //dia abis makan
+    if (StepLawan.is_makan) //kalo dia ga abis makan
     {
         InsVFirst(&Acu, StepLawan.victim); //realokasi bidak victim
-        UpdateList(&Lawanacu,StepLawan);
-        SwapTile(B, StepLawan.new_position, StepLawan.cur_position);
     }
-
+    UpdateUndoList(&Lawanacu, StepLawan);
+    SwapTile(B, StepLawan.new_position, StepLawan.cur_position);
+    
     POP(S, &Stepku);
 
     if (Stepku.is_makan) //kalo aku ga abis makan
     {
-        UpdateList(&Acu, Stepku);
-        SwapTile(B,Stepku.new_position, Stepku.cur_position);
-    }
-    else //aku abis makan
-    {
         InsVFirst(&Lawanacu, Stepku.victim); //realokasi bidak victim
-        UpdateList(&Acu,Stepku);
-        SwapTile(B, StepLawan.new_position, StepLawan.cur_position);
     }
+    UpdateUndoList(&Acu, Stepku);
+    SwapTile(B,Stepku.new_position, Stepku.cur_position);
    
   //tidak dipush kembali karena undo bisa dilakukan berulang2 berturut2
 }

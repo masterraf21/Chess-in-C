@@ -24,6 +24,7 @@ void SwapTile(BOARD *B, BOARD_INDEX x, BOARD_INDEX y);
 void MakanTile(BOARD *B, BOARD_INDEX pemangsa, BOARD_INDEX korban);
 void UpdateStack(Stack *S, MOVE M);
 void UpdateList(List_Bidak *L, MOVE M);
+void UpdateUndoList(List_Bidak *LSelf, MOVE M);
 void UpdateMakan(List_Bidak *LEnemy, MOVE M);
 void UpdateBoard(BOARD *B, MOVE M);
 void UndoBoard(BOARD *B, Stack *S, List_Bidak *Acu, List_Bidak *Lawanacu);
