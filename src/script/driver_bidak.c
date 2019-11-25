@@ -9,11 +9,8 @@ int main(){
     //init masing masing list;
     InitListBidak(&B.LHitam, BLACK);
     InitListBidak(&B.LPutih, WHITE);
+    //coba testing slurr dengan print board;
+    PrintBoard(B);
     
-
-
-
-
-
-
+    return 0;
 }

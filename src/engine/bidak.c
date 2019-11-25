@@ -10,7 +10,7 @@ boolean Enemy(BIDAK B, BOARD_TILE T){
     boolean retval = false; 
     retval = ((bk^T)<0);
 
-    return retval;
+    return ((T!=EMPTY_SQUARE)&&retval);
 }
 
 boolean Friend(BIDAK B, BOARD_TILE T){
@@ -18,7 +18,7 @@ boolean Friend(BIDAK B, BOARD_TILE T){
     boolean retval = false; 
     retval = ((bk^T)>0);
 
-    return retval;
+    return ((T!=EMPTY_SQUARE)&&retval);
 }
 
 BIDAK InitBidak(PAWN_ID num,PAWN_TYPE Tipe, BOARD_INDEX Posisi, COLOR Warna)
