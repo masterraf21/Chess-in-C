@@ -19,7 +19,7 @@ typedef struct {
 /* Queue dengan representasi berkait dengan pointer */
 typedef struct tElmtQueueTurn * address;
 typedef struct tElmtQueueTurn { 
-  infotypeturn Info;
+  infotypeturn InfoT;
   address Next; 
 } ElmtQueueTurn; 
 
@@ -32,17 +32,17 @@ typedef struct {
 typedef Queue_Giliran Queue;
 
 /* Selektor */
-#define Head(Q) (Q).HEAD
-#define Tail(Q) (Q).TAIL
-#define InfoHead(Q) (Q).HEAD->Info
-#define InfoTail(Q) (Q).TAIL->Info
-#define Next(P) (P)->Next
-#define Info(P) (P)->Info
+#define HeadT(Q) (Q).HEAD
+#define TailT(Q) (Q).TAIL
+#define InfoHeadT(Q) (Q).HEAD->Info
+#define InfoTailT(Q) (Q).TAIL->Info
+#define NextT(P) (P)->Next
+#define InfoT(P) (P)->Info
 
 /* Prototype manajemen memori */
 void AlokasiTurn (address *P, infotypeturn X);
 /* I.S. Sembarang */
-/* F.S. Alamat P dialokasi, jika berhasil maka Info(P)=X dan 
+/* F.S. Alamat P dialokasi, jika berhasil maka Info(TP)=X dan 
         Next(P)=Nil */
 /*      P=Nil jika alokasi gagal */
 void DealokasiTurn (address  P);

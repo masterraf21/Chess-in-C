@@ -5,15 +5,15 @@
 /* Prototype manajemen memori */
 void AlokasiTurn (address *P, infotypeturn X)
 /* I.S. Sembarang */
-/* F.S. Alamat P dialokasi, jika berhasil maka Info(P)=X dan 
-        Next(P)=Nil */
+/* F.S. Alamat P dialokasi, jika berhasil maka InfoT(P)=X dan 
+        NextT(P)=Nil */
 /*      P=Nil jika alokasi gagal */
 {
 	*P = (address) malloc(sizeof(ElmtQueueTurn));
 
 	if(*P!=Nil){
-		Info(*P) = X;
-		Next(*P) = Nil;
+		InfoT(*P) = X;
+		NextT(*P) = Nil;
 	}
 }
 void DealokasiTurn (address  P)
@@ -25,16 +25,16 @@ void DealokasiTurn (address  P)
 boolean IsEmptyTurn (Queue Q)
 /* Mengirim true jika Q kosong: HEAD(Q)=Nil and TAIL(Q)=Nil */
 {
-	return ((Head(Q)==Nil)&&(Tail(Q)==Nil));
+	return ((HeadT(Q)==Nil)&&(TailT(Q)==Nil));
 }
 int NbElmtTurn(Queue Q)
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong */
 {
 	int count = 0;
-	address P = Head(Q);
+	address P = HeadT(Q);
 
 	while(P!=Nil){
-		P = Next(P);
+		P = NextT(P);
 		count++;
 	}
 	
@@ -45,8 +45,8 @@ void CreateEmptyTurn(Queue * Q)
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk */
 {
-	Head(*Q) = Nil;
-	Tail(*Q) = Nil;
+	HeadT(*Q) = Nil;
+	TailT(*Q) = Nil;
 }
 /*** Primitif AddTurn/DelTurnete ***/
 void AddTurn (Queue * Q, infotypeturn X)
@@ -61,13 +61,13 @@ void AddTurn (Queue * Q, infotypeturn X)
 
 	if (P!=Nil){
 		if (IsEmptyTurn(*Q)){
-			Head(*Q) = P;
-			Tail(*Q) = P;
+			HeadT(*Q) = P;
+			TailT(*Q) = P;
 		}else{
 			//next the current tail with P
-			Next(Tail(*Q)) = P;
+			NextT(TailT(*Q)) = P;
 			//now that the current tail is p assign with p
-			Tail(*Q) = P;
+			TailT(*Q) = P;
 		}
 	}
 }
@@ -78,16 +78,16 @@ void DelTurn(Queue * Q, infotypeturn * X)
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "mundur" */
 {
-	address P = Head(*Q);
+	address P = HeadT(*Q);
 
-	if(Next(Head(*Q))==Nil)
+	if(NextT(HeadT(*Q))==Nil)
 		//only one element, then create empty
 		CreateEmptyTurn(Q);
 	else
 		//get the next one
-		Head(*Q) = Next(Head(*Q));
+		HeadT(*Q) = NextT(HeadT(*Q));
 
 	//get the info then deallocate
-	*X = Info(P);
+	*X = InfoT(P);
 	DealokasiTurn(P);
 }
