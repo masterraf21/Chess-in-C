@@ -42,4 +42,6 @@ void SalinKata();
 
 void TulisKata(Kata kat);
 
+int StrToInt(Kata kat); 
+
 #endif

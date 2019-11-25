@@ -49,3 +49,10 @@ void TulisKata(Kata kat){
 	}
 	printf("\n");
 }
+
+int StrToInt(Kata kat){
+	int res = 0; 
+    for (int i = 0;i < kat.Length ; ++i) 
+        res = res * 10 + kat.TabKata[i] - '0'; 
+    return res;
+}
