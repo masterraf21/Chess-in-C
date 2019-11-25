@@ -43,10 +43,14 @@ boolean IsDownKosong(BOARD B, BIDAK P);
 /***** SEARCH FUNCTION ******/
 boolean IsNeighbor(BOARD B, BIDAK Bi);
 boolean IsNeighborKnight(BOARD B, BIDAK Bi);
+//Fungsi ini bakal ngeluarin mid yang diprompt oleh user
+//setelah printing, index diarray selalu -1 dengan yang diprompt
+MOVE_ID GetQueueIdx(Queue_Move Q, int IdxPrompt);
+MOVE GetListIdx(List_Move L, int IdxPrompt);
+BIDAK GetBidakId(List_Bidak L, MOVE_ID Mid);
 
 
 /***** MAIN FUNCTION *****/
-
 //dipake buat nampilin mana aja yang bisa gerak
 //pake queue biar enak ngeluarinnya
 Queue_Move AvailableMove(BOARD B, List_Bidak L);
@@ -74,13 +78,17 @@ void GenQueen(BOARD B, BIDAK Q, List_Move *L);
 void GenKing(BOARD B, BIDAK K, List_Move *L);
 
 /*** INTERFACE BETWEEN MOVE AND LIST ******/
-
 //color dirinya sendiri
 BIDAK SearchMakan(BOARD_INDEX bi, BOARD_TILE bt, BOARD B, COLOR SelfColor);
 void AddMove(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index);
 void AddMakan(BOARD B, List_Move *L, BIDAK Mover, BOARD_INDEX VictimIdx, BOARD_TILE VictimTile);
 
-
-
+/*** PRINTING FUNCTION ****/
+char* IdxtoStr(BOARD_INDEX Idx);
+char* TypetoStr(PAWN_TYPE type);
+void PrintIdxPos(MOVE_ID Mid, int idx);
+void PrintIdxMove(MOVE M, int idx);
+void PrintAvailableMove(Queue_Move Q);
+void PrintMoveBidak(List_Move L);
 
 #endif

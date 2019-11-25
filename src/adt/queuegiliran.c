@@ -15,11 +15,11 @@ void DealokasiTurn (address_turn  P)
 {
 	free(P);
 }
-boolean IsEmptyTurn (Queue Q)
+boolean IsEmptyTurn (Queue_Giliran Q)
 {
 	return ((HeadT(Q)==Nil)&&(TailT(Q)==Nil));
 }
-int NbElmtTurn(Queue Q)
+int NbElmtTurn(Queue_Giliran Q)
 {
 	int count = 0;
 	address_turn P = HeadT(Q);
@@ -32,12 +32,12 @@ int NbElmtTurn(Queue Q)
 	return count;
 }
 
-void CreateEmptyTurn(Queue * Q)
+void CreateEmptyTurn(Queue_Giliran * Q)
 {
 	HeadT(*Q) = Nil;
 	TailT(*Q) = Nil;
 }
-void AddTurn (Queue * Q, infotypeturn X)
+void AddTurn (Queue_Giliran * Q, infotypeturn X)
 {
 	address_turn P;
 	AlokasiTurn(&P, X);
@@ -54,7 +54,7 @@ void AddTurn (Queue * Q, infotypeturn X)
 		}
 	}
 }
-void DelTurn(Queue * Q, infotypeturn * X)
+void DelTurn(Queue_Giliran * Q, infotypeturn * X)
 {
 	address_turn P = HeadT(*Q);
 

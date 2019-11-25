@@ -10,7 +10,8 @@
 #define Nil NULL
 
 /* Deklarasi infotype */
-typedef LIST_ID infotype;
+
+typedef MOVE_ID infotype;
 
 /* Queue_Move dengan representasi berkait dengan pointer */
 typedef struct tElmtQueueM * addressQ;

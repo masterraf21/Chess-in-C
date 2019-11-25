@@ -57,10 +57,10 @@ void AddQ (Queue_Move * Q, infotype X)
 /* F.S. X menjadi TAIL, TAIL "maju" */
 {
 	addressQ P;
-	Alokasi(&P, X);
+	AlokasiQ(&P, X);
 
 	if (P!=Nil){
-		if (IsEmpty(*Q)){
+		if (IsEmptyQ(*Q)){
 			Head(*Q) = P;
 			Tail(*Q) = P;
 		}else{
@@ -82,12 +82,12 @@ void DelQ(Queue_Move * Q, infotype * X)
 
 	if(NextQM(Head(*Q))==Nil)
 		//only one element, then create empty
-		CreateEmpty(Q);
+		CreateEmptyQ(Q);
 	else
 		//get the NextQM one
 		Head(*Q) = NextQM(Head(*Q));
 
 	//get the info then deallocate
 	*X = InfoQM(P);
-	Dealokasi(P);
+	DealokasiQ(P);
 }
