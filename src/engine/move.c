@@ -1,4 +1,6 @@
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 #include "move.h"
 
 /**** HELPER FUNCTION *****/
@@ -196,6 +198,44 @@ boolean IsNeighborKnight(BOARD B, BIDAK Bi){
     ||(k7==EMPTY_SQUARE)||(Enemy(Bi,k7))||(k8==EMPTY_SQUARE)||(Enemy(Bi,k8)));
 }
 
+MOVE_ID GetQueueIdx(Queue_Move Q, int IdxPrompt){
+    int elmt = NbElmtQ(Q);
+    Queue_Move Qb = Q;
+    MOVE_ID move[elmt];//buat nyimpen
+
+    //Ambil element queue jadiin array biasa
+    MOVE_ID tmp;
+    for (int i = 0; i < elmt; i++)
+    {
+        DelQ(&Qb, &tmp);
+        move[i] = tmp;
+    }
+
+    return move[IdxPrompt-1];
+}
+
+MOVE GetListIdx(List_Move L, int IdxPrompt){
+    int elmt = NbElmtM(L);
+    MOVE mov[elmt];
+    //masukin ke array biar mudah sis
+    address_move P = FirstMove(L);
+    int i=0;
+    MOVE M;
+    while(P!=Nil){
+        M = InfoMove(P);
+        mov[i] = M;
+        P = NextMove(P);
+        i++;
+    }
+
+    return mov[IdxPrompt-1];
+}
+
+BIDAK GetBidakId(List_Bidak L, MOVE_ID Mid){
+    address_bidak P = SearchId(L, Mid.id);
+    return InfoBidak(P);
+}
+
 /***** MAIN FUNCTION *****/
 //dipake buat nampilin mana aja yang bisa gerak
 //pake queue biar enak ngeluarinnya
@@ -205,16 +245,19 @@ Queue_Move AvailableMove(BOARD B, List_Bidak L){
     CreateEmptyQ(&Q);
     //Iterate inside the list
     BIDAK Bi;
+    MOVE_ID Mid;
     address_bidak P = FirstBidak(L);
     while(P!=Nil){
         Bi = InfoBidak(P);
         if(Bi.id.type==KNIGHT){
+            Mid.id = Bi.id;
+            Mid.posisi = Bi.posisi;
             if(IsNeighborKnight(B,Bi)){
-                AddQ(&Q,Bi.id);
+                AddQ(&Q,Mid);
             }
         }else/*selain knight*/{
             if(IsNeighbor(B,Bi)){
-                AddQ(&Q, Bi.id);
+                AddQ(&Q,Mid);
             }
         }
         P = NextBidak(P);
@@ -729,7 +772,7 @@ void GenQueen(BOARD B, BIDAK Q, List_Move *L){
             }else if(Enemy(Q,qt)){
                 AddMakan(B, L, Q, qi, qt);
             }else/*kosong*/{
-                AddMove(L, Q, qi);
+                AddMove(L, Q, qi);/* code */
             }
             i++;
         } while (qt!=BAD_SQUARE);
@@ -779,7 +822,7 @@ void GenQueen(BOARD B, BIDAK Q, List_Move *L){
                 break;
             }else if(Enemy(Q,qt)){
                 AddMakan(B, L, Q, qi, qt);
-            }else/*kosong*/{
+            }else/*kosong*/{/* code */
                 AddMove(L, Q, qi);
             }
             i++;
@@ -927,4 +970,293 @@ void AddMakan(BOARD B, List_Move *L, BIDAK Mover, BOARD_INDEX VictimIdx, BOARD_T
     M.victim = Victim;
 
     InsVFirstM(L, M);
+}/*** PRINTING FUNCTION ****/
+char* IdxtoStr(BOARD_INDEX Idx){
+    char *index = (char *) malloc(sizeof(char)*8);
+
+    switch (Idx)
+    {
+    case A1:
+        strcpy(index, "(a,1)");
+        break;
+    case A2:
+        strcpy(index, "(a,2)");
+        break;
+    case A3:
+        strcpy(index, "(a,3)");
+        break;
+    case A4:
+        strcpy(index, "(a,4)");
+        break;
+    case A5:
+        strcpy(index, "(a,5)");
+        break;
+    case A6:
+        strcpy(index, "(a,6)");
+        break;
+    case A7:
+        strcpy(index, "(a,7)");
+        break;
+    case A8:
+        strcpy(index, "(a,8)");
+        break;
+    case B1:
+        strcpy(index, "(b,1)");
+        break;
+    case B2:
+        strcpy(index, "(b,2)");
+        break;
+    case B3:
+        strcpy(index, "(b,3)");
+        break; 
+    case B4:
+        strcpy(index, "(b,4)");
+        break; 
+    case B5:
+        strcpy(index, "(b,5)");
+        break; 
+    case B6:
+        strcpy(index, "(b,1)");
+        break; 
+    case B7:
+        strcpy(index, "(b,7)");
+        break; 
+    case B8:
+        strcpy(index, "(b,8)");
+        break;
+    case C1:
+        strcpy(index, "(c,1)");
+        break;  
+    case C2:
+        strcpy(index, "(c,2)");
+        break;        
+    case C3:
+        strcpy(index, "(c,3)");
+        break;
+    case C4:
+        strcpy(index, "(c,4)");
+        break;
+    case C5:
+        strcpy(index, "(c,5)");
+        break;
+    case C6:
+        strcpy(index, "(c,6)");
+        break;
+    case C7:
+        strcpy(index, "(c,7)");
+        break;
+    case C8:
+        strcpy(index, "(c,8)");
+        break;
+    case D1:
+        strcpy(index, "(d,1)");
+        break;
+    case D2:
+        strcpy(index, "(d,2)");
+        break;
+    case D3:
+        strcpy(index, "(d,3)");
+        break;             
+    case D4:
+        strcpy(index, "(d,4)");
+        break; 
+    case D5:
+        strcpy(index, "(d,5)");
+        break;
+    case D6:
+        strcpy(index, "(d,7)");
+        break; 
+    case D7:
+        strcpy(index, "(d,7)");
+        break;
+    case D8:
+        strcpy(index, "(d,8)");
+        break;
+    case E1:
+        strcpy(index, "(e,1)");
+        break; 
+    case E2:
+        strcpy(index, "(e,2)");
+        break;
+    case E3:
+        strcpy(index, "(e,3)");
+        break;
+    case E4:
+        strcpy(index, "(e,4)");
+        break;
+    case E5:
+        strcpy(index, "(e,5)");
+        break;
+    case E6:
+        strcpy(index, "(e,7)");
+        break;
+    case E7:
+        strcpy(index, "(e,7)");
+        break;
+    case E8:
+        strcpy(index, "(e,8)");
+        break;
+    case F1:
+        strcpy(index, "(f,1)");
+        break; 
+    case F2:
+        strcpy(index, "(f,2)");
+        break;
+    case F3:
+        strcpy(index, "(f,3)");
+        break;
+    case F4:
+        strcpy(index, "(f,4)");
+        break;
+    case F5:
+        strcpy(index, "(f,5)");
+        break;
+    case F6:
+        strcpy(index, "(f,7)");
+        break;
+    case F7:
+        strcpy(index, "(f,7)");
+        break;
+    case F8:
+        strcpy(index, "(f,8)");
+        break;
+    case G1:
+        strcpy(index, "(g,1)");
+        break; 
+    case G2:
+        strcpy(index, "(g,2)");
+        break;
+    case G3:
+        strcpy(index, "(g,3)");
+        break;
+    case G4:
+        strcpy(index, "(g,4)");
+        break;
+    case G5:
+        strcpy(index, "(g,5)");
+        break;
+    case G6:
+        strcpy(index, "(g,7)");
+        break;
+    case G7:
+        strcpy(index, "(g,7)");
+        break;
+    case G8:
+        strcpy(index, "(g,8)");
+        break;
+    case H1:
+        strcpy(index, "(h,1)");
+        break; 
+    case H2:
+        strcpy(index, "(h,2)");
+        break;
+    case H3:
+        strcpy(index, "(h,3)");
+        break;
+    case H4:
+        strcpy(index, "(h,4)");
+        break;
+    case H5:
+        strcpy(index, "(h,5)");
+        break;
+    case H6:
+        strcpy(index, "(h,7)");
+        break;
+    case H7:
+        strcpy(index, "(h,7)");
+        break;
+    case H8:
+        strcpy(index, "(h,8)");
+        break;
+    }
+
+    return index;
 }
+
+char* TypetoStr(PAWN_TYPE type){
+    char *typ = (char *) malloc(sizeof(char)*8);
+
+    switch (type)
+    {
+    case PAWN:
+        strcpy(typ, "Pion");
+        break;
+    case KNIGHT:
+        strcpy(typ, "Kuda");
+        break;
+    case BISHOP:
+        strcpy(typ, "Mentri");
+        break;
+    case ROOK:
+        strcpy(typ, "Benteng");
+        break;
+    case QUEEN:
+        strcpy(typ, "Ratu");
+        break;
+    case KING:
+        strcpy(typ, "Raja");
+        break;
+    }
+
+    return typ;
+}
+void PrintIdxPos(MOVE_ID Mid, int idx){
+    char* type = TypetoStr(Mid.id.type);
+    char* idxstr = IdxtoStr(Mid.posisi);
+    printf("%d. %s %s\n", idx, type, idxstr);
+}
+
+void PrintIdxMove(MOVE M, int idx){
+    char* idxstr = IdxtoStr(M.new_position);
+    printf("%d. %s\n", idx, idxstr);
+}
+
+void PrintAvailableMove(Queue_Move Q){
+    int elmt = NbElmtQ(Q);
+    Queue_Move Qb = Q;
+    MOVE_ID move[elmt];//buat nyimpen
+
+    //Ambil element queue jadiin array biasa
+    MOVE_ID tmp;
+    for (int i = 0; i < elmt; i++)
+    {
+        DelQ(&Qb, &tmp);
+        move[i] = tmp;
+    }
+    
+    //print gan
+    int nomer;//index printnya
+    printf("Daftar bidak yang bisa bergerak:\n");
+    for (int i = 0; i < elmt; i++)
+    {
+        nomer = i+1;
+        PrintIdxPos(move[i],nomer);
+    }
+}
+
+
+
+void PrintMoveBidak(List_Move L){
+    int elmt = NbElmtM(L);
+    MOVE mov[elmt];
+    //masukin ke array biar mudah sis
+    address_move P = FirstMove(L);
+    int i=0;
+    MOVE M;
+    while(P!=Nil){
+        M = InfoMove(P);
+        mov[i] = M;
+        P = NextMove(P);
+        i++;
+    }
+    //printing gans
+    printf("Daftar posisi tujuan yang mungkin:\n");
+    int nomer;//index
+    for (int i = 0; i < elmt; i++)
+    {
+        nomer = i+1;
+        PrintIdxMove(mov[i],nomer);
+    }
+
+}
+
