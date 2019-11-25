@@ -205,7 +205,7 @@ Queue_Move AvailableMove(BOARD B, List_Bidak L){
     CreateEmptyQ(&Q);
     //Iterate inside the list
     BIDAK Bi;
-    address_bidak P = First(L);
+    address_bidak P = FirstBidak(L);
     while(P!=Nil){
         Bi = InfoBidak(P);
         if(Bi.id.type==KNIGHT){
@@ -217,7 +217,7 @@ Queue_Move AvailableMove(BOARD B, List_Bidak L){
                 AddQ(&Q, Bi.id);
             }
         }
-        P = Next(P);
+        P = NextBidak(P);
     }
 
 

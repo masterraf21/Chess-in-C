@@ -34,7 +34,7 @@ BIDAK InitBidak(PAWN_ID num,PAWN_TYPE Tipe, BOARD_INDEX Posisi, COLOR Warna)
 
 void InitListBidak(List_Bidak *L, COLOR Warna)
 {
-    CreateEmpty(L);
+    CreateEmptyBidak(L);
     
     //Generate bidak satu satu sesuai warna
     //nanti bakal ada dua list, white or black

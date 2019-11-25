@@ -8,7 +8,7 @@
 boolean IsEmptyBidak (List_Bidak L)
 /* Mengirim true jika list kosong */
 {
-	return (First(L)==Nil);
+	return (FirstBidak(L)==Nil);
 }
 
 /****************** PEMBUATAN LIST KOSONG ******************/
@@ -16,27 +16,27 @@ void CreateEmptyBidak (List_Bidak *L)
 /* I.S. sembarang             */
 /* F.S. Terbentuk list kosong */
 {
-	First(*L) = Nil;
+	FirstBidak(*L) = Nil;
 }
 
 /****************** Manajemen Memori ******************/
-address_bidak Alokasi (infotypelb X)
+address_bidak AlokasiB (infotypelb X)
 /* Mengirimkan address_bidak hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address_bidak tidak nil, dan misalnya */
-/* menghasilkan P, maka InfoBidak(P)=X, Next(P)=Nil */
+/* menghasilkan P, maka InfoBidak(P)=X, NextBidak(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
 {
 	ElmtListb *P = (ElmtListb *) malloc(sizeof(ElmtListb));
 
 	if (P != Nil){
 		InfoBidak(P) = X;
-		Next(P) = Nil;
+		NextBidak(P) = Nil;
 		return P;
 	}else{
 		return Nil;
 	}
 }
-void Dealokasi (address_bidak *P)
+void DealokasiB (address_bidak *P)
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian address_bidak P */
@@ -45,13 +45,13 @@ void Dealokasi (address_bidak *P)
 }
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-address_bidak Search (List_Bidak L, infotypelb X)
+address_bidak SearchB (List_Bidak L, infotypelb X)
 /* Mencari apakah ada elemen list dengan InfoBidak(P)= X */
 /* Jika ada, mengirimkan address_bidak elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 {
 	address_bidak P_nil = Nil;
-	address_bidak P_next = First(L);
+	address_bidak P_next = FirstBidak(L);
 	boolean found = false;
 
 	//cek kosong gak
@@ -64,7 +64,7 @@ address_bidak Search (List_Bidak L, infotypelb X)
 				P_nil = P_next;
 				found = true;
 			}else{
-				P_next = Next(P_next);
+				P_next = NextBidak(P_next);
 			}
 
 		}while ((P_next!=Nil)&&(!found)); //berhenti pas dia udah diujung atau uda ketemu
@@ -75,7 +75,7 @@ address_bidak Search (List_Bidak L, infotypelb X)
 
 address_bidak SearchId (List_Bidak L, LIST_ID X){
 	address_bidak P_nil = Nil;
-	address_bidak P_next = First(L);
+	address_bidak P_next = FirstBidak(L);
 	boolean found = false;
 
 	//cek kosong gak
@@ -88,7 +88,7 @@ address_bidak SearchId (List_Bidak L, LIST_ID X){
 				P_nil = P_next;
 				found = true;
 			}else{
-				P_next = Next(P_next);
+				P_next = NextBidak(P_next);
 			}
 
 		}while ((P_next!=Nil)&&(!found)); //berhenti pas dia udah diujung atau uda ketemu
@@ -100,7 +100,7 @@ address_bidak SearchId (List_Bidak L, LIST_ID X){
 
 address_bidak SearchCustom(List_Bidak L, BOARD_INDEX idx, BOARD_TILE type){
 	address_bidak P_nil = Nil;
-	address_bidak P_next = First(L);
+	address_bidak P_next = FirstBidak(L);
 	boolean found = false;
 
 	//cek kosong gak
@@ -115,7 +115,7 @@ address_bidak SearchCustom(List_Bidak L, BOARD_INDEX idx, BOARD_TILE type){
 				P_nil = P_next;
 				found = true;
 			}else{
-				P_next = Next(P_next);
+				P_next = NextBidak(P_next);
 			}
 
 		}while ((P_next!=Nil)&&(!found)); //berhenti pas dia udah diujung atau uda ketemu
@@ -131,7 +131,7 @@ void InsVFirst (List_Bidak *L, infotypelb X)
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
 {
-	address_bidak P = Alokasi(X);
+	address_bidak P = AlokasiB(X);
 	if (P!=Nil){
 		InsertFirst(L, P);
 	}
@@ -142,7 +142,7 @@ void InsVLast (List_Bidak *L, infotypelb X)
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 {
-	address_bidak P = Alokasi(X);
+	address_bidak P = AlokasiB(X);
 	if (P!=Nil){
 		InsertLast(L, P);
 	}
@@ -157,7 +157,7 @@ void DelVFirst (List_Bidak *L, infotypelb *X)
 	address_bidak P;
 	DelFirst(L, &P);
 	*X = InfoBidak(P);
-	Dealokasi(&P);
+	DealokasiB(&P);
 }
 void DelVLast (List_Bidak *L, infotypelb *X)
 /* I.S. list tidak kosong */
@@ -167,7 +167,7 @@ void DelVLast (List_Bidak *L, infotypelb *X)
 	address_bidak P;
 	DelLast(L, &P);
 	*X = InfoBidak(P);
-	Dealokasi(&P);
+	DealokasiB(&P);
 }
 
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
@@ -177,8 +177,8 @@ void InsertFirst (List_Bidak *L, address_bidak P)
 /* F.S. Menambahkan elemen ber-address_bidak P sebagai elemen pertama */
 {
 	//elemen "kedua" diassign dengan address_bidak
-	Next(P) = First(*L);
-	First(*L) = P;
+	NextBidak(P) = FirstBidak(*L);
+	FirstBidak(*L) = P;
 
 }
 void InsertAfter (List_Bidak *L, address_bidak P, address_bidak Prec)
@@ -188,8 +188,8 @@ void InsertAfter (List_Bidak *L, address_bidak P, address_bidak Prec)
 {
 	//P Inputan
 	//Prec tuh addr sebelum P nantinya 
-	Next(P) = Next(Prec);
-	Next(Prec) = P;
+	NextBidak(P) = NextBidak(Prec);
+	NextBidak(Prec) = P;
 
 }
 void InsertLast (List_Bidak *L, address_bidak P)
@@ -199,14 +199,14 @@ void InsertLast (List_Bidak *L, address_bidak P)
 	
 
 	if(IsEmpty(*L)){
-		Next(P) = Nil;
-		First(*L) = P;
+		NextBidak(P) = Nil;
+		FirstBidak(*L) = P;
 		
 	}else/*Traversal*/{
 		//Traversal sampe ujung gan, berhenti sebelum Nil
-		address_bidak Last = First(*L);
-		while(Next(Last)!=Nil){
-			Last = Next(Last);
+		address_bidak Last = FirstBidak(*L);
+		while(NextBidak(Last)!=Nil){
+			Last = NextBidak(Last);
 		}
 		InsertAfter(L,P,Last);
 	}
@@ -217,14 +217,14 @@ void DelFirst (List_Bidak *L, address_bidak *P)
 /* I.S. List_Bidak tidak kosong */
 /* F.S. P adalah alamat elemen pertama list sebelum penghapusan */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
-/* First element yg baru adalah suksesor elemen pertama yang lama */
+/* FirstBidak element yg baru adalah suksesor elemen pertama yang lama */
 {
-	(*P) = First(*L);
-	if(Next(First(*L))==Nil){ //cuman ada satu
+	(*P) = FirstBidak(*L);
+	if(NextBidak(FirstBidak(*L))==Nil){ //cuman ada satu
 		CreateEmpty(L);
 	}
 	else{
-		First(*L) = Next(First(*L));
+		FirstBidak(*L) = NextBidak(FirstBidak(*L));
 	}
 }
 void DelP (List_Bidak *L, infotypelb X)
@@ -234,21 +234,21 @@ void DelP (List_Bidak *L, infotypelb X)
 /* Jika tidak ada elemen list dengan InfoBidak(P)=X, maka list tetap */
 /* List_Bidak mungkin menjadi kosong karena penghapusan */
 {
-	address_bidak P = Search(*L, X); //P bakal jadi output
+	address_bidak P = SearchB(*L, X); //P bakal jadi output
 	if (P!=Nil){
-		address_bidak Prec = First(*L);
+		address_bidak Prec = FirstBidak(*L);
 
 		if (Prec==P)/*yang pertama*/{
 			DelFirst(L, &P);
 		}else/*cari sebelumnya*/{
-			while (Next(Prec)!=P){
-				Prec = Next(Prec);
+			while (NextBidak(Prec)!=P){
+				Prec = NextBidak(Prec);
 			}
 			DelAfter(L, &P, Prec);
 		}
 	}
 
-	Dealokasi(&P); //udah ketemu gan
+	DealokasiB(&P); //udah ketemu gan
 
 }
 void DelLast (List_Bidak *L, address_bidak *P)
@@ -258,20 +258,20 @@ void DelLast (List_Bidak *L, address_bidak *P)
 /* Last element baru adalah predesesor elemen terakhir yg lama, */
 {
 	address_bidak Last, PrecLast;
-	Last = First(*L);
+	Last = FirstBidak(*L);
 	PrecLast = Nil;
 
-	while(Next(Last)!=Nil){
+	while(NextBidak(Last)!=Nil){
 		//Traversal sampe ujung
 		PrecLast = Last;
-		Last = Next(Last);
+		Last = NextBidak(Last);
 	}
 
 	*P = Last;
 	if (PrecLast==Nil){
-		First(*L) = Nil;
+		FirstBidak(*L) = Nil;
 	}else{
-		Next(PrecLast) = Nil;
+		NextBidak(PrecLast) = Nil;
 		//jadinya preclast tuh element terakhir gan
 	}
 
@@ -279,12 +279,12 @@ void DelLast (List_Bidak *L, address_bidak *P)
 /* jika ada */
 void DelAfter (List_Bidak *L, address_bidak *Pdel, address_bidak Prec)
 /* I.S. List_Bidak tidak kosong. Prec adalah anggota list  */
-/* F.S. Menghapus Next(Prec): */
+/* F.S. Menghapus NextBidak(Prec): */
 /*      Pdel adalah alamat elemen list yang dihapus  */
 {
-	*Pdel = Next(Prec);
+	*Pdel = NextBidak(Prec);
 	if (*Pdel != Nil)
-		Next(Prec) = Next(Next(Prec));
+		NextBidak(Prec) = NextBidak(NextBidak(Prec));
 }
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
@@ -297,11 +297,11 @@ void PrintInfo (List_Bidak L)
 {
 	printf("[");
 	if (!IsEmpty(L)){
-		address_bidak P = First(L);
+		address_bidak P = FirstBidak(L);
 
 		do{
 			printf("%d", InfoBidak(P));
-			P = Next(P);
+			P = NextBidak(P);
 
 			if (P!=Nil){
 				printf(",");
@@ -317,11 +317,11 @@ void PrintInfo (List_Bidak L)
 int NbElmt (List_Bidak L)
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 {
-	address_bidak P = First(L);
+	address_bidak P = FirstBidak(L);
 	int count = 0;
 	while(P!=Nil){
 		count +=1 ;
-		P = Next(P);
+		P = NextBidak(P);
 	}
 	return count;
 }
@@ -329,7 +329,7 @@ int NbElmt (List_Bidak L)
 // /*** Prekondisi untuk Max/Min/rata-rata : List_Bidak tidak kosong ***/
 // infotypelb Max (List_Bidak L)
 // /* Mengirimkan nilai InfoBidak(P) yang maksimum */{
-// 	address_bidak P = First(L);
+// 	address_bidak P = FirstBidak(L);
 // 	infotypelb Max = InfoBidak(P);
 
 // 	while(P!=Nil){
@@ -337,7 +337,7 @@ int NbElmt (List_Bidak L)
 // 			Max = InfoBidak(P);
 // 		}
 
-// 		P = Next(P);
+// 		P = NextBidak(P);
 // 	}
 
 // 	return Max;
@@ -346,15 +346,15 @@ int NbElmt (List_Bidak L)
 // address_bidak AdrMax (List_Bidak L)
 // /* Mengirimkan address_bidak P, dengan info(P) yang bernilai maksimum */
 // {
-// 	address_bidak P = First(L);
-// 	address_bidak Max = First(L);
+// 	address_bidak P = FirstBidak(L);
+// 	address_bidak Max = FirstBidak(L);
 
 // 	while(P!=Nil){
 // 		if(InfoBidak(P)>InfoBidak(Max)){
 // 			Max = P;
 // 		}
 
-// 		P = Next(P);
+// 		P = NextBidak(P);
 // 	}
 
 // 	return Max;
@@ -362,7 +362,7 @@ int NbElmt (List_Bidak L)
 // infotypelb Min (List_Bidak L)
 // /* Mengirimkan nilai info(P) yang minimum */
 // {
-// 	address_bidak P = First(L);
+// 	address_bidak P = FirstBidak(L);
 // 	infotypelb Min = InfoBidak(P);
 
 // 	while(P!=Nil){
@@ -370,7 +370,7 @@ int NbElmt (List_Bidak L)
 // 			Min = InfoBidak(P);
 // 		}
 
-// 		P = Next(P);
+// 		P = NextBidak(P);
 // 	}
 
 // 	return Min;
@@ -379,15 +379,15 @@ int NbElmt (List_Bidak L)
 // address_bidak AdrMin (List_Bidak L)
 // /* Mengirimkan address_bidak P, dengan info(P) yang bernilai minimum */
 // {
-// 	address_bidak P = First(L);
-// 	address_bidak Min = First(L);
+// 	address_bidak P = FirstBidak(L);
+// 	address_bidak Min = FirstBidak(L);
 
 // 	while(P!=Nil){
 // 		if(InfoBidak(P)<InfoBidak(Min)){
 // 			Min = P;
 // 		}
 
-// 		P = Next(P);
+// 		P = NextBidak(P);
 // 	}
 
 // 	return Min;
@@ -398,11 +398,11 @@ int NbElmt (List_Bidak L)
 // {
 // 	int nb = NbElmt(L);
 // 	int jml = 0;
-// 	address_bidak P  = First(L);
+// 	address_bidak P  = FirstBidak(L);
 
 // 	while(P!=Nil){
 // 		jml += InfoBidak(P);
-// 		P = Next(P);
+// 		P = NextBidak(P);
 // 	}
 
 // 	float rat = (float) jml / (float) nb;
@@ -419,31 +419,31 @@ void InversList (List_Bidak *L)
 {
 
 	// address_bidak prev = Nil;
-	// address_bidak curr = First(*L);
+	// address_bidak curr = FirstBidak(*L);
 	// address_bidak next = Nil;
 
 	// while(curr != Nil){
-	// 	next = Next(curr);
-	// 	Next(curr) = prev;
+	// 	next = NextBidak(curr);
+	// 	NextBidak(curr) = prev;
 
 	// 	prev = curr;
 	// 	curr = next;
 	// }
 
 	address_bidak P,Q;
-	address_bidak First = First(*L);
+	address_bidak FirstBidak = FirstBidak(*L);
 
-	P = First(*L);
-	Q = Next(P);
+	P = FirstBidak(*L);
+	Q = NextBidak(P);
 
 	while(Q != Nil){
 
 		P = Q;
-		Q = Next(Q);
+		Q = NextBidak(Q);
 
 		P;
 		InsertFirst(L, P);
-		Next(First) = Q;
+		NextBidak(FirstBidak) = Q;
 	}
 
 }
@@ -458,18 +458,18 @@ void Konkat1 (List_Bidak *L1, List_Bidak *L2, List_Bidak *L3)
 	CreateEmpty(L3);
 
     if (!(IsEmpty(*L1))){
-        First(*L3) = First(*L1);
+        FirstBidak(*L3) = FirstBidak(*L1);
 
-        address_bidak last1 = First(*L1);
+        address_bidak last1 = FirstBidak(*L1);
 
-        while(Next(last1) != Nil) {
-            last1 = Next(last1);
+        while(NextBidak(last1) != Nil) {
+            last1 = NextBidak(last1);
         }
 
-        Next(last1) = First(*L2);
+        NextBidak(last1) = FirstBidak(*L2);
     }
     else{
-        First(*L3) = First(*L2);
+        FirstBidak(*L3) = FirstBidak(*L2);
     }
 
 
