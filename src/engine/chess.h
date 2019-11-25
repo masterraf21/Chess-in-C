@@ -63,6 +63,12 @@ typedef struct{
     PAWN_TYPE type;
 }LIST_ID;
 
+//buat queue
+typedef struct{
+  LIST_ID id;
+  BOARD_INDEX posisi;
+}MOVE_ID;
+
 //struct ini dipake buat nanti di linked list, bisa buat generate move juga
 typedef struct{
     LIST_ID id;
@@ -79,6 +85,7 @@ typedef struct {
     boolean is_makan;
     BIDAK victim;
 }MOVE;
+
 
 /* Elemen move bakal ngeupdate linked list setelah ngeupdate stack */
 
