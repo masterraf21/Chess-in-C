@@ -57,7 +57,7 @@ address Search (List_Bidak L, infotype X);
 /* Mencari apakah ada elemen List_Bidak dengan info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
-address SearchId (List_Bidak L, List_ID X);
+address SearchId (List_Bidak L, LIST_ID X);
 /* Buat cari id tertentu gan */
 address SearchCustom(List_Bidak L, BOARD_INDEX idx, BOARD_TILE type);
 

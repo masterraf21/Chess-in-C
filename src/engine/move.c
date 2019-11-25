@@ -844,25 +844,25 @@ void GenKing(BOARD B, BIDAK K, List_Move *L){
 //Implementation of search custom 
 BIDAK SearchMakan(BOARD_INDEX idx, BOARD_TILE type, BOARD B, COLOR SelfColor){
     
+    List_Bidak LPutih = (*B).LPutih;
+    List_Bidak LHitam = (*B).LHitam;
+
     //ambil list bidak lawan
     if (SelfColor==WHITE){
-        List_Bidak LMusuh;
-        LMusuh = B.LHitam;
+        address P = SearchCustom(LHitam,idx,type); 
     }else{
-        List_Bidak LMusuh;
-        LMusuh = B.LPutih;
+        address P = SearchCustom(LPutih,idx,type);
     }
 
-    address P = SearchCustom(LMusuh,idx,type);
     BIDAK B = Info(P);
 
     return B;
 }
 void AddMove(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index){
     MOVE M;
+    M.warna = Mover.warna;
     M.cur_position = Mover.posisi;
-    M.id.type = Mover.id.type;
-    M.id.number = Mover.id.number;
+    M.id = Mover.id;
     M.new_position = Target_Index;
     M.is_makan = false;
 
@@ -872,8 +872,8 @@ void AddMove(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index){
 void AddMakan(BOARD B, List_Move *L, BIDAK Mover, BOARD_INDEX VictimIdx, BOARD_TILE VictimTile){
     MOVE M;
     M.cur_position = Mover.posisi;
-    M.id.type = Mover.id.type;
-    M.id.number = Mover.id.number;
+    M.warna = Mover.warna;
+    M.id = Mover.id;
     M.new_position = VictimIdx;
     M.is_makan = true;
 

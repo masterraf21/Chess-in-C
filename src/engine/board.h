@@ -20,9 +20,12 @@ typedef struct {
 #define SetBoard(B,X) Tab(B).TI[X]
 
 /****HELPER FUNCTION USING STACK***/
+void SwapTile(BOARD *B, BOARD_INDEX x, BOARD_INDEX y);
+void MakanTile(BOARD *B, BOARD_INDEX mangsa, BOARD_INDEX korban)
 void UpdateStack(Stack *S, MOVE M);
 void UpdateList(List_Bidak *L, MOVE M);
-void UpdateBoard(BOARD *B, List_Bidak L, COLOR C);
+void UpdateMakan(List_Bidak *LEnemy, MOVE M)
+void UpdateBoard(BOARD *B, MOVE M);
 
 
 

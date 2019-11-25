@@ -86,6 +86,7 @@ typedef LIST_ID ELMT_QUEUE;
 
 typedef struct {
     LIST_ID id;
+    COLOR warna;
     BOARD_INDEX cur_position;
     BOARD_INDEX new_position;
     boolean is_makan;

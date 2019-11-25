@@ -3,13 +3,56 @@
 
 
 /****HELPER FUNCTION USING STACK***/
+void SwapTile(BOARD *B, BOARD_INDEX curpos, BOARD_INDEX newpos){
+    BOARD TILE tmp = SetBoard(*B, curpos);
+    SetBoard(*B, curpos) = SetBoard(*B, newpos);
+    SetBoard(*B, newpos) = tmp;
+}
+void MakanTile(BOARD *B, BOARD_INDEX prey, BOARD_INDEX victim){
+    BOARD TILE tmp = SetBoard(*B, prey);
+    SetBoard(*B, victim) = tmp;
+    SetBoard(*B, prey) = EMPTY_SQUARE;
+}
 void UpdateStack(Stack *S, MOVE M){
-
+    Push(S, M);
 }
-void UpdateList(List_Bidak *L, MOVE M){
-
+void UpdateList(List_Bidak *LSelf, MOVE M){
+    LIST_ID id = M.id;
+    address P = SearchId(*LSelf, id);
+    Info(P).posisi = M.new_position;
 }
-void UpdateBoard(BOARD *B, List_Bidak L, COLOR C){
+void UpdateMakan(List_Bidak *LEnemy, MOVE M){
+    BIDAK Victim = M.victim;
+    //Karena dia dimakan jadi di dealokasiin dari list musuh
+    DelP(LEnemy, Victim);
+}
+void UpdateBoard(BOARD *B, MOVE M){
+    List_Bidak LPutih = (*B).LPutih;
+    List_Bidak LHitam = (*B).LHitam;
+    //Yang ga makan dulu
+    if (!M.is_makan){
+
+        if (M.warna==WHITE)
+            UpdateList(&LPutih, M);
+        else/*Black*/
+            UpdateList(&LHitam, M);
+        
+        //Karna ga makan, kita cuman swap nilai di cur pos
+        //sama new pos di board
+
+        SwapTile(B, M.cur_position, M.new_position);
+
+    }else{
+        if (M.warna==WHITE){
+            UpdateList(&LPutih, M);
+            UpdateMakan(&LHitam, M);
+        }else{
+            UpdateList(&LHitam, M);
+            UpdateMakan(&LPutih, M); 
+        }
+        MakanTile(B, M.cur_position, M.new_position);
+    }
+    
 
 }
 

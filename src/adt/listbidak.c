@@ -73,7 +73,7 @@ address Search (List_Bidak L, infotype X)
 	return P_nil;
 }
 
-address SearchId (List_Bidak L, PAWN_TYPE X){
+address SearchId (List_Bidak L, List_ID X){
 	address P_nil = Nil;
 	address P_next = First(L);
 	boolean found = false;
@@ -84,7 +84,7 @@ address SearchId (List_Bidak L, PAWN_TYPE X){
 	if(!IsEmpty(L)){
 		//cek dulu elemen pertama apapun isinya
 		do{
-			if(Info(P_next).id.type==X){
+			if(Info(P_next).id==X){
 				P_nil = P_next;
 				found = true;
 			}else{
