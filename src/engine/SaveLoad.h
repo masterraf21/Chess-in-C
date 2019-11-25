@@ -3,7 +3,7 @@
 
 // #include "chess.h
 #include "chess.h"
-#include "mesin_kata"
+#include "../adt/mesin_kata.h"
 
 COLOR getcolor (char c){
 

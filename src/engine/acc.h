@@ -9,8 +9,8 @@ void Menu();
 
 void keluar();
 
-void RunNewGame(Leaderboard *B);
+void RunNewGame(LeaderBoard *B);
 
-void RunSavedGame(Leaderboard *B);
+void RunSavedGame(LeaderBoard *B);
 
 #endif

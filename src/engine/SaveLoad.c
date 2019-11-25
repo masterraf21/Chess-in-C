@@ -1,5 +1,6 @@
 #include "SaveLoad.h"
-#include "listbidak.h"
+#include "../adt/listbidak.h"
+#include "../adt/queuegiliran.h"
 #include <stdio.h>
 
 COLOR getcolor (char c){
@@ -10,7 +11,7 @@ COLOR getcolor (char c){
     }
 }
 
-void ReadFile(List *W,*B,Queue *Q){
+void ReadFile(List_Bidak *W, List_Bidak *B,Queue_Giliran *Q){
      /* 
      NOTE : BELUM MEMPERTIMBANGKAN GILIRAN QUEUE    
     Bidak -> List_ID, Posisi, Warna
@@ -33,7 +34,7 @@ void ReadFile(List *W,*B,Queue *Q){
     char* Namfile;
     BIDAK tempB;
     LIST_ID tempL;
-    QueueElmt tempQ;
+    infotypeturn tempQ;
     printf("Masukkan nama save file : ");
     scanf("%s",Namfile);
     STARTKATA(Namfile);
@@ -53,17 +54,17 @@ void ReadFile(List *W,*B,Queue *Q){
         }
         ADVKATA();
         for(int i =1;i<= 1;i++){
-            tempQ.warna = CKata.TabKata[0];
-            tempQ.count = counttoint(CKata);
+            tempQ.player = CKata.TabKata[0];
+            tempQ.counter = counttoint(CKata);
             ADVKATA();
-            tempQ.Nilai = strtoint(CKata);
-            Add(tempQ,Q);
+            tempQ.poin = strtoint(CKata);
+            Add(Q,tempQ);
             ADVKATA();
         }  
     }   
 }
 
-void SaveFile(List_Bidak W,B){
+void SaveFile(List_Bidak W, List_Bidak B){
     /* 
     reverse engineer ReadFile
     per bidak diseparate semicolon(;)
@@ -72,21 +73,21 @@ void SaveFile(List_Bidak W,B){
     char *Namfile;
     FILE *catur;
     address P;
-    BIDAK B;
+    BIDAK BD;
     printf("Masukkan nama save file : ");
     scanf("%s",Namfile);
     catur = fopen(Namfile,"w");
     P = First(W);
     while (P != Nil){
-        B = Info(P)
-        fprintf(catur,"%d%d%dP;",B.id.number,B.id.type,B.posisi);
+        BD = Info(P);
+        fprintf(catur,"%d%d%dP;",BD.id.number,BD.id.type,BD.posisi);
         P = Next(P);
     }
     fprintf(catur,"\n");
     P = First(B);
     while (P != Nil){
-        B = Info(P)
-        fprintf(catur,"%d%d%dH;",B.id.number,B.id.type,B.posisi);
+        BD = Info(P);
+        fprintf(catur,"%d%d%dH;",BD.id.number,BD.id.type,BD.posisi);
         P = Next(P);
     }
     fprintf(catur,"\n|\n");

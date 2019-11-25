@@ -1,5 +1,5 @@
 #include "acc.h"
-// #include all file
+#include "leader.h"
 #include <stdio.h>
 
 
@@ -23,11 +23,11 @@ void keluar(){
         printf("Sampai Jumpa !\n");
 }
 
-void RunNewGame(Leaderboard *B){
+void RunNewGame(LeaderBoard *B){
 // -> prosedur mulai game baru, leaderboard digunakan untuk menambah score jika game selesai
 
 }
 
-void RunSavedGame(Leaderboard *B){
+void RunSavedGame(LeaderBoard *B){
 // -> prosedur mulai game dari saveffie, read savefile dulu baru ngejalanin game  
 }

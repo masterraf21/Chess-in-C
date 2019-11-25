@@ -1,14 +1,9 @@
 
+// for adt
+#include "../adt/boolean.h"
 
-/*
-void Welcome() -> print welcome
-void Menu() -> print menu 
-void keluar() -> display exit message
-
-void RunNewGame(Leaderboard *B) -> prosedur mulai game baru, leaderboard digunakan untuk menambah score jika game selesai
-void RunSavedGame(Leaderboard *B) -> prosedur mulai game dari saveffie, read savefile dulu baru ngejalanin game  
-*/
-
+// for engine
+#include "leader.h"
 int main(){
     int pil;
     LeaderBoard B;
