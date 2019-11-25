@@ -1,6 +1,6 @@
 /* File : List_Bidakbidak.h */
 /* contoh ADT List_Bidak berkait dengan representasi fisik pointer  */
-/* Representasi address dengan pointer */
+/* Representasi address_bidak dengan pointer */
 /* infotype adalah integer */
 /* ini isinya buat linked List_Bidak isi bidak*/
 #ifndef List_bidak_H
@@ -12,21 +12,21 @@
 #define Nil NULL
 
 typedef BIDAK infotype;
-typedef struct tElmtList_Bidak *address;
-typedef struct tElmtList_Bidak { 
+typedef struct tElmtList *address_bidak;
+typedef struct tElmtList { 
 	infotype info;
-	address next;
-} ElmtList_Bidak;
+	address_bidak next;
+} ElmtList;
 
 typedef struct {
-	address First;
+	address_bidak First;
 } List_Bidak;
 
 
 /* Definisi List_Bidak : */
 /* List_Bidak kosong : First(L) = Nil */
-/* Setiap elemen dengan address P dapat diacu Info(P), Next(P) */
-/* Elemen terakhir List_Bidak : jika addressnya Last, maka Next(Last)=Nil */
+/* Setiap elemen dengan address_bidak P dapat diacu Info(P), Next(P) */
+/* Elemen terakhir List_Bidak : jika address_bidaknya Last, maka Next(Last)=Nil */
 #define Info(P) (P)->info
 #define Next(P) (P)->next
 #define First(L) ((L).First)
@@ -42,24 +42,24 @@ void CreateEmpty (List_Bidak *L);
 /* F.S. Terbentuk List_Bidak kosong */
 
 /****************** Manajemen Memori ******************/
-address Alokasi (infotype X);
-/* Mengirimkan address hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
+address_bidak Alokasi (infotype X);
+/* Mengirimkan address_bidak hasil alokasi sebuah elemen */
+/* Jika alokasi berhasil, maka address_bidak tidak nil, dan misalnya */
 /* menghasilkan P, maka info(P)=X, Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
-void Dealokasi (address *P);
+void Dealokasi (address_bidak *P);
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
-/* Melakukan dealokasi/pengembalian address P */
+/* Melakukan dealokasi/pengembalian address_bidak P */
 
 /****************** PENCARIAN SEBUAH ELEMEN List_Bidak ******************/
-address Search (List_Bidak L, infotype X);
+address_bidak Search (List_Bidak L, infotype X);
 /* Mencari apakah ada elemen List_Bidak dengan info(P)= X */
-/* Jika ada, mengirimkan address elemen tersebut. */
+/* Jika ada, mengirimkan address_bidak elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
-address SearchId (List_Bidak L, LIST_ID X);
+address_bidak SearchId (List_Bidak L, LIST_ID X);
 /* Buat cari id tertentu gan */
-address SearchCustom(List_Bidak L, BOARD_INDEX idx, BOARD_TILE type);
+address_bidak SearchCustom(List_Bidak L, BOARD_INDEX idx, BOARD_TILE type);
 
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
@@ -86,36 +86,36 @@ void DelVLast (List_Bidak *L, infotype *X);
 
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
-void InsertFirst (List_Bidak *L, address P);
+void InsertFirst (List_Bidak *L, address_bidak P);
 /* I.S. Sembarang, P sudah dialokasi  */
-/* F.S. Menambahkan elemen ber-address P sebagai elemen pertama */
-void InsertAfter (List_Bidak *L, address P, address Prec);
+/* F.S. Menambahkan elemen ber-address_bidak P sebagai elemen pertama */
+void InsertAfter (List_Bidak *L, address_bidak P, address_bidak Prec);
 /* I.S. Prec pastilah elemen List_Bidak dan bukan elemen terakhir, */
 /*      P sudah dialokasi  */
 /* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
-void InsertLast (List_Bidak *L, address P);
+void InsertLast (List_Bidak *L, address_bidak P);
 /* I.S. Sembarang, P sudah dialokasi  */
 /* F.S. P ditambahkan sebagai elemen terakhir yang baru */
 
 /*** PENGHAPUSAN SEBUAH ELEMEN ***/
-void DelFirst (List_Bidak *L, address *P);
+void DelFirst (List_Bidak *L, address_bidak *P);
 /* I.S. List_Bidak tidak kosong */
 /* F.S. P adalah alamat elemen pertama List_Bidak sebelum penghapusan */
 /*      Elemen List_Bidak berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
 void DelP (List_Bidak *L, infotype X);
 /* I.S. Sembarang */
-/* F.S. Jika ada elemen List_Bidak beraddress P, dengan info(P)=X  */
+/* F.S. Jika ada elemen List_Bidak beraddress_bidak P, dengan info(P)=X  */
 /* Maka P dihapus dari List_Bidak dan di-dealokasi */
 /* Jika tidak ada elemen List_Bidak dengan info(P)=X, maka List_Bidak tetap */
 /* List_Bidak mungkin menjadi kosong karena penghapusan */
-void DelLast (List_Bidak *L, address *P);
+void DelLast (List_Bidak *L, address_bidak *P);
 /* I.S. List_Bidak tidak kosong */
 /* F.S. P adalah alamat elemen terakhir List_Bidak sebelum penghapusan  */
 /*      Elemen List_Bidak berkurang satu (mungkin menjadi kosong) */
 /* Last element baru adalah predesesor elemen terakhir yg lama, */
 /* jika ada */
-void DelAfter (List_Bidak *L, address *Pdel, address Prec);
+void DelAfter (List_Bidak *L, address_bidak *Pdel, address_bidak Prec);
 /* I.S. List_Bidak tidak kosong. Prec adalah anggota List_Bidak  */
 /* F.S. Menghapus Next(Prec): */
 /*      Pdel adalah alamat elemen List_Bidak yang dihapus  */
@@ -133,12 +133,12 @@ int NbElmt (List_Bidak L);
 /*** Prekondisi untuk Max/Min/rata-rata : List_Bidak tidak kosong ***/
 infotype Max (List_Bidak L);
 /* Mengirimkan nilai info(P) yang maksimum */
-address AdrMax (List_Bidak L);
-/* Mengirimkan address P, dengan info(P) yang bernilai maksimum */
+address_bidak AdrMax (List_Bidak L);
+/* Mengirimkan address_bidak P, dengan info(P) yang bernilai maksimum */
 infotype Min (List_Bidak L);
 /* Mengirimkan nilai info(P) yang minimum */
-address AdrMin (List_Bidak L);
-/* Mengirimkan address P, dengan info(P) yang bernilai minimum */
+address_bidak AdrMin (List_Bidak L);
+/* Mengirimkan address_bidak P, dengan info(P) yang bernilai minimum */
 float Average (List_Bidak L);
 /* Mengirimkan nilai rata-rata info(P) */
 

@@ -2,7 +2,6 @@
 #include "move.h"
 
 /**** HELPER FUNCTION *****/
-BOARD_INDEX Neighbor(BIDAK B);
 BOARD_INDEX Up(BIDAK B){
     return B.posisi+10;
 }
@@ -161,16 +160,68 @@ boolean IsDownKosong(BOARD B, BIDAK P){
     return (SetBoard(B, Down(P))==EMPTY_SQUARE);
 }
 
-/***** MAIN FUNCTION *****/
+/***** SEARCH FUNCTION ******/
+boolean IsNeighbor(BOARD B, BIDAK Bi){
+    BOARD_TILE up,down,left,right,skat,skab,skit,skib;
+    up=SetBoard(B,Up(Bi));down=SetBoard(B,Down(Bi));left=SetBoard(B,Left(Bi));right=SetBoard(B,Right(Bi));
+    skat=SetBoard(B,SerongKananAtas(Bi));skab=SetBoard(B,SerongKananBawah(Bi));
+    skit=SetBoard(B,SerongKiriAtas(Bi));skib=SetBoard(B,SerongKiriBawah(Bi));
 
+    if((Bi.id.type==KING)||(Bi.id.type==QUEEN)){
+        return ((up==EMPTY_SQUARE)||(Enemy(Bi,up))||(down==EMPTY_SQUARE)||(Enemy(Bi,down))
+        ||(left==EMPTY_SQUARE)||(Enemy(Bi,left))||(right==EMPTY_SQUARE)||(Enemy(Bi,right))
+        ||(skat==EMPTY_SQUARE)||(Enemy(Bi,skat))||(skab==EMPTY_SQUARE)||(Enemy(Bi,skab))
+        ||(skit==EMPTY_SQUARE)||(Enemy(Bi,skit))||(skib==EMPTY_SQUARE)||(Enemy(Bi,skib)));
+    }else if(Bi.id.type==ROOK){
+        return ((up==EMPTY_SQUARE)||(Enemy(Bi,up))||(down==EMPTY_SQUARE)||(Enemy(Bi,down))
+        ||(left==EMPTY_SQUARE)||(Enemy(Bi,left))||(right==EMPTY_SQUARE)||(Enemy(Bi,right)));
+    }else if((Bi.id.type==PAWN)&&(Bi.warna==WHITE)){
+        return (up==EMPTY_SQUARE)||(Enemy(Bi,skat))||(Enemy(Bi,skit));
+    }
+    else if ((Bi.id.type==PAWN)&&(Bi.warna==BLACK)){
+        return (down==EMPTY_SQUARE)||(Enemy(Bi,skab))||(Enemy(Bi,skib));
+    }else/*BISHOP*/{
+        ((skat==EMPTY_SQUARE)||(Enemy(Bi,skat))||(skab==EMPTY_SQUARE)||(Enemy(Bi,skab))
+        ||(skit==EMPTY_SQUARE)||(Enemy(Bi,skit))||(skib==EMPTY_SQUARE)||(Enemy(Bi,skib)));
+    }
+}
+
+boolean IsNeighborKnight(BOARD B, BIDAK Bi){
+    BOARD_TILE k1,k2,k3,k4,k5,k6,k7,k8;
+    k1=SetBoard(B, Knight1(Bi));k1=SetBoard(B, Knight2(Bi));k1=SetBoard(B, Knight3(Bi));k1=SetBoard(B, Knight4(Bi));
+    k1=SetBoard(B, Knight5(Bi));k1=SetBoard(B, Knight6(Bi));k1=SetBoard(B, Knight7(Bi));k1=SetBoard(B, Knight8(Bi));
+
+    return ((k1==EMPTY_SQUARE)||(Enemy(Bi,k1))||(k2==EMPTY_SQUARE)||(Enemy(Bi,k2))||(k3==EMPTY_SQUARE)||(Enemy(Bi,k3))
+    ||(k4==EMPTY_SQUARE)||(Enemy(Bi,k4))||(k5==EMPTY_SQUARE)||(Enemy(Bi,k5))||(k6==EMPTY_SQUARE)||(Enemy(Bi,k6))
+    ||(k7==EMPTY_SQUARE)||(Enemy(Bi,k7))||(k8==EMPTY_SQUARE)||(Enemy(Bi,k8)));
+}
+
+/***** MAIN FUNCTION *****/
 //dipake buat nampilin mana aja yang bisa gerak
 //pake queue biar enak ngeluarinnya
-Queue_Move AvailableMove(List_Bidak B){
+Queue_Move AvailableMove(BOARD B, List_Bidak L){
     //siapin Output bray
     Queue_Move Q;
     CreateEmpty(&Q);
+    //Iterate inside the list
+    BIDAK Bi;
+    address_bidak P = First(L);
+    while(P!=Nil){
+        Bi = Info(P);
+        if(Bi.id.type==KNIGHT){
+            if(IsNeighborKnight(B,Bi)){
+                Add(&Q,Bi.id);
+            }
+        }else/*selain knight*/{
+            if(IsNeighbor(B,Bi)){
+                Add(&Q, Bi.id);
+            }
+        }
+        P = Next(P);
+    }
 
 
+    return Q;
 }
 List_Move GenerateMove(BIDAK B, BOARD BO){
     List_Move L;
@@ -197,57 +248,57 @@ List_Move GenerateMove(BIDAK B, BOARD BO){
     return L;
 }
 
-//helper functions
-boolean IsMoveLegal(MOVE M);
-BOARD_INDEX GetKingPos(List_Bidak B){
-    address P = SearchId(B, KING);
-    if(P!=Nil)
-        return Info(P).id.type;
+//ray checking kayaknya gaakan diimplement
+// boolean IsMoveLegal(MOVE M);
+// BOARD_INDEX GetKingPos(List_Bidak B){
+//     address P = SearchId(B, KING);
+//     if(P!=Nil)
+//         return Info(P).id.type;
 
-}
-boolean IsKingCheck(BIDAK B, BOARD_INDEX KingPos, int *ray){
+// }
+// boolean IsKingCheck(BIDAK B, BOARD_INDEX KingPos, int *ray){
 
-}
-boolean IsKingSafe(BOARD_INDEX KingPos, int *ray, int *dummyboard){
+// }
+// boolean IsKingSafe(BOARD_INDEX KingPos, int *ray, int *dummyboard){
 
-}
-int * CreateDummyBoard(BOARD B){
-    int dummy[64];
-    DUMMY_INDEX j = A1x;
-    for (BOARD_INDEX i = A1; i <= H8; i++)
-    {
-        dummy[j] = SetBoard(B, i);
-        j++;        
-    }
+// }
+// int * CreateDummyBoard(BOARD B){
+//     int dummy[64];
+//     DUMMY_INDEX j = A1x;
+//     for (BOARD_INDEX i = A1; i <= H8; i++)
+//     {
+//         dummy[j] = SetBoard(B, i);
+//         j++;        
+//     }
 
-    return dummy;
-}
-void DummytoRay(int *dummy, int **ray, DUMMY_INDEX i){
+//     return dummy;
+// }
+// void DummytoRay(int *dummy, int **ray, DUMMY_INDEX i){
     
 
-}
-int * CreateRay(BOARD B){
-    enum PawnBlack {KingB=-6,QueenB,RookB,BishopB,KnightB,PawnB};
-    enum PawnWhite {PawnW=1,KnightW,BishopW,RookW,QueenW,KingW};
+// }
+// int * CreateRay(BOARD B){
+//     enum PawnBlack {KingB=-6,QueenB,RookB,BishopB,KnightB,PawnB};
+//     enum PawnWhite {PawnW=1,KnightW,BishopW,RookW,QueenW,KingW};
 
-    int dummy[64] = CreateDummyBoard(B);
-    int ray[64];
-    //init the ray with 0s
-    for (DUMMY_INDEX i = A1x; i <= H8x; i++)
-    {
-        ray[i] = 0;
-    }
+//     int dummy[64] = CreateDummyBoard(B);
+//     int ray[64];
+//     //init the ray with 0s
+//     for (DUMMY_INDEX i = A1x; i <= H8x; i++)
+//     {
+//         ray[i] = 0;
+//     }
     
-    for (DUMMY_INDEX i = A1x; i <= H8x; i++){
+//     for (DUMMY_INDEX i = A1x; i <= H8x; i++){
 
 
 
 
-    }
-}
-int * CheckRay(BOARD B, COLOR C){
+//     }
+// }
+// int * CheckRay(BOARD B, COLOR C){
 
-}
+// }
 
 //Move generator perbidak
 
@@ -874,9 +925,9 @@ BIDAK SearchMakan(BOARD_INDEX idx, BOARD_TILE type, BOARD B, COLOR SelfColor){
 
     //ambil list bidak lawan
     if (SelfColor==WHITE){
-        address P = SearchCustom(LHitam,idx,type); 
+        address_bidak P = SearchCustom(LHitam,idx,type); 
     }else{
-        address P = SearchCustom(LPutih,idx,type);
+        address_bidak P = SearchCustom(LPutih,idx,type);
     }
 
     BIDAK B = Info(P);
