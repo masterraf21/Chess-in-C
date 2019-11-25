@@ -32,8 +32,8 @@ typedef struct {
 /* Selektor */
 #define HeadT(Q) (Q).HEADT
 #define TailT(Q) (Q).TAILT
-#define InfoHeadT(Q) (Q).HEAD->InfoT
-#define InfoTailT(Q) (Q).TAIL->InfoT
+#define InfoHeadT(Q) (Q).HEADT->InfoT
+#define InfoTailT(Q) (Q).TAILT->InfoT
 #define NextT(P) (P)->NextT
 #define InfoT(P) (P)->InfoT
 
