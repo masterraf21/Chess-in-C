@@ -3,13 +3,16 @@
 
 // #include "chess.h
 #include "chess.h"
+#include "../adt/listbidak.h"
+#include "../adt/queuegiliran.h"
 #include "../adt/mesin_kata.h"
+char AmbilWarna(COLOR c);
 
-COLOR getcolor (char c){
+COLOR getcolor (char c);
 
-void ReadFile(List *W,List *B);
+void ReadFile(List_Bidak *W, List_Bidak *B,Queue_Giliran *Q);
 	
-void SaveFile(List W,B);
+void SaveFile(List_Bidak W, List_Bidak B, Queue_Giliran Q);
 			 	
 
 #endif
