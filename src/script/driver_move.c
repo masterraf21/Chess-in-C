@@ -41,11 +41,7 @@ int main(){
     BOARD B;
      //init board dulu slurr
     init_board(&B);
-    //init masing masing list;
-    InitListBidak(&B.LHitam, BLACK);
-    InitListBidak(&B.LPutih, WHITE);
     //Let's simulate something to generate move
-
     //Init stack lur
     Stack S;
     CreateEmptyStack(&S);
