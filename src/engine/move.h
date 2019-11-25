@@ -7,7 +7,6 @@
 #include "../adt/listbidak.h"
 #include "../adt/queuemove.h"
 
-
 /**** HELPER FUNCTION *****/
 BOARD_INDEX Up(BIDAK B);
 BOARD_INDEX Up_i(BIDAK B, int i);

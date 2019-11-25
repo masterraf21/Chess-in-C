@@ -12,54 +12,52 @@
 /* Deklarasi infotype */
 typedef LIST_ID infotype;
 
-/* Queue dengan representasi berkait dengan pointer */
-typedef struct tElmtQueue * address;
-typedef struct tElmtQueue { 
+/* Queue_Move dengan representasi berkait dengan pointer */
+typedef struct tElmtQueueM * addressQ;
+typedef struct tElmtQueueM { 
   infotype Info;
-  address Next; 
+  addressQ Next; 
 } ElmtQueue; 
 
 /* Type queue dengan ciri HEAD dan TAIL : */
 typedef struct { 
-  address HEAD;  /* alamat penghapusan */
-  address TAIL;  /* alamat penambahan */
+  addressQ HEAD;  /* alamat penghapusan */
+  addressQ TAIL;  /* alamat penambahan */
 } Queue_Move;
-
-typedef Queue_Move Queue;
 
 /* Selektor */
 #define Head(Q) (Q).HEAD
 #define Tail(Q) (Q).TAIL
 #define InfoHead(Q) (Q).HEAD->Info
 #define InfoTail(Q) (Q).TAIL->Info
-#define Next(P) (P)->Next
-#define Info(P) (P)->Info
+#define NextQM(P) (P)->Next
+#define InfoQM(P) (P)->Info
 
 /* Prototype manajemen memori */
-void Alokasi (address *P, infotype X);
+void AlokasiQ (addressQ *P, infotype X);
 /* I.S. Sembarang */
 /* F.S. Alamat P dialokasi, jika berhasil maka Info(P)=X dan 
         Next(P)=Nil */
 /*      P=Nil jika alokasi gagal */
-void Dealokasi (address  P);
+void DealokasiQ (addressQ  P);
 /* I.S. P adalah hasil alokasi, P != Nil */
 /* F.S. Alamat P didealokasi, dikembalikan ke sistem */
-boolean IsEmpty (Queue Q);
+boolean IsEmptyQ (Queue_Move Q);
 /* Mengirim true jika Q kosong: HEAD(Q)=Nil and TAIL(Q)=Nil */
-int NbElmt(Queue Q);
+int NbElmtQ(Queue_Move Q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong */
 /*** Kreator ***/
-void CreateEmpty(Queue * Q);
+void CreateEmptyQ(Queue_Move * Q);
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk */
 /*** Primitif Add/Delete ***/
-void Add (Queue * Q, infotype X);
+void AddQ (Queue_Move * Q, infotype X);
 /* Proses: Mengalokasi X dan menambahkan X pada bagian TAIL dari Q
    jika alokasi berhasil; jika alokasi gagal Q tetap */
 /* Pada dasarnya adalah proses insert last */
 /* I.S. Q mungkin kosong */
 /* F.S. X menjadi TAIL, TAIL "maju" */
-void Del(Queue * Q, infotype * X);
+void DelQ(Queue_Move * Q, infotype * X);
 /* Proses: Menghapus X pada bagian HEAD dari Q dan mendealokasi
    elemen HEAD */
 /* Pada dasarnya operasi delete first */

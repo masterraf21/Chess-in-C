@@ -202,19 +202,19 @@ boolean IsNeighborKnight(BOARD B, BIDAK Bi){
 Queue_Move AvailableMove(BOARD B, List_Bidak L){
     //siapin Output bray
     Queue_Move Q;
-    CreateEmpty(&Q);
+    CreateEmptyQ(&Q);
     //Iterate inside the list
     BIDAK Bi;
     address_bidak P = First(L);
     while(P!=Nil){
-        Bi = Info(P);
+        Bi = InfoBidak(P);
         if(Bi.id.type==KNIGHT){
             if(IsNeighborKnight(B,Bi)){
-                Add(&Q,Bi.id);
+                AddQ(&Q,Bi.id);
             }
         }else/*selain knight*/{
             if(IsNeighbor(B,Bi)){
-                Add(&Q, Bi.id);
+                AddQ(&Q, Bi.id);
             }
         }
         P = Next(P);
@@ -225,7 +225,7 @@ Queue_Move AvailableMove(BOARD B, List_Bidak L){
 }
 List_Move GenerateMove(BIDAK B, BOARD BO){
     List_Move L;
-    CreateEmpty(&L);
+    CreateEmptyM(&L);
     
     if((B.id.type==PAWN)&&(B.warna==WHITE)){
         GenWPawn(BO, B, &L);
@@ -253,7 +253,7 @@ List_Move GenerateMove(BIDAK B, BOARD BO){
 // BOARD_INDEX GetKingPos(List_Bidak B){
 //     address P = SearchId(B, KING);
 //     if(P!=Nil)
-//         return Info(P).id.type;
+//         return InfoQM(P).id.type;
 
 // }
 // boolean IsKingCheck(BIDAK B, BOARD_INDEX KingPos, int *ray){
@@ -396,6 +396,7 @@ void GenBPawn(BOARD B, BIDAK BPawn, List_Move *L){
         if(Enemy(BPawn, TKiri)){
             AddMakan(B, L, BPawn, IdxKiri, TKiri);
         }
+    }
 }
 
 void GenRook(BOARD B, BIDAK R, List_Move *L){
@@ -583,9 +584,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
 
         BOARD_INDEX ki = Knight1(K);
         BOARD_TILE kn = SetBoard(B,ki);
-        if(Friend(K,kn)){
-            break;
-        }else if(Enemy(K,kn)){
+        if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
             AddMove(L, K, ki);
@@ -595,9 +594,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
         
         BOARD_INDEX ki = Knight2(K);
         BOARD_TILE kn = SetBoard(B,ki);
-        if(Friend(K,kn)){
-            break;
-        }else if(Enemy(K,kn)){
+        if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
             AddMove(L, K, ki);
@@ -607,9 +604,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
 
         BOARD_INDEX ki = Knight3(K);
         BOARD_TILE kn = SetBoard(B,ki);
-        if(Friend(K,kn)){
-            break;
-        }else if(Enemy(K,kn)){
+        if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
             AddMove(L, K, ki);
@@ -620,9 +615,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
 
         BOARD_INDEX ki = Knight4(K);
         BOARD_TILE kn = SetBoard(B,ki);
-        if(Friend(K,kn)){
-            break;
-        }else if(Enemy(K,kn)){
+        if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
             AddMove(L, K, ki);
@@ -633,9 +626,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
 
         BOARD_INDEX ki = Knight5(K);
         BOARD_TILE kn = SetBoard(B,ki);
-        if(Friend(K,kn)){
-            break;
-        }else if(Enemy(K,kn)){
+        if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
             AddMove(L, K, ki);
@@ -645,9 +636,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
 
         BOARD_INDEX ki = Knight6(K);
         BOARD_TILE kn = SetBoard(B,ki);
-        if(Friend(K,kn)){
-            break;
-        }else if(Enemy(K,kn)){
+        if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
             AddMove(L, K, ki);
@@ -658,9 +647,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
 
         BOARD_INDEX ki = Knight7(K);
         BOARD_TILE kn = SetBoard(B,ki);
-        if(Friend(K,kn)){
-            break;
-        }else if(Enemy(K,kn)){
+        if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
             AddMove(L, K, ki);
@@ -672,9 +659,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
 
         BOARD_INDEX ki = Knight8(K);
         BOARD_TILE kn = SetBoard(B,ki);
-        if(Friend(K,kn)){
-            break;
-        }else if(Enemy(K,kn)){
+        if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
         }else/*kosong*/{
             AddMove(L, K, ki);
@@ -825,9 +810,7 @@ void GenKing(BOARD B, BIDAK K, List_Move *L){
     if (SetBoard(B,Up(K))!=BAD_SQUARE){
         BOARD_INDEX ki = Up(K);
         BOARD_TILE kt = SetBoard(B,ki);
-        if(Friend(K,kt)){
-            break;
-        }else if(Enemy(K,kt)){
+        if(Enemy(K,kt)){
             AddMakan(B, L, K, ki, kt);
         }else{
             AddMove(L,K,ki);
@@ -836,9 +819,7 @@ void GenKing(BOARD B, BIDAK K, List_Move *L){
     if (SetBoard(B,Down(K))!=BAD_SQUARE){
         BOARD_INDEX ki = Down(K);
         BOARD_TILE kt = SetBoard(B,ki);
-        if(Friend(K,kt)){
-            break;
-        }else if(Enemy(K,kt)){
+        if(Enemy(K,kt)){
             AddMakan(B, L, K, ki, kt);
         }else{
             AddMove(L,K,ki);
@@ -848,9 +829,7 @@ void GenKing(BOARD B, BIDAK K, List_Move *L){
     if (SetBoard(B,Left(K))!=BAD_SQUARE){
         BOARD_INDEX ki = Left(K);
         BOARD_TILE kt = SetBoard(B,ki);
-        if(Friend(K,kt)){
-            break;
-        }else if(Enemy(K,kt)){
+        if(Enemy(K,kt)){
             AddMakan(B, L, K, ki, kt);
         }else{
             AddMove(L,K,ki);
@@ -860,9 +839,7 @@ void GenKing(BOARD B, BIDAK K, List_Move *L){
     if (SetBoard(B,Right(K))!=BAD_SQUARE){
         BOARD_INDEX ki = Right(K);
         BOARD_TILE kt = SetBoard(B,ki);
-        if(Friend(K,kt)){
-            break;
-        }else if(Enemy(K,kt)){
+        if(Enemy(K,kt)){
             AddMakan(B, L, K, ki, kt);
         }else{
             AddMove(L,K,ki);
@@ -871,9 +848,7 @@ void GenKing(BOARD B, BIDAK K, List_Move *L){
     if (SetBoard(B,SerongKananAtas(K))!=BAD_SQUARE){
         BOARD_INDEX ki = SerongKiriAtas(K);
         BOARD_TILE kt = SetBoard(B,ki);
-        if(Friend(K,kt)){
-            break;
-        }else if(Enemy(K,kt)){
+        if(Enemy(K,kt)){
             AddMakan(B, L, K, ki, kt);
         }else{
             AddMove(L,K,ki);
@@ -882,9 +857,7 @@ void GenKing(BOARD B, BIDAK K, List_Move *L){
     if (SetBoard(B,SerongKananBawah(K))!=BAD_SQUARE){
         BOARD_INDEX ki = SerongKananBawah(K);
         BOARD_TILE kt = SetBoard(B,ki);
-        if(Friend(K,kt)){
-            break;
-        }else if(Enemy(K,kt)){
+        if(Enemy(K,kt)){
             AddMakan(B, L, K, ki, kt);
         }else{
             AddMove(L,K,ki);
@@ -893,9 +866,7 @@ void GenKing(BOARD B, BIDAK K, List_Move *L){
     if (SetBoard(B,SerongKiriAtas(K))!=BAD_SQUARE){
         BOARD_INDEX ki = SerongKiriAtas(K);
         BOARD_TILE kt = SetBoard(B,ki);
-        if(Friend(K,kt)){
-            break;
-        }else if(Enemy(K,kt)){
+        if(Enemy(K,kt)){
             AddMakan(B, L, K, ki, kt);
         }else{
             AddMove(L,K,ki);
@@ -905,9 +876,7 @@ void GenKing(BOARD B, BIDAK K, List_Move *L){
     if (SetBoard(B,SerongKiriBawah(K))!=BAD_SQUARE){
         BOARD_INDEX ki = SerongKiriBawah(K);
         BOARD_TILE kt = SetBoard(B,ki);
-        if(Friend(K,kt)){
-            break;
-        }else if(Enemy(K,kt)){
+        if(Enemy(K,kt)){
             AddMakan(B, L, K, ki, kt);
         }else{
             AddMove(L,K,ki);
@@ -920,19 +889,20 @@ void GenKing(BOARD B, BIDAK K, List_Move *L){
 //Implementation of search custom 
 BIDAK SearchMakan(BOARD_INDEX idx, BOARD_TILE type, BOARD B, COLOR SelfColor){
     
-    List_Bidak LPutih = (*B).LPutih;
-    List_Bidak LHitam = (*B).LHitam;
+    List_Bidak LPutih = (B).LPutih;
+    List_Bidak LHitam = (B).LHitam;
 
     //ambil list bidak lawan
-    if (SelfColor==WHITE){
-        address_bidak P = SearchCustom(LHitam,idx,type); 
-    }else{
-        address_bidak P = SearchCustom(LPutih,idx,type);
-    }
+    address_bidak Phitam = SearchCustom(LHitam,idx,type); 
+    address_bidak Pputih = SearchCustom(LPutih,idx,type);
+    
+    BIDAK Bh = InfoBidak(Phitam);
+    BIDAK Bp = InfoBidak(Pputih);
 
-    BIDAK B = Info(P);
-
-    return B;
+    if(SelfColor==WHITE)
+        return Bh;
+    else
+        return Bp;
 }
 void AddMove(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index){
     MOVE M;
@@ -942,7 +912,7 @@ void AddMove(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index){
     M.new_position = Target_Index;
     M.is_makan = false;
 
-    InsVFirst(L, M);
+    InsVFirstM(L, M);
 }
 
 void AddMakan(BOARD B, List_Move *L, BIDAK Mover, BOARD_INDEX VictimIdx, BOARD_TILE VictimTile){
@@ -956,6 +926,5 @@ void AddMakan(BOARD B, List_Move *L, BIDAK Mover, BOARD_INDEX VictimIdx, BOARD_T
     BIDAK Victim = SearchMakan(VictimIdx, VictimTile, B, Mover.warna);
     M.victim = Victim;
 
-    InsVFirst(L, M);
-
+    InsVFirstM(L, M);
 }

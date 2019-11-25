@@ -4,14 +4,14 @@
 #include "chess.h"
 #include "bidak.h"
 #include "../adt/stacklist.h"
-#include "move.h"
+
 
 /** TYPEDEF KHUSUS **/
 typedef struct {
     TabInt Tab; //Table of int[120]
     List_Bidak LPutih; //List bidak yang berkorespondensi
     List_Bidak LHitam; //buat yang item
-} BOARD;
+}BOARD;
 
 /****** MACRO *******/
 #define Tab(L) (L).Tab
@@ -27,13 +27,9 @@ void UpdateList(List_Bidak *L, MOVE M);
 void UpdateMakan(List_Bidak *LEnemy, MOVE M);
 void UpdateBoard(BOARD *B, MOVE M);
 
-
-
-
 /******* KONSTRUKTOR ******/
 // Init
 void init_board(BOARD *B);
-
 
 /****** DRAW ******/
 // Pra- Draw procedure

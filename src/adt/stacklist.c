@@ -3,67 +3,67 @@
 #include "stacklist.h"
 
 /* Prototype manajemen memori */
-void Alokasi (address *P, infotype X)
+void AlokasiStack (address_stack *P, infotypestack X)
 /* I.S. Sembarang */
-/* F.S. Alamat P dialokasi, jika berhasil maka Info(P)=X dan 
-        Next(P)=Nil */
+/* F.S. Alamat P dialokasi, jika berhasil maka InfoStack(P)=X dan 
+        NextStack(P)=Nil */
 /*      P=Nil jika alokasi gagal */{
-	*P = (address) malloc(sizeof(ElmtStack));
+	*P = (address_stack) malloc(sizeof(ElmtStack));
 	if(*P!=Nil){
-		Info(*P) = X;
-		Next(*P) = Nil;
+		InfoStack(*P) = X;
+		NextStack(*P) = Nil;
 	}
 }
-void Dealokasi (address P)
+void DealokasiStacks (address_stack P)
 /* I.S. P adalah hasil alokasi, P != Nil */
 /* F.S. Alamat P didealokasi, dikembalikan ke sistem */ 
 {
 	free(P);
 }
 /* ********* PROTOTYPE REPRESENTASI LOJIK STACK ***************/
-boolean IsEmpty (Stack S)
+boolean IsEmptyStack (Stack S)
 /* Mengirim true jika Stack kosong: TOP(S) = Nil */
 {
 	return (Top(S)==Nil);
 }
-void CreateEmpty (Stack * S)
+void CreateEmptyStack (Stack * S)
 /* I.S. sembarang */ 
 /* F.S. Membuat sebuah stackS yang kosong */
 {
 	Top(*S) = Nil;
 }
-void Push (Stack * S, infotype X)
+void Push (Stack * S, infotypestack X)
 /* Menambahkan X sebagai elemen Stack S */
 /* I.S. S mungkin kosong, X terdefinisi */
 /* F.S. X menjadi TOP yang baru jika alokasi X berhasil, */
 /*      jika tidak, S tetap */
 /* Pada dasarnya adalah operasi Insert First pada list linier */
 {
-	address P;
+	address_stack P;
 	Alokasi(&P,X);
 
 	if(P!=Nil){
 		//add the current top to next of
 		//our allocated P
-		Next(P) = Top(*S);
+		NextStack(P) = Top(*S);
 		//then assign the actual top to the p
 		Top(*S) = P;
 	}
 }
-void Pop (Stack * S, infotype * X)
+void Pop (Stack * S, infotypestack * X)
 /* Menghapus X dari Stack S. */
 /* I.S. S tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, */
 /*      elemen TOP yang lama didealokasi */
 /* Pada dasarnya adalah operasi Delete First pada list linier */
 {
-	address P = Top(*S);
+	address_stack P = Top(*S);
 	//kalo kosong
-	if (Next(Top(*S))==Nil)
+	if (NextStack(Top(*S))==Nil)
 		CreateEmpty(S);
 	else
-		Top(*S) = Next(Top(*S));
+		Top(*S) = NextStack(Top(*S));
 
-	*X = Info(P);
+	*X = InfoStack(P);
 	Dealokasi(P);
 }

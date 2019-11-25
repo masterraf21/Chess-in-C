@@ -1,6 +1,6 @@
 #include "board.h"
 #include <stdlib.h>
-
+#include <stdio.h>
 
 /****HELPER FUNCTION USING STACK***/
 void SwapTile(BOARD *B, BOARD_INDEX curpos, BOARD_INDEX newpos){
@@ -18,8 +18,8 @@ void UpdateStack(Stack *S, MOVE M){
 }
 void UpdateList(List_Bidak *LSelf, MOVE M){
     LIST_ID id = M.id;
-    address P = SearchId(*LSelf, id);
-    Info(P).posisi = M.new_position;
+    address_bidak P = SearchId(*LSelf, id);
+    InfoBidak(P).posisi = M.new_position;
 }
 void UpdateMakan(List_Bidak *LEnemy, MOVE M){
     BIDAK Victim = M.victim;
@@ -70,7 +70,7 @@ void init_board(BOARD *B)
     LHitam(*B) = ListB;
 
     //Assign Array dengan kondisi awal chess
-    InitTab(B);
+    //InitTab((&B)->Tab);
     /*Bidak*/
     //Pawn dulu 
     for (BOARD_INDEX i = A2; i <= H2; i++)

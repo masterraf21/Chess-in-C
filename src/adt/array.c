@@ -20,7 +20,7 @@ void InitTab (TabInt *T)
 
 /* ********** SELEKTOR ********** */
 /* *** Banyaknya elemen *** */
-int NbElmt (TabInt T)
+int NbElmtArr (TabInt T)
 /* Mengirimkan banyaknya elemen efektif tabel */
 /* Mengirimkan nol jika tabel kosong */
 /* *** Daya tampung container *** */
@@ -96,7 +96,7 @@ boolean IsIdxEff (TabInt T, IdxType i)
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test tabel kosong *** */
-boolean IsEmpty (TabInt T)
+boolean IsEmptyArr (TabInt T)
 /* Mengirimkan true jika tabel T kosong, mengirimkan false jika tidak */
 {
     return (T.Neff==0);

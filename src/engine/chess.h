@@ -6,9 +6,6 @@
 
 #include "../adt/array.h"
 
-
-
-
 //index of the board itself
 typedef enum {
   A1=21, B1, C1, D1, E1, F1, G1, H1,
@@ -40,14 +37,7 @@ typedef enum
 //the bad square index
 typedef int BAD_INDEX;
 
-typedef struct {
-    TabInt Tab; //Table of int[120]
-    List_Bidak LPutih; //List bidak yang berkorespondensi
-    List_Bidak LHitam; //buat yang item
-} BOARD;
-
 /*For Bidak*/
-
 //enum tipe warna
 typedef enum
 {
@@ -94,7 +84,6 @@ typedef struct {
 
 
 //for done moves
-typedef MOVE ELMT_STACK;
 
 /* typedef struct for LeaderBoard */
 typedef struct {
