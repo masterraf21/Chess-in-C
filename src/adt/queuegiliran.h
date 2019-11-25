@@ -27,9 +27,9 @@ typedef struct tElmtQueue {
 typedef struct { 
   address HEAD;  /* alamat penghapusan */
   address TAIL;  /* alamat penambahan */
-} Queue_Move;
+} Queue_Giliran;
 
-typedef Queue_Move Queue;
+typedef Queue_Giliran Queue;
 
 /* Selektor */
 #define Head(Q) (Q).HEAD
