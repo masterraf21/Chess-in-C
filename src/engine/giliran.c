@@ -43,7 +43,7 @@ void changeTurnMove(Queue_Giliran *Q, infotypeturn *currPlayerInfo, MOVE *M)
 	}
 	(*currPlayerInfo).counter ++;
 	AddTurn(Q, (*currPlayerInfo));
-	DelTurn(Q, currPlayerInfo);
+	DelTurn(Q, (*currPlayerInfo));
 }
 
 void changeTurnUndo(Queue_Giliran *Q, infotypeturn *currPlayerInfo, MOVE *M)

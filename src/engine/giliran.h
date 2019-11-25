@@ -5,8 +5,6 @@
 #include "../adt/listbidak.h"
 #include "../adt/queuegiliran.h"
 
-
-
 /*inisialisasi queue ketika game dimulai*/
 void InitGiliran(Queue_Giliran *Q, infotypeturn *currPlayerInfo);
 //dipanggil sebelum game loop (saat inisialisasi)
