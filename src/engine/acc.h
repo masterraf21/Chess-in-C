@@ -24,4 +24,6 @@ void RunGame(BOARD D,List_Bidak W, List_Bidak B, Queue_Giliran *Q,boolean *done)
 
 int getIdent(Queue_Giliran Q);
 
+int getnum(char *cmd);
+
 #endif

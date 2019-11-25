@@ -88,6 +88,8 @@ void RunGame(BOARD D,List_Bidak W, List_Bidak B, Queue_Giliran *Q,boolean *done)
                                 break;
                         case 4 : exit = true;
                                 break;
+                        default : "Input salah !\n";
+                                break;
                 }
         }
         // if (/* cek penuh */){
@@ -110,4 +112,24 @@ int getIdent(Queue_Giliran Q){
         } else {
                 return 2;
         }
+}
+
+int getnum(char *cmd){
+        char mov[] = "MOVE";
+        char spc[] = "SPECIAL_MOVE";
+        char und[] = "UNDO";
+        char ext[] = "EXIT";
+
+        if (strcmp(cmd,mov) == 0) {
+                return 1;
+        } else if (strcmp(cmd,mov) == 0){
+                return 2;
+        } else if (strcmp(cmd,mov) == 0){
+                return 3;
+        } else if (strcmp(cmd,mov) == 0){
+                return 4;
+        } else {
+                return 5;
+        }
+ 
 }
