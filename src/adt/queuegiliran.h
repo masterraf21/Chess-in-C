@@ -1,7 +1,7 @@
 /* File : queuelist.h */
 /* Representasi queue dengan list berkait dengan first (HEAD) dan last (TAIL) */
-#ifndef _QUEUEMOVE_H
-#define _QUEUEMOVE_H
+#ifndef _QUEUEGILIRAN_H
+#define _QUEUEGILIRAN_H
 #include "boolean.h"
 #include "../engine/chess.h"
 #include <stdlib.h>
