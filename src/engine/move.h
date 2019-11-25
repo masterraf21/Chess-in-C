@@ -90,5 +90,7 @@ void PrintIdxPos(MOVE_ID Mid, int idx);
 void PrintIdxMove(MOVE M, int idx);
 void PrintAvailableMove(Queue_Move Q);
 void PrintMoveBidak(List_Move L);
+void PrintBerpindah (MOVE M);
+
 
 #endif

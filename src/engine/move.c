@@ -1208,6 +1208,7 @@ void PrintIdxPos(MOVE_ID Mid, int idx){
 
 void PrintIdxMove(MOVE M, int idx){
     char* idxstr = IdxtoStr(M.new_position);
+    char* type = TypetoStr(M.id.type);
     printf("%d. %s\n", idx, idxstr);
 }
 
@@ -1258,5 +1259,13 @@ void PrintMoveBidak(List_Move L){
         PrintIdxMove(mov[i],nomer);
     }
 
+}
+
+void PrintBerpindah (MOVE M){
+    char* type = TypetoStr(M.id.type);
+    char* curpos =  IdxtoStr(M.cur_position);
+    char* newpos = IdxtoStr(M.new_position);
+
+    printf("Bidak %s telah berpindah dari %s ke %s\n", type, curpos, newpos);
 }
 
