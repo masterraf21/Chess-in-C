@@ -3,7 +3,7 @@
 
 #include "chess.h"
 #include "../adt/listbidak.h"
-#include "../adt/queuemove.h"
+#include "../adt/queuegiliran.h"
 
 /*inisialisasi queue ketika game dimulai*/
 void InitGiliran(Queue *Q, infotype *currPlayerInfo);
