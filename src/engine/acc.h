@@ -6,7 +6,6 @@
 #include "bidak.h"
 #include "board.h"
 #include "giliran.h"
-//#include "undo.h"
 #include "SaveLoad.h"
 
 
