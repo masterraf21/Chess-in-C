@@ -29,8 +29,6 @@ typedef struct {
   address_turn TAILT;  /* alamat penambahan */
 } Queue_Giliran;
 
-typedef Queue_Giliran Queue;
-
 /* Selektor */
 #define HeadT(Q) (Q).HEADT
 #define TailT(Q) (Q).TAILT
@@ -48,22 +46,22 @@ void AlokasiTurn (address_turn *P, infotypeturn X);
 void DealokasiTurn (address_turn  P);
 /* I.S. P adalah hasil alokasi, P != Nil */
 /* F.S. Alamat P didealokasi, dikembalikan ke sistem */
-boolean IsEmptyTurn (Queue Q);
+boolean IsEmptyTurn (Queue_Giliran Q);
 /* Mengirim true jika Q kosong: HEADT(Q)=Nil and TAILT(Q)=Nil */
-int NbElmtTurn(Queue Q);
+int NbElmtTurn(Queue_Giliran Q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong */
 /*** Kreator ***/
-void CreateEmptyTurn(Queue * Q);
+void CreateEmptyTurn(Queue_Giliran * Q);
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk */
 /*** Primitif AddTurn/Delete ***/
-void AddTurn (Queue * Q, infotypeturn X);
+void AddTurn (Queue_Giliran * Q, infotypeturn X);
 /* Proses: Mengalokasi X dan menambahkan X pada bagian TAILT dari Q
    jika alokasi berhasil; jika alokasi gagal Q tetap */
 /* Pada dasarnya adalah proses insert last */
 /* I.S. Q mungkin kosong */
 /* F.S. X menjadi TAILT, TAILT "maju" */
-void DelTurn(Queue * Q, infotypeturn * X);
+void DelTurn(Queue_Giliran * Q, infotypeturn * X);
 /* Proses: Menghapus X pada bagian HEADT dari Q dan mendealokasi
    elemen HEADT */
 /* Pada dasarnya operasi delete first */
