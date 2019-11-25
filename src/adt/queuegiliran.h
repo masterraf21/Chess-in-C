@@ -21,7 +21,7 @@ typedef struct tElmtQueueTurn * address;
 typedef struct tElmtQueueTurn { 
   infotypeturn Info;
   address Next; 
-} ElmtQueueTurnTurn; 
+} ElmtQueueTurn; 
 
 /* Type queue dengan ciri HEAD dan TAIL : */
 typedef struct { 
