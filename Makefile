@@ -3,5 +3,3 @@ src = 	$(wildcard src/adt/*.c) \
 
 obj = $(src:.c=.o)
 
-
-
