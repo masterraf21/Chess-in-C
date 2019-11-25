@@ -24,12 +24,12 @@ typedef struct {
 
 
 /* Definisi List_Bidak : */
-/* List_Bidak kosong : First(L) = Nil */
-/* Setiap elemen dengan address_bidak P dapat diacu Info(P), Next(P) */
-/* Elemen terakhir List_Bidak : jika address_bidaknya Last, maka Next(Last)=Nil */
+/* List_Bidak kosong : FirstBidak(L) = Nil */
+/* Setiap elemen dengan address_bidak P dapat diacu Info(P), NextBidak(P) */
+/* Elemen terakhir List_Bidak : jika address_bidaknya Last, maka NextBidak(Last)=Nil */
 #define InfoBidak(P) (P)->infob
-#define Next(P) (P)->next
-#define First(L) ((L).First)
+#define NextBidak(P) (P)->next
+#define FirstBidak(L) ((L).First)
 
 /* PROTOTYPE */
 /****************** TEST List_Bidak KOSONG ******************/
@@ -42,18 +42,18 @@ void CreateEmptyBidak (List_Bidak *L);
 /* F.S. Terbentuk List_Bidak kosong */
 
 /****************** Manajemen Memori ******************/
-address_bidak Alokasi (infotypelb X);
+address_bidak AlokasiB (infotypelb X);
 /* Mengirimkan address_bidak hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address_bidak tidak nil, dan misalnya */
-/* menghasilkan P, maka info(P)=X, Next(P)=Nil */
+/* menghasilkan P, maka info(P)=X, NextBidak(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
-void Dealokasi (address_bidak *P);
+void DealokasiB (address_bidak *P);
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian address_bidak P */
 
 /****************** PENCARIAN SEBUAH ELEMEN List_Bidak ******************/
-address_bidak Search (List_Bidak L, infotypelb X);
+address_bidak SearchB (List_Bidak L, infotypelb X);
 /* Mencari apakah ada elemen List_Bidak dengan info(P)= X */
 /* Jika ada, mengirimkan address_bidak elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
@@ -102,7 +102,7 @@ void DelFirst (List_Bidak *L, address_bidak *P);
 /* I.S. List_Bidak tidak kosong */
 /* F.S. P adalah alamat elemen pertama List_Bidak sebelum penghapusan */
 /*      Elemen List_Bidak berkurang satu (mungkin menjadi kosong) */
-/* First element yg baru adalah suksesor elemen pertama yang lama */
+/* FirstBidak element yg baru adalah suksesor elemen pertama yang lama */
 void DelP (List_Bidak *L, infotypelb X);
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen List_Bidak beraddress_bidak P, dengan info(P)=X  */
@@ -117,7 +117,7 @@ void DelLast (List_Bidak *L, address_bidak *P);
 /* jika ada */
 void DelAfter (List_Bidak *L, address_bidak *Pdel, address_bidak Prec);
 /* I.S. List_Bidak tidak kosong. Prec adalah anggota List_Bidak  */
-/* F.S. Menghapus Next(Prec): */
+/* F.S. Menghapus NextBidak(Prec): */
 /*      Pdel adalah alamat elemen List_Bidak yang dihapus  */
 
 /****************** PROSES SEMUA ELEMEN List_Bidak ******************/
