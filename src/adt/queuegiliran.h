@@ -13,13 +13,13 @@ typedef struct {
 	COLOR player;
 	int counter;
 	int poin;
-} infotype;
+} infotypeturn;
 
 
 /* Queue dengan representasi berkait dengan pointer */
 typedef struct tElmtQueue * address;
 typedef struct tElmtQueue { 
-  infotype Info;
+  infotypeturn Info;
   address Next; 
 } ElmtQueue; 
 
@@ -40,7 +40,7 @@ typedef Queue_Move Queue;
 #define Info(P) (P)->Info
 
 /* Prototype manajemen memori */
-void Alokasi (address *P, infotype X);
+void Alokasi (address *P, infotypeturn X);
 /* I.S. Sembarang */
 /* F.S. Alamat P dialokasi, jika berhasil maka Info(P)=X dan 
         Next(P)=Nil */
@@ -57,13 +57,13 @@ void CreateEmpty(Queue * Q);
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk */
 /*** Primitif Add/Delete ***/
-void Add (Queue * Q, infotype X);
+void Add (Queue * Q, infotypeturn X);
 /* Proses: Mengalokasi X dan menambahkan X pada bagian TAIL dari Q
    jika alokasi berhasil; jika alokasi gagal Q tetap */
 /* Pada dasarnya adalah proses insert last */
 /* I.S. Q mungkin kosong */
 /* F.S. X menjadi TAIL, TAIL "maju" */
-void Del(Queue * Q, infotype * X);
+void Del(Queue * Q, infotypeturn * X);
 /* Proses: Menghapus X pada bagian HEAD dari Q dan mendealokasi
    elemen HEAD */
 /* Pada dasarnya operasi delete first */
