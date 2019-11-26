@@ -198,37 +198,29 @@ boolean IsNeighborKnight(BOARD B, BIDAK Bi){
     ||(k7==EMPTY_SQUARE)||(Enemy(Bi,k7))||(k8==EMPTY_SQUARE)||(Enemy(Bi,k8)));
 }
 
-MOVE_ID GetQueueIdx(Queue_Move Q, int IdxPrompt){
-    int elmt = NbElmtQ(Q);
-    Queue_Move Qb = Q;
-    MOVE_ID move[elmt];//buat nyimpen
+void GetQueueIdx(Queue_Move *Q, int IdxPrompt, MOVE_ID *M){
 
     //Ambil element queue jadiin array biasa
-    MOVE_ID tmp;
-    for (int i = 0; i < elmt; i++)
+    addressQ P = Head(*Q);
+    for (int i = 0; i < IdxPrompt-1; i++)
     {
-        DelQ(&Qb, &tmp);
-        move[i] = tmp;
+        P = NextQM(P);
     }
 
-    return move[IdxPrompt-1];
+    *M = InfoQM(P);
 }
 
 MOVE GetListIdx(List_Move L, int IdxPrompt){
-    int elmt = NbElmtM(L);
-    MOVE mov[elmt];
     //masukin ke array biar mudah sis
-    address_move P = FirstMove(L);
-    int i=0;
     MOVE M;
-    while(P!=Nil){
-        M = InfoMove(P);
-        mov[i] = M;
+    address_move P = FirstMove(L);
+    for (int i = 0; i < IdxPrompt-1; i++)
+    {
         P = NextMove(P);
-        i++;
     }
+    M = InfoMove(P);
 
-    return mov[IdxPrompt-1];
+    return M;
 }
 
 BIDAK GetBidakId(List_Bidak L, MOVE_ID Mid){
@@ -248,15 +240,21 @@ Queue_Move AvailableMove(BOARD B, List_Bidak L){
     MOVE_ID Mid;
     address_bidak P = FirstBidak(L);
     while(P!=Nil){
+        //printf("2. %d\n", InfoBidak(P).warna);
         Bi = InfoBidak(P);
         if(Bi.id.type==KNIGHT){
-            Mid.id = Bi.id;
-            Mid.posisi = Bi.posisi;
+            
             if(IsNeighborKnight(B,Bi)){
+                Mid.id.number = Bi.id.number;
+                Mid.id.type = Bi.id.type;
+                Mid.posisi = Bi.posisi;
                 AddQ(&Q,Mid);
             }
         }else/*selain knight*/{
             if(IsNeighbor(B,Bi)){
+                Mid.id.number = Bi.id.number;
+                Mid.id.type = Bi.id.type;
+                Mid.posisi = Bi.posisi;
                 AddQ(&Q,Mid);
             }
         }
@@ -1214,24 +1212,18 @@ void PrintIdxMove(MOVE M, int idx){
 
 void PrintAvailableMove(Queue_Move Q){
     int elmt = NbElmtQ(Q);
-    Queue_Move Qb = Q;
-    MOVE_ID move[elmt];//buat nyimpen
+    addressQ P = Head(Q);//buat nyimpen
 
-    //Ambil element queue jadiin array biasa
-    MOVE_ID tmp;
-    for (int i = 0; i < elmt; i++)
-    {
-        DelQ(&Qb, &tmp);
-        move[i] = tmp;
-    }
-    
     //print gan
-    int nomer;//index printnya
+    //index printnya
+    int nomer;
     printf("Daftar bidak yang bisa bergerak:\n");
     for (int i = 0; i < elmt; i++)
     {
+        MOVE_ID Mov = InfoQM(P);
         nomer = i+1;
-        PrintIdxPos(move[i],nomer);
+        PrintIdxPos(Mov,nomer);
+        P = NextQM(P);
     }
 }
 

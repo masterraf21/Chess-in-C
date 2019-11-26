@@ -45,7 +45,7 @@ boolean IsNeighbor(BOARD B, BIDAK Bi);
 boolean IsNeighborKnight(BOARD B, BIDAK Bi);
 //Fungsi ini bakal ngeluarin mid yang diprompt oleh user
 //setelah printing, index diarray selalu -1 dengan yang diprompt
-MOVE_ID GetQueueIdx(Queue_Move Q, int IdxPrompt);
+void GetQueueIdx(Queue_Move *Q, int IdxPrompt, MOVE_ID *M);
 MOVE GetListIdx(List_Move L, int IdxPrompt);
 BIDAK GetBidakId(List_Bidak L, MOVE_ID Mid);
 

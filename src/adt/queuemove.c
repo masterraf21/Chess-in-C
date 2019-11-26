@@ -16,7 +16,7 @@ void AlokasiQ (addressQ *P, infotype X)
 		NextQM(*P) = Nil;
 	}
 }
-void DealokasiQ (addressQ  P)
+void DealokasiQ (addressQ P)
 /* I.S. P adalah hasil alokasi, P != Nil */
 /* F.S. Alamat P didealokasi, dikembalikan ke sistem */
 {

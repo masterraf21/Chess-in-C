@@ -38,7 +38,7 @@ void RunNewGame(LeaderBoard *B){
         Queue_Giliran Q;
         InitGiliran(&Q);
         init_board(&D);
-        RunGame(D,&Q,&done);
+        RunGame(&D,&Q,&done);
         if (done) {
                 idx = getIdent(Q);
                 if (idx == 1){
@@ -62,14 +62,14 @@ void RunNewGame(LeaderBoard *B){
         
 }
 
-void RunSavedGame(LeaderBoard *B){ /* belum mempertimbangkan nama */
-// -> prosedur mulai game dari saveffie, read savefile dulu baru ngejalanin game
+// void RunSavedGame(LeaderBoard *B){ /* belum mempertimbangkan nama */
+// // -> prosedur mulai game dari saveffie, read savefile dulu baru ngejalanin game
 
 
         
-}
+// }
 
-void RunGame(BOARD D, Queue_Giliran *Q,boolean *done){
+void RunGame(BOARD *D, Queue_Giliran *Q,boolean *done){
         boolean exit = false;
         char cmd[15];
         int x;
@@ -78,17 +78,17 @@ void RunGame(BOARD D, Queue_Giliran *Q,boolean *done){
         infotypeturn currplayer;
         while((! exit) && (! Is50Turn(*Q)) && !(*done)) {
                 DelTurn(Q,&currplayer);
-                PrintBoard(D);
+                PrintBoard(*D);
                 printf("Masukkan command : ");
                 scanf("%s",cmd);
                 x = getNum(cmd);
                 switch (x){
-                        case 1 : MoveCore(&D,&S,&currplayer,done); /* -> kondisi game selesai ada di done */
+                        case 1 : MoveCore(D,&S,&currplayer,done); /* -> kondisi game selesai ada di done */
                                 break;
-                        case 2 : specialmove();
-                                break;
-                        case 3 : UndoCore(&D,&S,&currplayer); AddTurn(Q,currplayer);
-                                 DelTurn(Q,&currplayer); UndoCore(&D,&S,&currplayer);
+                        // case 2 : specialmove();
+                        //         break;
+                        case 3 : UndoCore(D,&S,&currplayer); AddTurn(Q,currplayer);
+                                 DelTurn(Q,&currplayer); UndoCore(D,&S,&currplayer);
                                 break;
                         case 4 : exit = true;
                                 break;

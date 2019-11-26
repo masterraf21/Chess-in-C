@@ -166,7 +166,7 @@ void InsertLastM (List_Move *L, address_move P)
 }
 
 /*** PENGHAPUSAN SEBUAH ELEMEN ***/
-void DelFirstMM (List_Move *L, address_move *P)
+void DelFirstM (List_Move *L, address_move *P)
 /* I.S. List_Move tidak kosong */
 /* F.S. P adalah alamat elemen pertama List_Move sebelum penghapusan */
 /*      Elemen List_Move berkurang satu (mungkin menjadi kosong) */

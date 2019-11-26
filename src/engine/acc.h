@@ -16,9 +16,9 @@ void keluar();
 
 void RunNewGame(LeaderBoard *B);
 
-void RunSavedGame(LeaderBoard *B);
+//void RunSavedGame(LeaderBoard *B);
 
-void RunGame(BOARD D, Queue_Giliran *Q,boolean *done);
+void RunGame(BOARD *D, Queue_Giliran *Q,boolean *done);
 
 int getIdent(Queue_Giliran Q);
 

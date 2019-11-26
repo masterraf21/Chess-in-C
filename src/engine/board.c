@@ -201,6 +201,8 @@ char IntToCharBidak(int n)
     else if (n== 6)
     {
         c = 'k';  //white king
+    } else {
+        c = ' ';
     }
     
     return c;

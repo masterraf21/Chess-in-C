@@ -4,20 +4,28 @@ void MoveCore(BOARD *B, Stack *S, infotypeturn *R, boolean *done){
         List_Bidak LPutih = (*B).LPutih;
         List_Bidak LHitam = (*B).LHitam;
         List_Bidak L;
+        CreateEmptyBidak(&L);
         if ((*R).player==WHITE){
-                L = LPutih;
+                FirstBidak(L) = FirstBidak(LPutih);
+                //printf("Putih mlaku\n");
         }else{
-                L = LHitam;
+                FirstBidak(L) = FirstBidak(LHitam);
+                //printf("ireng\n");
         }
 
         //Generate Possible move of all bidaks
         //and print
-        Queue_Move Q = AvailableMove(*B, L);
+        Queue_Move Q;
+        CreateEmptyQ(&Q);
+        //printf("1. %d\n",InfoBidak(FirstBidak(L)).warna);
+        Q = AvailableMove(*B, L);
         PrintAvailableMove(Q);
         printf("Pilih bidak yang ingin digerakkan: ");
         int idx;
-        scanf("%d\n", &idx);
-        MOVE_ID Mid = GetQueueIdx(Q, idx);
+        scanf("%d", &idx);
+        MOVE_ID Mid;
+        GetQueueIdx(&Q, idx, &Mid);
+        // printf("%x %x %d\n", Mid.id.number, Mid.id.type, Mid.posisi);
         BIDAK Bi = GetBidakId(L, Mid);//we get bidak here
 
         //Next move is to generate the list move from the one bidak we have
@@ -25,7 +33,7 @@ void MoveCore(BOARD *B, Stack *S, infotypeturn *R, boolean *done){
         //Print the mtf
         PrintMoveBidak(Lm);
         printf("Pilih posisi tujuan bidak: ");
-        scanf("%d\n", &idx);
+        scanf("%d", &idx);
         MOVE Mov = GetListIdx(Lm, idx);
         //udah dapet move nih gan
         PrintBerpindah(Mov);
