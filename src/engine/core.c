@@ -1,24 +1,22 @@
 #include "core.h"
 
 void MoveCore(BOARD *B, Stack *S, infotypeturn *R, boolean *done){
-        List_Bidak LPutih = (*B).LPutih;
-        List_Bidak LHitam = (*B).LHitam;
         List_Bidak L;
         CreateEmptyBidak(&L);
         if ((*R).player==WHITE){
-                FirstBidak(L) = FirstBidak(LPutih);
-                //printf("Putih mlaku\n");
+                FirstBidak(L) = FirstBidak(LPutih(*B));
+                printf("putih\n");
         }else{
-                FirstBidak(L) = FirstBidak(LHitam);
-                //printf("ireng\n");
+                FirstBidak(L) = FirstBidak(LHitam(*B));
+                printf("hitam\n");
         }
 
         //Generate Possible move of all bidaks
         //and print
         Queue_Move Q;
         CreateEmptyQ(&Q);
-        //printf("1. %d\n",InfoBidak(FirstBidak(L)).warna);
         Q = AvailableMove(*B, L);
+        //printf("2. %d\n",InfoHead(Q).posisi);
         PrintAvailableMove(Q);
         printf("Pilih bidak yang ingin digerakkan: ");
         int idx;
@@ -82,4 +80,5 @@ void UndoCore(BOARD *D, Stack *S, infotypeturn *R){
         }
         (*D).LPutih = Put;
         (*D).LHitam = Hit;
+        
 }

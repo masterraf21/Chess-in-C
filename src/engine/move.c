@@ -162,41 +162,93 @@ boolean IsDownKosong(BOARD B, BIDAK P){
     return (SetBoard(B, Down(P))==EMPTY_SQUARE);
 }
 
+boolean IsDestValid(BIDAK B, BOARD_TILE T){
+    return ((T == EMPTY_SQUARE) || Enemy(B,T));
+}
+
 /***** SEARCH FUNCTION ******/
-boolean IsNeighbor(BOARD B, BIDAK Bi){
-    BOARD_TILE up,down,left,right,skat,skab,skit,skib;
-    up=SetBoard(B,Up(Bi));down=SetBoard(B,Down(Bi));left=SetBoard(B,Left(Bi));right=SetBoard(B,Right(Bi));
-    skat=SetBoard(B,SerongKananAtas(Bi));skab=SetBoard(B,SerongKananBawah(Bi));
-    skit=SetBoard(B,SerongKiriAtas(Bi));skib=SetBoard(B,SerongKiriBawah(Bi));
+boolean IsMoveable(BOARD B, BIDAK Bi){
+    if ((Bi.id.type==KING)||(Bi.id.type==QUEEN)){
+        BOARD_TILE up,down,left,right,skat,skab,skit,skib;
+        up=SetBoard(B,Up(Bi));down=SetBoard(B,Down(Bi));left=SetBoard(B,Left(Bi));right=SetBoard(B,Right(Bi));
+        skat=SetBoard(B,SerongKananAtas(Bi));skab=SetBoard(B,SerongKananBawah(Bi));
+        skit=SetBoard(B,SerongKiriAtas(Bi));skib=SetBoard(B,SerongKiriBawah(Bi));
 
-    if((Bi.id.type==KING)||(Bi.id.type==QUEEN)){
-        return ((up==EMPTY_SQUARE)||(Enemy(Bi,up))||(down==EMPTY_SQUARE)||(Enemy(Bi,down))
-        ||(left==EMPTY_SQUARE)||(Enemy(Bi,left))||(right==EMPTY_SQUARE)||(Enemy(Bi,right))
-        ||(skat==EMPTY_SQUARE)||(Enemy(Bi,skat))||(skab==EMPTY_SQUARE)||(Enemy(Bi,skab))
-        ||(skit==EMPTY_SQUARE)||(Enemy(Bi,skit))||(skib==EMPTY_SQUARE)||(Enemy(Bi,skib)));
-    }else if(Bi.id.type==ROOK){
-        return ((up==EMPTY_SQUARE)||(Enemy(Bi,up))||(down==EMPTY_SQUARE)||(Enemy(Bi,down))
-        ||(left==EMPTY_SQUARE)||(Enemy(Bi,left))||(right==EMPTY_SQUARE)||(Enemy(Bi,right)));
-    }else if((Bi.id.type==PAWN)&&(Bi.warna==WHITE)){
-        return (up==EMPTY_SQUARE)||(Enemy(Bi,skat))||(Enemy(Bi,skit));
-    }
-    else if ((Bi.id.type==PAWN)&&(Bi.warna==BLACK)){
-        return (down==EMPTY_SQUARE)||(Enemy(Bi,skab))||(Enemy(Bi,skib));
-    }else/*BISHOP*/{
-        return ((skat==EMPTY_SQUARE)||(Enemy(Bi,skat))||(skab==EMPTY_SQUARE)||(Enemy(Bi,skab))
-        ||(skit==EMPTY_SQUARE)||(Enemy(Bi,skit))||(skib==EMPTY_SQUARE)||(Enemy(Bi,skib)));
+        return ((IsDestValid(Bi,up)) || (IsDestValid(Bi,down)) || (IsDestValid(Bi,left)) || (IsDestValid(Bi,right))
+                || (IsDestValid(Bi,skab)) || (IsDestValid(Bi,skat)) || (IsDestValid(Bi,skit)) || (IsDestValid(Bi,skib)));
+    } else if (Bi.id.type == ROOK) {
+        BOARD_TILE up,down,left,right;
+        up=SetBoard(B,Up(Bi));down=SetBoard(B,Down(Bi));left=SetBoard(B,Left(Bi));right=SetBoard(B,Right(Bi));
+
+        return ((IsDestValid(Bi,up)) || (IsDestValid(Bi,down)) || (IsDestValid(Bi,left)) || (IsDestValid(Bi,right)));
+    } else if (Bi.id.type == BISHOP){
+        BOARD_TILE skat,skab,skit,skib;
+        skat=SetBoard(B,SerongKananAtas(Bi));skab=SetBoard(B,SerongKananBawah(Bi));
+        skit=SetBoard(B,SerongKiriAtas(Bi));skib=SetBoard(B,SerongKiriBawah(Bi));
+
+        return ((IsDestValid(Bi,skab)) || (IsDestValid(Bi,skat)) || (IsDestValid(Bi,skit)) || (IsDestValid(Bi,skib)));
+    } else if (Bi.id.type == KNIGHT){
+        BOARD_TILE k1,k2,k3,k4,k5,k6,k7,k8;
+        k1=SetBoard(B, Knight1(Bi));k2=SetBoard(B, Knight2(Bi));k3=SetBoard(B, Knight3(Bi));k4=SetBoard(B, Knight4(Bi));
+        k5=SetBoard(B, Knight5(Bi));k6=SetBoard(B, Knight6(Bi));k7=SetBoard(B, Knight7(Bi));k8=SetBoard(B, Knight8(Bi));
+
+        return ((IsDestValid(Bi,k1)) || (IsDestValid(Bi,k2)) || (IsDestValid(Bi,k3)) || (IsDestValid(Bi,k4))
+                || (IsDestValid(Bi,k5)) || (IsDestValid(Bi,k6)) || (IsDestValid(Bi,k7)) || (IsDestValid(Bi,k8)));
+    } else /*PAWN*/{
+        if (Bi.warna == WHITE){
+            BOARD_TILE up,skat,skit;
+            up=SetBoard(B,Up(Bi)); skat=SetBoard(B,SerongKananAtas(Bi)); skit=SetBoard(B,SerongKiriAtas(Bi));
+
+            return (up==EMPTY_SQUARE)||(Enemy(Bi,skat))||(Enemy(Bi,skit));
+        } else {
+            BOARD_TILE down,skab,skib;
+            down=SetBoard(B,Down(Bi)); skab=SetBoard(B,SerongKananBawah(Bi)); skib=SetBoard(B,SerongKiriBawah(Bi));
+
+            return (down==EMPTY_SQUARE)||(Enemy(Bi,skab))||(Enemy(Bi,skib));
+        }
     }
 }
 
-boolean IsNeighborKnight(BOARD B, BIDAK Bi){
-    BOARD_TILE k1,k2,k3,k4,k5,k6,k7,k8;
-    k1=SetBoard(B, Knight1(Bi));k1=SetBoard(B, Knight2(Bi));k1=SetBoard(B, Knight3(Bi));k1=SetBoard(B, Knight4(Bi));
-    k1=SetBoard(B, Knight5(Bi));k1=SetBoard(B, Knight6(Bi));k1=SetBoard(B, Knight7(Bi));k1=SetBoard(B, Knight8(Bi));
+// boolean IsMoveabletemp(BOARD B, BIDAK Bi){
+//     BOARD_TILE up,down,left,right,skat,skab,skit,skib;
+//     up=SetBoard(B,Up(Bi));down=SetBoard(B,Down(Bi));left=SetBoard(B,Left(Bi));right=SetBoard(B,Right(Bi));
+//     skat=SetBoard(B,SerongKananAtas(Bi));skab=SetBoard(B,SerongKananBawah(Bi));
+//     skit=SetBoard(B,SerongKiriAtas(Bi));skib=SetBoard(B,SerongKiriBawah(Bi));
 
-    return ((k1==EMPTY_SQUARE)||(Enemy(Bi,k1))||(k2==EMPTY_SQUARE)||(Enemy(Bi,k2))||(k3==EMPTY_SQUARE)||(Enemy(Bi,k3))
-    ||(k4==EMPTY_SQUARE)||(Enemy(Bi,k4))||(k5==EMPTY_SQUARE)||(Enemy(Bi,k5))||(k6==EMPTY_SQUARE)||(Enemy(Bi,k6))
-    ||(k7==EMPTY_SQUARE)||(Enemy(Bi,k7))||(k8==EMPTY_SQUARE)||(Enemy(Bi,k8)));
-}
+//     if((Bi.id.type==KING)||(Bi.id.type==QUEEN)){
+//         if (Enemy(Bi,up)){
+//             printf("salah\n");
+//             printf("%d\n",up);
+//         } else {
+//             printf("bener \n");
+//         }
+//         return ((up==EMPTY_SQUARE)||(Enemy(Bi,up))||(down==EMPTY_SQUARE)||(Enemy(Bi,down))
+//         ||(left==EMPTY_SQUARE)||(Enemy(Bi,left))||(right==EMPTY_SQUARE)||(Enemy(Bi,right))
+//         ||(skat==EMPTY_SQUARE)||(Enemy(Bi,skat))||(skab==EMPTY_SQUARE)||(Enemy(Bi,skab))
+//         ||(skit==EMPTY_SQUARE)||(Enemy(Bi,skit))||(skib==EMPTY_SQUARE)||(Enemy(Bi,skib)));
+//     }else if(Bi.id.type==ROOK){
+//         return ((up==EMPTY_SQUARE)||(Enemy(Bi,up))||(down==EMPTY_SQUARE)||(Enemy(Bi,down))
+//         ||(left==EMPTY_SQUARE)||(Enemy(Bi,left))||(right==EMPTY_SQUARE)||(Enemy(Bi,right)));
+//     }else if((Bi.id.type==PAWN)&&(Bi.warna==WHITE)){
+//         return (up==EMPTY_SQUARE)||(Enemy(Bi,skat))||(Enemy(Bi,skit));
+//     }
+//     else if ((Bi.id.type==PAWN)&&(Bi.warna==BLACK)){
+//         return (down==EMPTY_SQUARE)||(Enemy(Bi,skab))||(Enemy(Bi,skib));
+//     }else/*BISHOP*/{
+//         return ((skat==EMPTY_SQUARE)||(Enemy(Bi,skat))||(skab==EMPTY_SQUARE)||(Enemy(Bi,skab))
+//         ||(skit==EMPTY_SQUARE)||(Enemy(Bi,skit))||(skib==EMPTY_SQUARE)||(Enemy(Bi,skib)));
+//     }
+// }
+
+// boolean IsNeighborKnight(BOARD B, BIDAK Bi){
+//     BOARD_TILE k1,k2,k3,k4,k5,k6,k7,k8;
+//     k1=SetBoard(B, Knight1(Bi));k2=SetBoard(B, Knight2(Bi));k3=SetBoard(B, Knight3(Bi));k4=SetBoard(B, Knight4(Bi));
+//     k5=SetBoard(B, Knight5(Bi));k6=SetBoard(B, Knight6(Bi));k7=SetBoard(B, Knight7(Bi));k8=SetBoard(B, Knight8(Bi));
+
+//     return ((k1==EMPTY_SQUARE)||(Enemy(Bi,k1))||(k2==EMPTY_SQUARE)||(Enemy(Bi,k2))||(k3==EMPTY_SQUARE)||(Enemy(Bi,k3))
+//     ||(k4==EMPTY_SQUARE)||(Enemy(Bi,k4))||(k5==EMPTY_SQUARE)||(Enemy(Bi,k5))||(k6==EMPTY_SQUARE)||(Enemy(Bi,k6))
+//     ||(k7==EMPTY_SQUARE)||(Enemy(Bi,k7))||(k8==EMPTY_SQUARE)||(Enemy(Bi,k8)));
+// }
 
 void GetQueueIdx(Queue_Move *Q, int IdxPrompt, MOVE_ID *M){
 
@@ -240,24 +292,31 @@ Queue_Move AvailableMove(BOARD B, List_Bidak L){
     MOVE_ID Mid;
     address_bidak P = FirstBidak(L);
     while(P!=Nil){
-        //printf("2. %d\n", InfoBidak(P).warna);
         Bi = InfoBidak(P);
-        if(Bi.id.type==KNIGHT){
-            
-            if(IsNeighborKnight(B,Bi)){
-                Mid.id.number = Bi.id.number;
-                Mid.id.type = Bi.id.type;
-                Mid.posisi = Bi.posisi;
-                AddQ(&Q,Mid);
-            }
-        }else/*selain knight*/{
-            if(IsNeighbor(B,Bi)){
-                Mid.id.number = Bi.id.number;
-                Mid.id.type = Bi.id.type;
-                Mid.posisi = Bi.posisi;
-                AddQ(&Q,Mid);
-            }
+        if (IsMoveable(B,Bi)){
+            Mid.id.number = Bi.id.number;
+            Mid.id.type = Bi.id.type;
+            Mid.posisi = Bi.posisi;
+            //printf("3. %d\n", Mid.posisi);
+            AddQ(&Q,Mid);
         }
+        // if(Bi.id.type==KNIGHT){  
+        //     if(IsNeighborKnight(B,Bi)){
+        //         Mid.id.number = Bi.id.number;
+        //         Mid.id.type = Bi.id.type;
+        //         Mid.posisi = Bi.posisi;
+        //         printf("3. %d\n", Mid.posisi);
+        //         AddQ(&Q,Mid);
+        //     }
+        // }else/*selain knight*/{
+        //     if(IsNeighbor(B,Bi)){
+        //         Mid.id.number = Bi.id.number;
+        //         Mid.id.type = Bi.id.type;
+        //         Mid.posisi = Bi.posisi;
+        //         printf("3. %d\n", Mid.posisi);
+        //         AddQ(&Q,Mid);
+        //     }
+        // }
         P = NextBidak(P);
     }
 
@@ -627,7 +686,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
         BOARD_TILE kn = SetBoard(B,ki);
         if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
-        }else/*kosong*/{
+        }else if (kn == EMPTY_SQUARE)/*kosong*/{
             AddMove(L, K, ki);
         }
     }
@@ -637,7 +696,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
         BOARD_TILE kn = SetBoard(B,ki);
         if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
-        }else/*kosong*/{
+        }else if (kn == EMPTY_SQUARE)/*kosong*/{
             AddMove(L, K, ki);
         }
     }
@@ -647,7 +706,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
         BOARD_TILE kn = SetBoard(B,ki);
         if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
-        }else/*kosong*/{
+        }else if (kn == EMPTY_SQUARE)/*kosong*/{
             AddMove(L, K, ki);
         }
 
@@ -658,7 +717,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
         BOARD_TILE kn = SetBoard(B,ki);
         if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
-        }else/*kosong*/{
+        }else if (kn == EMPTY_SQUARE)/*kosong*/{
             AddMove(L, K, ki);
         }
 
@@ -669,7 +728,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
         BOARD_TILE kn = SetBoard(B,ki);
         if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
-        }else/*kosong*/{
+        }else if (kn == EMPTY_SQUARE)/*kosong*/{
             AddMove(L, K, ki);
         }
     } 
@@ -679,7 +738,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
         BOARD_TILE kn = SetBoard(B,ki);
         if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
-        }else/*kosong*/{
+        }else if (kn == EMPTY_SQUARE)/*kosong*/{
             AddMove(L, K, ki);
         }
     } 
@@ -690,7 +749,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
         BOARD_TILE kn = SetBoard(B,ki);
         if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
-        }else/*kosong*/{
+        }else if (kn == EMPTY_SQUARE)/*kosong*/{
             AddMove(L, K, ki);
         }
 
@@ -702,7 +761,7 @@ void GenKnight(BOARD B, BIDAK K, List_Move *L){
         BOARD_TILE kn = SetBoard(B,ki);
         if(Enemy(K,kn)){
             AddMakan(B, L, K, ki, kn);
-        }else/*kosong*/{
+        }else if (kn == EMPTY_SQUARE)/*kosong*/{
             AddMove(L, K, ki);
         }
     }  

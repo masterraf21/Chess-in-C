@@ -39,10 +39,12 @@ boolean PawnWFirst(BOARD B, BIDAK P);
 boolean PawnBFirst(BOARD B, BIDAK P);
 boolean IsUpKosong(BOARD B, BIDAK P);
 boolean IsDownKosong(BOARD B, BIDAK P);
+boolean IsDestValid(BIDAK B, BOARD_TILE T);
 
 /***** SEARCH FUNCTION ******/
-boolean IsNeighbor(BOARD B, BIDAK Bi);
-boolean IsNeighborKnight(BOARD B, BIDAK Bi);
+boolean IsMoveable(BOARD B, BIDAK Bi);
+// boolean IsMoveable(BOARD B, BIDAK Bi);
+// boolean IsNeighborKnight(BOARD B, BIDAK Bi);
 //Fungsi ini bakal ngeluarin mid yang diprompt oleh user
 //setelah printing, index diarray selalu -1 dengan yang diprompt
 void GetQueueIdx(Queue_Move *Q, int IdxPrompt, MOVE_ID *M);

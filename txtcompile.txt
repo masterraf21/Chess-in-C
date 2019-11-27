@@ -1,0 +1,1 @@
+gcc -o tes main.c engine/acc.c adt/array.c engine/bidak.c engine/board.c engine/core.c engine/giliran.c engine/leader.c adt/listbidak.c adt/listmove.c adt/mesin_kar.c adt/mesin_kata.c engine/move.c adt/queuegiliran.c adt/queuemove.c adt/stacklist.c 

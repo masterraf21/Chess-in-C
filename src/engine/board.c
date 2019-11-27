@@ -41,7 +41,7 @@ void UpdateBoard(BOARD *B, MOVE M){
     if (!M.is_makan){
 
         if (M.warna==WHITE)
-            UpdateUndoList(&LPutih, M);
+            UpdateList(&LPutih, M);
         else/*Black*/
             UpdateList(&LHitam, M);
         

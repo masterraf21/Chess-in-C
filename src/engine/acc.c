@@ -88,9 +88,9 @@ void RunGame(BOARD *D, Queue_Giliran *Q,boolean *done){
                         // case 2 : specialmove();
                         //         break;
                         case 3 : UndoCore(D,&S,&currplayer); AddTurn(Q,currplayer);
-                                 DelTurn(Q,&currplayer); UndoCore(D,&S,&currplayer);
+                                 DelTurn(Q,&currplayer); UndoCore(D,&S,&currplayer); printf("Gerakan sampai giliran sebelumnya berhasil dibatalkan.\n");
                                 break;
-                        case 4 : exit = true;
+                        case 4 : exit = true; printf("Game telah dihentikan.\n");
                                 break;
                         default : printf("Input salah !\n");
                                 break;
@@ -127,11 +127,11 @@ int getNum(char *cmd){
 
         if (strcmp(cmd,mov) == 0) {
                 return 1;
-        } else if (strcmp(cmd,mov) == 0){
+        } else if (strcmp(cmd,spc) == 0){
                 return 2;
-        } else if (strcmp(cmd,mov) == 0){
+        } else if (strcmp(cmd,und) == 0){
                 return 3;
-        } else if (strcmp(cmd,mov) == 0){
+        } else if (strcmp(cmd,ext) == 0){
                 return 4;
         } else {
                 return 5;
