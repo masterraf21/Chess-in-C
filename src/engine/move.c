@@ -597,7 +597,7 @@ void GenRook(BOARD B, BIDAK R, List_Move *L){
 }
 void GenBishop(BOARD B, BIDAK Bi, List_Move *L){
 
-    if(SetBoard(B,SerongKananAtas(Bi))!=BAD_SQUARE){printf("masuk1\n");
+    if(SetBoard(B,SerongKananAtas(Bi))!=BAD_SQUARE){
         int i = 1;
         BOARD_INDEX ni = SerongKananAtas_i(Bi,i);
         BOARD_TILE nt = SetBoard(B, ni); 
@@ -617,65 +617,62 @@ void GenBishop(BOARD B, BIDAK Bi, List_Move *L){
         
     }
 
-    if(SetBoard(B,SerongKiriAtas(Bi))!=BAD_SQUARE){printf("masuk2\n");
+    if(SetBoard(B,SerongKiriAtas(Bi))!=BAD_SQUARE){
         int i = 1;
         BOARD_INDEX ni = SerongKiriAtas_i(Bi,i);
-        BOARD_TILE nt = SetBoard(B, ni); printf("setup don!\n");
+        BOARD_TILE nt = SetBoard(B, ni);
         do
-        {printf("mashok while\n");
+        {
             ni = SerongKiriAtas_i(Bi,i);
             nt = SetBoard(B, ni); 
             if(Friend(Bi, nt)){
                 break;
-            }else if(Enemy(Bi,nt)){ printf("makanuwu\n");
+            }else if(Enemy(Bi,nt)){
                 AddMakan(B, L, Bi, ni, nt);
-            }else{printf("ELSa?");
+            }else{
                 AddMove(L, Bi, ni);
             }
-            i++;printf("(%d,%d)", i,nt);
         } while (nt!=BAD_SQUARE);
     }    
 
 
-    if(SetBoard(B,SerongKananBawah(Bi))!=BAD_SQUARE){printf("masuk3\n");
+    if(SetBoard(B,SerongKananBawah(Bi))!=BAD_SQUARE){
         int i = 1;
         BOARD_INDEX ni = SerongKananBawah_i(Bi,i);
-        BOARD_TILE nt = SetBoard(B, ni); printf("setup don!\n");
+        BOARD_TILE nt = SetBoard(B, ni);
         do
-        {printf("mashok while\n");
+        {
             ni = SerongKananBawah_i(Bi,i);
             nt = SetBoard(B, ni); 
             if (Friend(Bi, nt)){
                 break;
-            }else if(Enemy(Bi,nt)){printf("makanuwu\n");
+            }else if(Enemy(Bi,nt)){
                 AddMakan(B, L, Bi, ni, nt);
-            }else{printf("ELSa?");
+            }else{
                 AddMove(L, Bi, ni); 
             }
-            i++;printf("(%d,%d)", i,nt);
         } while (nt!=BAD_SQUARE);
         
     }
   
-    if(SetBoard(B,SerongKiriBawah(Bi))!=BAD_SQUARE){printf("masuk4\n");
+    if(SetBoard(B,SerongKiriBawah(Bi))!=BAD_SQUARE){
         int i = 1;
         BOARD_INDEX ni = SerongKiriBawah_i(Bi,i);
-        BOARD_TILE nt = SetBoard(B, ni); printf("setup don!\n");
+        BOARD_TILE nt = SetBoard(B, ni);
         do
-        {printf("mashok while\n");
+        {
             ni = SerongKiriBawah_i(Bi,i);
             nt = SetBoard(B, ni); 
             if (Friend(Bi, nt)){
                 break;
-            }else if(Enemy(Bi,nt)){printf("makanuwu\n");
+            }else if(Enemy(Bi,nt)){
                 AddMakan(B, L, Bi, ni, nt);
-            }else{printf("ELSa? %x", ni);
+            }else{
                 AddMove(L, Bi, ni); 
             }
-            i++;printf("(%d,%d,%d)", i,nt,ni);
         } while (nt!=BAD_SQUARE);
         
-    }printf("ga masuk apa2 anjay\n");
+    }
 }
 
 void GenKnight(BOARD B, BIDAK K, List_Move *L){
