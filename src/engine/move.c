@@ -334,7 +334,7 @@ List_Move GenerateMove(BIDAK B, BOARD BO){
     }else{
         if (B.id.type==ROOK){
             GenRook(BO, B, &L);
-        }else if(B.id.type==BISHOP){ printf("bishopuwu\n");
+        }else if(B.id.type==BISHOP){
             GenBishop(BO, B, &L);
         }else if(B.id.type==KNIGHT){
             GenKnight(BO, B, &L);
@@ -632,6 +632,7 @@ void GenBishop(BOARD B, BIDAK Bi, List_Move *L){
             }else{
                 AddMove(L, Bi, ni);
             }
+            i++;
         } while (nt!=BAD_SQUARE);
     }    
 
@@ -651,6 +652,7 @@ void GenBishop(BOARD B, BIDAK Bi, List_Move *L){
             }else{
                 AddMove(L, Bi, ni); 
             }
+            i++;
         } while (nt!=BAD_SQUARE);
         
     }
@@ -670,6 +672,7 @@ void GenBishop(BOARD B, BIDAK Bi, List_Move *L){
             }else{
                 AddMove(L, Bi, ni); 
             }
+            i++;
         } while (nt!=BAD_SQUARE);
         
     }
@@ -988,22 +991,19 @@ BIDAK SearchMakan(BOARD_INDEX idx, BOARD_TILE type, BOARD B, COLOR SelfColor){
     
     List_Bidak LPutih = (B).LPutih;
     List_Bidak LHitam = (B).LHitam;
-    BIDAK Bh, Bp;
-    //ambil list bidak lawan
-    if (SelfColor == WHITE)
-    {
-        address_bidak Phitam = SearchCustom(LHitam,idx,type);
-        Bh = InfoBidak(Phitam);
-        return Bh;
-    }
-    else
-    {
-        address_bidak Pputih = SearchCustom(LPutih,idx,type);
-        Bp = InfoBidak(Pputih);
-        return Bp;
-    }  
-}
 
+    //ambil list bidak lawan
+    if(SelfColor==WHITE){
+    address_bidak Phitam = SearchCustom(LHitam,idx,type);
+    BIDAK Bh = InfoBidak(Phitam);
+    return Bh;
+    }
+    else {
+    address_bidak Pputih = SearchCustom(LPutih,idx,type);
+    BIDAK Bp = InfoBidak(Pputih);
+    return Bp;
+    }
+}
 void AddMove(List_Move *L, BIDAK Mover, BOARD_INDEX Target_Index){
     MOVE M;
     M.warna = Mover.warna;
@@ -1022,15 +1022,12 @@ void AddMakan(BOARD B, List_Move *L, BIDAK Mover, BOARD_INDEX VictimIdx, BOARD_T
     M.id = Mover.id;
     M.new_position = VictimIdx;
     M.is_makan = true;
-    printf("mau searchmakanuwu\n");
+
     BIDAK Victim = SearchMakan(VictimIdx, VictimTile, B, Mover.warna);
-    printf("bebas ehe\n");
     M.victim = Victim;
 
     InsVFirstM(L, M);
-}
-
-/*** PRINTING FUNCTION ****/
+}/*** PRINTING FUNCTION ****/
 char* IdxtoStr(BOARD_INDEX Idx){
     char *index = (char *) malloc(sizeof(char)*8);
 

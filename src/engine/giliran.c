@@ -58,5 +58,5 @@ int Poin(MOVE M)
 
 boolean Is50Turn(Queue_Giliran Q)
 {
-	return (((InfoHeadT(Q).counter) == 50) && ((InfoTailT(Q).counter) == 50));
+	return (((InfoHeadT(Q).counter) == 5) && ((InfoTailT(Q).counter) == 5));
 }
