@@ -334,7 +334,7 @@ List_Move GenerateMove(BIDAK B, BOARD BO){
     }else{
         if (B.id.type==ROOK){
             GenRook(BO, B, &L);
-        }else if(B.id.type==BISHOP){
+        }else if(B.id.type==BISHOP){ printf("bishopuwu\n");
             GenBishop(BO, B, &L);
         }else if(B.id.type==KNIGHT){
             GenKnight(BO, B, &L);
@@ -1022,7 +1022,9 @@ void AddMakan(BOARD B, List_Move *L, BIDAK Mover, BOARD_INDEX VictimIdx, BOARD_T
     M.id = Mover.id;
     M.new_position = VictimIdx;
     M.is_makan = true;
+    printf("mau searchmakanuwu\n");
     BIDAK Victim = SearchMakan(VictimIdx, VictimTile, B, Mover.warna);
+    printf("bebas ehe\n");
     M.victim = Victim;
 
     InsVFirstM(L, M);
